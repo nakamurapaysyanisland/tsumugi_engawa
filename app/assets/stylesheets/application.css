@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+body {
+  font-family: "YuMincho", "Hiragino Mincho ProN", "Noto Serif CJK JP", "MS PMincho", serif;
+}
