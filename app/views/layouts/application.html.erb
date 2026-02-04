@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title>つむぎ縁側</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/157db97ebd.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+      <header>
+        <nav>
+          <div>
+           <a class="navbar-brand h1" class="text-decoration">つむぎ縁側</a>
+           <button>
+           </button>
+           <div>
+            <ul>
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to user_path(current_user) do %>
+                    ホーム
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                  ログアウト
+                <% end %>
+              </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to root_path do %>
+                    ホーム
+                  <% end %>
+                  <li class="nav-item">
+                <%= link_to new_user_registration_path do %>
+                  新規会員登録
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_user_session_path do %>
+                  ログイン
+                <% end %>
+              </li>
+            <% end %>  
+            </ul>
+           </div>
+          </div>
+        </nav>
+      </header>
+    <%= yield %>
+    <footer>
+      <div>
+        <p>CopyRight</p>
+      </div>
+    </footer>
+  </body>
+</html>
