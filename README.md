@@ -1,24 +1,39 @@
-# README
+# tsumugi_engawa
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ 
+介護者自身の孤立を防ぎ、悩みを共有するためコミュニティサイト
+​
+### テーマを選んだ理由
+現在、介護施設を運営している会社に勤めており介護のことを考えることが多くあります。
+その中で施設に入りたいが空きがないあるいは、経済的理由で入れない方が多く存在するという状況を見聞きする機会がありました。
+そのような方は自宅でご家族に介護されながら支えられていると思います。
+しかし自宅で介護されているご家族は仕事の時間を短縮したり、自分の時間を持てず休養が出来なかったりなど社会的に孤立してしまったり心身ともに疲弊してしまいます。
+そのような方が悩みを簡単に打ち明けられる場を作り、同じ境遇の方々や介護経験のある方と繋がることで「ひとりじゃない」ということを伝えたいと思い、このテーマを選びました。
+悩みを聞いてほしいが人と会うために外に出ることが大変な方や知り合いには打ち明けにくい話も匿名で相談することが出来ます。相談だけでなくブログ機能もあるので記録としても活用していただけるようにしました。
+​
+### ターゲットユーザ
+* ​介護をしている人
+* 介護をしていた人
+* 介護の知識や仕事としての経験がある人
+* ワンオペ介護をしている方
+* ヤングケアラーの方
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### 主な利用シーン
+* 介護での悩みや相談がある時
+* 介護のことで分からないことがある時
+* 日常の記録を残したい時
+* 誰かに話を聞いてほしい時
+​
+## 設計書
+後ほど作成予定です
+​
+## 開発環境
+- OS：Windows
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Visual Studio Code（VSCode）
+​
+## 使用素材
+後ほど記載します
