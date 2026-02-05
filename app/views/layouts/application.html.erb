@@ -15,7 +15,7 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
-      <header class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: #FFFDD0;">
+      <header class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
         <nav class="container d-flex flex-row justify-content-between align-items-center">
            <a class="navbar-brand h1 mb-0 text-decoration-none text-dark" href="/">つむぎ縁側</a>
            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -27,7 +27,7 @@
             <ul class="d-flex list-unstyled mb-0 align-item-center">
               <% if user_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to user_path(current_user), class: "text-dark mr-2" do %>
+                  <%= link_to root_path, class: "text-dark mr-2" do %>
                     ホーム
                   <% end %>
                 </li>
@@ -90,7 +90,7 @@
       </header>
     <%= yield %>
     <footer>
-      <div>
+      <div class="text-center">
         <p>CopyRight</p>
       </div>
     </footer>
