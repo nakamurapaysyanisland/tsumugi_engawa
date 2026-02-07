@@ -5,6 +5,10 @@
   
   <div class="d-flex flex-row">
     <div class="col">
+      <%= f.file_field :image, accept: "image/*" %>
+    </div>
+      
+    <div class="col">
       <%= f.label :姓 %><br />
       <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
     </div>

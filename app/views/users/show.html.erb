@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+<%= image_tag @user.get_profile_image(100,100) %>
+<div>ニックネーム: <%= @user.nickname %></div>
+<% @posts.each do |post| %>
+<div><%= post.title %></div>
+<% end %>
+    </div>
+  </div>
+</div>

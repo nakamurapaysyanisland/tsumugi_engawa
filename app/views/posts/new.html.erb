@@ -1,0 +1,18 @@
+<h1>新規登録</h1>
+
+<%= form_with model: @posts.new do |f| %>
+  <div class="form-group"> 
+   <%= f.label :title, "タイトル" %>
+   <%= f.text_filed :title %> 
+  </div>
+
+  <div class="form-group">
+   <%= f.label :body, "本文" %>
+   <%= f.text_area :body %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "投稿" %>
+  </div>
+<% end %>   
+
