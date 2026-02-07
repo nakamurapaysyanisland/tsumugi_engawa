@@ -1,9 +1,9 @@
 <h1>新規登録</h1>
 
-<%= form_with model: @posts.new do |f| %>
+<%= form_with model: @posts do |f| %>
   <div class="form-group"> 
    <%= f.label :title, "タイトル" %>
-   <%= f.text_filed :title %> 
+   <%= f.text_field :title %> 
   </div>
 
   <div class="form-group">

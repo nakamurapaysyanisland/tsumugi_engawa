@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_image
   has_many_attached :posts
-  validates :nickname, presene: true, uniqueness: true
+  validates :nickname, presence: true, uniqueness: true
 
   
   def get_profile_image(width, height)

@@ -33,7 +33,7 @@
                   <% end %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to users_path(current_user), class: "text-dark mr-2" do %>
+                  <%= link_to user_path(current_user), class: "text-dark mr-2" do %>
                     マイページ
                   <% end %>
                 </li>
@@ -48,7 +48,7 @@
                   <% end %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to new_posts_path(current_user), class: "text-dark" do %>
+                  <%= link_to new_post_path(current_user), class: "text-dark" do %>
                     新規投稿
                   <% end %>
                 </li>
@@ -68,7 +68,7 @@
                     ホーム
                   <% end %>
                   <li class="nav-item">
-                  <%= link_to root_path, class: "text-dark mr-4" do %>
+                  <%= link_to posts_path, class: "text-dark mr-4" do %>
                     投稿一覧
                   <% end %>
                 </li>
