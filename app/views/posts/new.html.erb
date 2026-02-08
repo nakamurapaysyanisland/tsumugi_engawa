@@ -1,6 +1,18 @@
+ <div>
+        <% if @post.errors.any? %>
+          <h5>
+            投稿に失敗しました。入力内容を確認してください。
+          </h5>
+          <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
 <h1>新規登録</h1>
 
-<%= form_with model: @posts do |f| %>
+<%= form_with model: @post do |f| %>
   <div class="form-group"> 
    <%= f.label :title, "タイトル" %>
    <%= f.text_field :title %> 
@@ -10,6 +22,12 @@
    <%= f.label :body, "本文" %>
    <%= f.text_area :body %>
   </div>
+
+  <div class="form-group">
+  <%= f.label :category_id, "カテゴリー" %>
+  <%= f.collection_select :category_id, Category.all, :id, :name, { include_blank: "選択してください" }, { class: "form-control" } %>
+</div>
+
 
   <div class="form-group">
     <%= f.submit "投稿" %>

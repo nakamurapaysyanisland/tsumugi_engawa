@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+ before_action :authenticate_user!
 
 
   def show
@@ -8,10 +9,20 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+
   end
 
   def update
+    @user = current_user
+    if @user.update(user_params)
+       bypass_sign_in(@user) 
+      flash[:notice] = "ユーザー情報を更新しました。"
+    redirect_to user_path(@user)
+    else
+      render :edit
+    end
   end
+
   def unsubscrilbe
   end
 
@@ -21,11 +32,10 @@ class UsersController < ApplicationController
   def index
   end
 
-  def update
-  end
+  
 
   private
-  def users_params
-    params.require(:user).permit(:last_name, :first_name, :profile_image, :nickname)
+  def user_params
+    params.require(:user).permit(:last_name, :first_name, :profile_image, :nickname, :password)
   end
 end
