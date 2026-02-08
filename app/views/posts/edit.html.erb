@@ -1,2 +1,26 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<div>
+        <% if @post.errors.any? %>
+          <h5>
+            投稿に失敗しました。入力内容を確認してください。
+          </h5>
+          <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    <%= form_with model: @post do |f| %>
+    
+    <div class="form-group"> 
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title %> 
+    </div>
+
+    <div class="form-group">
+    <%= f.label :body, "本文" %>
+    <%= f.text_area :body %>
+    </div>
+    
+    <%= f.submit "更新" %>
+    <% end %>
