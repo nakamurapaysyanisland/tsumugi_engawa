@@ -6,7 +6,9 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   has_many :posts, dependent: :destroy
   validates :nickname, presence: true, uniqueness: true
-
+  
+  enum status: { active: 0, inactive: 1 }
+  enum role: { guest: 0, member: 1, admin: 2 }
   
   def get_profile_image(width, height)
   unless profile_image.attached?
