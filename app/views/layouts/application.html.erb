@@ -33,7 +33,7 @@
                   <% end %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to user_path(current_user), class: "text-dark mr-2" do %>
+                  <%= link_to mypage_path(current_user), class: "text-dark mr-2" do %>
                     マイページ
                   <% end %>
                 </li>
@@ -73,7 +73,7 @@
                   <% end %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to root_path, class: "text-dark mr-4" do %>
+                  <%= link_to users_path, class: "text-dark mr-4" do %>
                     カテゴリー
                   <% end %>
                 </li>
