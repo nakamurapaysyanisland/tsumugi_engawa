@@ -1,7 +1,7 @@
 
       <% @posts.each do |post| %>
         <div>
-        <%= image_tag @user.get_profile_image(20,20) %>
+        <%= image_tag post.user.get_profile_image(10,10), size: "50x50" %>
          
         <%= post.user.nickname %>
         </div>

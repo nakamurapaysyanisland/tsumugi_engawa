@@ -48,3 +48,12 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<h3>ニックネームだけでゲスト登録</h3>
+<%= form_with model: User.new, url: users_guest_sign_up_path, local: true do |f| %>
+  <div class="field">
+    <%= f.label :nickname %><br />
+    <%= f.text_field :nickname, placeholder: "たろう" %>
+  </div>
+  <%= f.submit "ゲスト登録して始める" %>
+<% end %>

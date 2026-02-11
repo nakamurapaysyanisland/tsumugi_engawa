@@ -5,16 +5,48 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_image
   has_many :posts, dependent: :destroy
+  before_save :destroy_posts_if_withdrawn, if: -> { status_changed? && withdrawn? }
+
   validates :nickname, presence: true, uniqueness: true
-  
-  enum status: { active: 0, inactive: 1 }
+  validates :last_name, :first_name, :email, presence: true, unless: :guest?
+  validates :password, presence: true, length: { minimum: 6 }, unless: :guest?
+
+  enum status: { active: 0, withdrawn: 1 }
   enum role: { guest: 0, member: 1, admin: 2 }
   
-  def get_profile_image(width, height)
-  unless profile_image.attached?
-    return 'no_image.jpg'
+  before_validation :set_default_role, on: :create
+
+  with_options unless: :guest? do |member|
+    member.validates :last_name, presence: true
+    member.validates :first_name, presence: true
+    member.validates :email, presence: true
+    member.validates :password, presence: true, on: :create 
   end
-  profile_image.variant(resize_to_limit: [width, height]).processed
+
+  def get_profile_image(width, height)
+    unless profile_image.attached?
+      return 'no_image.jpg'
+    end
+    profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  def password_required?
+    super && !guest?
+  end
+
+  def email_required?
+    super && !guest?
+  end
+
+  def active_for_authentication?
+    super && status != "withdrawn"
+  end
+private
+def set_default_role
+  self.role ||= :guest
 end
 
+def destroy_posts_if_withdrawn
+    posts.destroy_all
+  end
 end

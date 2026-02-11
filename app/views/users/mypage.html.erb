@@ -1,2 +1,34 @@
-<h1>Users#mypage</h1>
-<p>Find me in app/views/users/mypage.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+    
+<%= image_tag @user.get_profile_image(100,100) %>
+<div>ニックネーム：  <%= @user.nickname %>    さん。</div>
+
+<%= link_to user_path(@user) do %>
+ <i class="fa-solid fa-user">プロフィール</i>
+<% end %>
+
+
+<% if current_user.guest? %>
+  <div>
+    現在ゲストモードです。<%= link_to "正会員登録してすべての機能を使う", edit_upgrade_user_path(current_user) %>
+  </div>
+<% end %>
+
+<% @posts.each do |post| %>
+<div><%= post.title %></div>
+<div><%= post.body %></div>
+<%= post.created_at.strftime('%Y/%m/%d') %>
+
+<div>
+<%= link_to "編集", edit_post_path(post) %>
+<%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+</div>
+<% end %>
+
+
+
+    </div>
+  </div>
+</div>

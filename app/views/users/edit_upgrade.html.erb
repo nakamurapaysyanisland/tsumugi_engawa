@@ -1,0 +1,27 @@
+<h2>正会員登録</h2>
+
+<%= form_with model: @user, url: upgrade_user_path(@user), local: true do |f| %>
+  <%= render "devise/shared/error_messages", resource: @user %>
+
+  <div>
+    <%= f.label :nickname %><br />
+    <%= f.text_field :nickname %>
+  </div>
+
+  <div>
+    <%= f.label :last_name, "姓" %> <%= f.text_field :last_name %>
+    <%= f.label :first_name, "名" %> <%= f.text_field :first_name %>
+  </div>
+
+  <div>
+    <%= f.label :email %><br />
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password, "パスワード設定" %>
+    <%= f.password_field :password %>
+  </div>
+
+  <%= f.submit "正会員にアップグレードする" %>
+<% end %>

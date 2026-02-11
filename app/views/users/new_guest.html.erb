@@ -1,0 +1,11 @@
+<h2>ゲスト登録</h2>
+
+<%= form_with model: @user, url: guest_signup_path do |f| %>
+    <div>
+      <%= f.label :nickname, "ニックネーム" %><br>
+        <%= f.text_field :nickname %>
+    </div>
+    <div>
+      <%= f.submit "ゲスト登録" %>
+    </div>
+<% end %>
