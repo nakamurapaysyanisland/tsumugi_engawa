@@ -1,0 +1,21 @@
+<h1>カテゴリー一覧</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>カテゴリー名</th>
+      <th>投稿数</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td><%= category.posts.count %> 件</td>
+        <td><%= link_to 'このカテゴリーの投稿を見る', category_path(category), class: "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

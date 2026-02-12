@@ -1,5 +1,6 @@
-Rails.application.routes.draw do
-  devise_for :users, controllers: {
+Rails.application.routes.draw do 
+  
+    devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
   
 
   resources :posts
+  resources :categories, only: [:index, :show]
   get 'mypage' => 'users#mypage', as: 'mypage'
   root to: 'homes#top'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
