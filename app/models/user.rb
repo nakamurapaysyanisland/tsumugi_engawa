@@ -14,14 +14,7 @@ class User < ApplicationRecord
   enum status: { active: 0, withdrawn: 1 }
   enum role: { guest: 0, member: 1, admin: 2 }
   
-  before_validation :set_default_role, on: :create
-
-  with_options unless: :guest? do |member|
-    member.validates :last_name, presence: true
-    member.validates :first_name, presence: true
-    member.validates :email, presence: true
-    member.validates :password, presence: true, on: :create 
-  end
+  before_validation :set_default_role, on: :createrails 
 
   def get_profile_image(width, height)
     unless profile_image.attached?
