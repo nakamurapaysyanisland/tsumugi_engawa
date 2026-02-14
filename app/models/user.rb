@@ -42,4 +42,6 @@ end
 def destroy_posts_if_withdrawn
     posts.destroy_all
   end
+
+
 end
