@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
  before_action :authenticate_user!
- 
+ before_action :guest_check, only: [:destroy]
 
   def show
    @user = current_user
@@ -10,7 +10,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-
   end
 
   def update
@@ -83,6 +82,11 @@ class UsersController < ApplicationController
     resource.role = :member if action_name == 'create'
   end
 
+  def guest_check
+    if current_user.email == "guest_#{Time.now.to_i}#{rand(1000)}@example.com"
+      redirect_to mypage_path, alert: "ゲストユーザーはこの操作はできません。"
+    end
+  end 
   private
   def user_params
     params.require(:user).permit(:last_name, :first_name,:email, :profile_image, :nickname, :password, :password_confirmation, :role, :status)
