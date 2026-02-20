@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
  before_action :authenticate_user!
  before_action :guest_check, only: [:destroy]
-
+ before_action :ensure_current_user, only: [:edit, :update, :destroy]
   def show
    @user = current_user
    @posts = @user.posts
@@ -85,6 +85,12 @@ class UsersController < ApplicationController
   def guest_check
     if current_user.email == "guest_#{Time.now.to_i}#{rand(1000)}@example.com"
       redirect_to mypage_path, alert: "ゲストユーザーはこの操作はできません。"
+    end
+  end
+  def ensure_current_user
+    @user = User.find(params[:id])
+    unless @user.id == current_user.id
+      redirect_to mypage_path, alert: "他のユーザーの情報は編集出来ません。"
     end
   end 
   private
