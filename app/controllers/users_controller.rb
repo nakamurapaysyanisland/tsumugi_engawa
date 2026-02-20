@@ -2,6 +2,7 @@ class UsersController < ApplicationController
  before_action :authenticate_user!
  before_action :guest_check, only: [:destroy]
  before_action :ensure_current_user, only: [:edit, :update, :destroy]
+ 
   def show
    @user = current_user
    @posts = @user.posts
