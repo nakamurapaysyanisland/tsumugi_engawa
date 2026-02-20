@@ -1,10 +1,12 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
   has_one_attached :profile_image
   has_many :posts, dependent: :destroy
   
   validates :nickname, presence: true, uniqueness: true
+
   validates :last_name, :first_name, :email, presence: true, unless: :guest?
   validates :password, presence: true, length: { minimum: 6 }, unless: :guest?
 
@@ -13,7 +15,7 @@ class User < ApplicationRecord
   
   before_validation :set_default_role, on: :create
   before_save :destroy_posts_if_withdrawn, if: -> { status_changed? && withdrawn? }
-  
+
   def get_profile_image(width, height)
     unless profile_image.attached?
       return 'no_image.jpg'
@@ -22,11 +24,13 @@ class User < ApplicationRecord
   end
 
   def password_required?
-    super && !guest?
+    return false if guest? 
+    !persisted? || !password.nil? || !password_confirmation.nil?
+  
   end
 
   def email_required?
-    super && !guest?
+    !guest?
   end
 
   def active_for_authentication?

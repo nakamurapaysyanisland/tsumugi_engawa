@@ -1,13 +1,11 @@
 class PostsController < ApplicationController
- skip_before_action :authenticate_user!, only: [:index, :show], raise: false
- before_action :authenticate_user!, except: [:edit, :update, :destroy]
+ before_action :authenticate_user!, except: [:index, :show]
  before_action :ensure_current_user, only: [:edit, :update, :destroy]
   def new
     @post = Post.new
   end
 
   def index
-
     @posts = Post.includes(:user).all.order(created_at: :desc)
   @user = current_user
   end
@@ -29,12 +27,9 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
-    
   end
 
   def update
-     @post = Post.find(params[:id])
     if @post.update(post_params)
       flash[:notice] = "更新に成功しました。"
       redirect_to user_path(current_user)
@@ -44,9 +39,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to user_path(current_user)
+  end
+
+ 
+
+  private
+  def post_params
+    params.require(:post).permit(:title, :body, :category_id)
   end
 
   def ensure_current_user
@@ -54,10 +55,5 @@ class PostsController < ApplicationController
      unless @post.user_id == current_user.id
       redirect_to posts_path, alert: "他のユーザーの投稿は編集・削除は出来ません。"
     end
-  end
-  
-  private
-  def post_params
-    params.require(:post).permit(:title, :body, :category_id)
   end
 end
