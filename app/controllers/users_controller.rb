@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
  before_action :authenticate_user!
- before_action :guest_check, only: [:destroy]
- before_action :ensure_current_user, only: [:edit, :update, :destroy]
- 
+  before_action :guest_check, only: [:destroy, :withdraw]
+  before_action :ensure_current_user, only: [:edit, :update, :destroy, :withdraw]
+
   def show
-   @user = current_user
+   @user = User.find(params[:id])  
    @posts = @user.posts
-   @user = User.find(params[:id])
   end
 
   def edit
@@ -37,9 +36,9 @@ class UsersController < ApplicationController
   end
 
   def withdraw
-    @user = User.find(params[:id])
     @user.update(status: :withdrawn)
     @user.posts.destroy_all
+    sign_out @user
     redirect_to new_user_registration_path, notice: "退会処理が完了しました。またのご利用をお待ちしております。"
   end
 
@@ -82,9 +81,10 @@ class UsersController < ApplicationController
     super
     resource.role = :member if action_name == 'create'
   end
+  private
 
   def guest_check
-    if current_user.email == "guest_#{Time.now.to_i}#{rand(1000)}@example.com"
+    if current_user.guest? || current_user.role == "guest"
       redirect_to mypage_path, alert: "ゲストユーザーはこの操作はできません。"
     end
   end
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
       redirect_to mypage_path, alert: "他のユーザーの情報は編集出来ません。"
     end
   end 
-  private
+  
   def user_params
     params.require(:user).permit(:last_name, :first_name,:email, :profile_image, :nickname, :password, :password_confirmation, :role, :status)
   end
