@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.role = :guest
+    @user.status = :active
     if @user.save
       redirect_to mypage_path, notice: "ユーザー登録が完了しました。"
     else
