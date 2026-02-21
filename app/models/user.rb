@@ -13,7 +13,7 @@ class User < ApplicationRecord
   enum status: { active: 0, withdrawn: 1 }
   enum role: { guest: 0, member: 1, admin: 2 }
   
-  before_validation :set_default_role, on: :create
+  before_validation :set_defaults, on: :create
   before_save :destroy_posts_if_withdrawn, if: -> { status_changed? && withdrawn? }
 
   def get_profile_image(width, height)
@@ -36,12 +36,17 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && active?
   end
+  def inactive_message
+  active? ? super : :withdrawn_account 
+  end
+  
   def guest_user?
     self.guest? 
   end
 private
-def set_default_role
+def set_defaults
   self.role ||= :guest
+  self.status ||= :active
 end
 
 def destroy_posts_if_withdrawn
@@ -50,3 +55,4 @@ def destroy_posts_if_withdrawn
 
 
 end
+

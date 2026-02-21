@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
  before_action :authenticate_user!
   before_action :guest_check, only: [:destroy, :withdraw]
-  before_action :ensure_current_user, only: [:edit, :update, :destroy, :withdraw]
+  before_action :ensure_current_user, only: [:edit, :update, :destroy, :withdraw, :edit_upgrade, :upgrade]
 
   def show
    @user = User.find(params[:id])  
@@ -9,11 +9,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    
   end
 
   def update
-    @user = current_user
+    
     if @user.update(user_params)
        bypass_sign_in(@user) 
       flash[:notice] = "ユーザー情報を更新しました。"
@@ -65,11 +65,11 @@ class UsersController < ApplicationController
   end
  
   def edit_upgrade
-    @user = current_user
+  
   end
 
   def upgrade
-    @user = current_user
+    
     if @user.update(user_upgrade_params.merge(role: :member))
       redirect_to mypage_path, notice: "会員登録が完了しました。"
     else
