@@ -57,10 +57,9 @@ class UsersController < ApplicationController
     @user.email = "guest_#{Time.now.to_i}#{rand(1000)}@example.com"
     @user.password = SecureRandom.alphanumeric(10)
     if @user.save
-      sign_in @user
+      session[:user_id] = @user.id
       redirect_to mypage_path, notice: "ゲストユーザーとしてログインしました。"
     else
-      logger.error @user.errors.full_messages
       render :new_guest
     end
   end
