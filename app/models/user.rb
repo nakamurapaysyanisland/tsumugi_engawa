@@ -42,7 +42,7 @@ class User < ApplicationRecord
     self.guest? 
   end
 private
-def set_defaults
+def set_default_status
   self.role ||= :guest
   self.status ||= :active
 end
