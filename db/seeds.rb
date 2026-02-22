@@ -7,3 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Category.find_or_create_by(name: "給料")
 Category.find_or_create_by(name: "衛生管理")
+Category.find_or_create_by(name: "人間関係")
+Category.find_or_create_by(name: "仕事の内容")
