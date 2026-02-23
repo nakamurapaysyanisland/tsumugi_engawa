@@ -2,12 +2,15 @@
   <div class="row">
     <div class="col">
     
-      <%= image_tag @user.get_profile_image(100,100) %>
+      <%= image_tag @user.get_profile_image(100,100), size: "100x100" %>
       <div>ニックネーム：  <%= @user.nickname %>    さん。</div>
-
-      <%= link_to user_path(@user) do %>
+      <div>ステータス：  <%= t(@user.status, scope: 'enums.user.status') %></div>
+      <div>登録日：  <%= @user.created_at.strftime('%Y/%m/%d') %></div>
+      <%= link_to edit_user_path(@user) do %>
         <i class="fa-solid fa-user">プロフィール</i>
       <% end %>
+
+      <% t("enums.user.status.#{@user.status}") %>
 
     
 

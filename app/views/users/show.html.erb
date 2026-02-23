@@ -1,26 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col">
+
     
-<%= image_tag @user.get_profile_image(100,100) %>
-<div>ニックネーム：  <%= @user.nickname %>    さん</div>
-<% unless current_user.guest?%>
-<div>名前：  <%= @user.last_name %> <%= @user.first_name %>    </div>
-<div>メールアドレス：  <%= @user.email %>    </div>
-<div>ステータス：  <%= t(@user.status, scope: 'enums.user.status') %></div>
-<div>登録日：  <%= @user.created_at.strftime('%Y/%m/%d') %>    </div>
+<%= image_tag @user.get_profile_image(100,100), size: "100x100" %>
+<div><%= @user.nickname %>    さんの投稿一覧</div>
+
+ <% @posts.each do |post| %>
+        <div><%= post.title %></div>
+        <div><%= post.body %></div>
+        <%= post.created_at.strftime('%Y/%m/%d') %>
+
+        <%= link_to "詳細", post_path(post) %>
+      
 <% end %>
-<%= link_to edit_user_path(@user) do %>
- <i class="fa-solid fa-user-gear"></i>
-<% end %>
-
-<hr>
-<h3>退会について</h3>
-<p>退会するとマイページにログインできなくなります。</p>
-
-<%= link_to "退会する", withdraw_user_path(@user), 
-            method: :patch, data: { confirm: "本当に退会しますか？" }, class: "btn-delete" %>
-
-    </div>
-  </div>
-</div>

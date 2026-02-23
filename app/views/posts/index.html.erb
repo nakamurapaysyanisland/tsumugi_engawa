@@ -1,10 +1,13 @@
 
       <% @posts.each do |post| %>
+        
+        
+         <%= image_tag post.user.get_profile_image(100,100), size: "100x100" %>
         <div>
-        <%= image_tag post.user.get_profile_image(10,10), size: "50x50" %>
-         
-        <%= post.user.nickname %>
+        <strong>ユーザー:</strong>
+        <%= link_to post.user.nickname, user_path(post.user) %>
         </div>
+        
         <div>
         <%= post.category.name %>
         </div>
