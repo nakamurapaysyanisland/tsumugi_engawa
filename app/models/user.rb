@@ -14,14 +14,16 @@ class User < ApplicationRecord
   enum role: { guest: 0, member: 1, admin: 2 }
   
   before_validation :set_default_status, on: :create
-  before_save :destroy_posts_if_withdrawn, if: -> { status_changed? && withdrawn? }
-
-  def get_profile_image(width, height)
+  before_save :destroy_posts_if_withdrawn, if: -> { status_changed? && withdrawn? } 
+  before_save :check_role
+  
+def get_profile_image(width, height)
     unless profile_image.attached?
       return 'no_image.jpg'
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
-  end
+  
+end
 
   def password_required?
     return false if guest? 
@@ -51,6 +53,12 @@ def destroy_posts_if_withdrawn
     posts.destroy_all
   end
 
+  def check_role
+    if last_name.present? && first_name.present? && email.present?
+      self.role = 'member' if self.role == 'guest'
+ 
+    end
+  end
 
 end
 
