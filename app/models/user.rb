@@ -61,5 +61,16 @@ def destroy_posts_if_withdrawn
     end
   end
 
+  def self.search_for(content, method)
+    if method == 'perfect'
+      User.where(nickname: content)
+    elsif method == 'forward'
+      User.where('nickname LIKE ?', content+'%')
+    elsif method == 'backward'
+      User.where('nickname LIKE ?', '%'+content)
+    else
+      User.where('nickname LIKE ?', '%'+content+'%')
+    end
+  end
 end
 
