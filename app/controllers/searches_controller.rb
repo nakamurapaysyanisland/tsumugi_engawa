@@ -10,7 +10,7 @@ class SearchesController < ApplicationController
 		elsif @model == 'user'
 			@records = User.search_for(@content, @method)
 		elsif @model == 'tag'
-			@records = Tag.search_books_for(@content, @method)
+			@records = Tag.search_posts_for(@content, @method)
 		end
 	end
 end
