@@ -13,7 +13,14 @@
         <% end %>
       </div>
 <h5>ユーザー編集画面</h5>
-
+ <div class="form-group">
+      <%= f.label :image, class: "image-upload-label" do %>
+    <div class="image-upload-frame">
+      <i class="fas fa-camera"></i> <p>画像を選択してください</p>
+      <%= f.file_field :image, accept: "image/*", class: "hidden-file-input" %>
+    </div>
+  <% end %>
+ </div>
 <% t("enums.user.status.#{@user.status}") %>
 <div class="form-group">
   <%= f.label "ニックネーム" %>

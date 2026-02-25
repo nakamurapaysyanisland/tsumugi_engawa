@@ -24,7 +24,9 @@ Rails.application.routes.draw do
 
   
 
-  resources :posts
+  resources :posts do
+    resources :post_comments, only: [:create, :destroy]
+  end
   resources :categories, only: [:index, :show]
   get 'mypage' => 'users#mypage', as: 'mypage'
   root to: 'homes#top'
