@@ -5,7 +5,7 @@
     
 <%= image_tag @user.get_profile_image(100,100), size: "100x100" %>
 <div><%= @user.nickname %>    さんの投稿一覧</div>
-
+<div><%= @posts.count %> 件の投稿</div>
  <% @posts.each do |post| %>
         <div><%= post.title %></div>
         <div><%= post.body %></div>

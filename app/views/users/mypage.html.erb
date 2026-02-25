@@ -9,7 +9,7 @@
       <%= link_to edit_user_path(@user) do %>
         <i class="fa-solid fa-user">プロフィール</i>
       <% end %>
-
+      <div>投稿件数：<%= @posts.count%></div>
       <% t("enums.user.status.#{@user.status}") %>
 
     
@@ -18,6 +18,7 @@
         <div><%= post.title %></div>
         <div><%= post.body %></div>
         <%= post.created_at.strftime('%Y/%m/%d') %>
+          <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
 
         <div>
           <%= link_to "編集", edit_post_path(post) %>
