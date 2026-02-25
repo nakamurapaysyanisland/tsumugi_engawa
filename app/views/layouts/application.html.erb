@@ -16,7 +16,12 @@
 
   <body class="d-flex flex-column vh-100">
       <header class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
-     
+     <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :content %>
+    <%= f.select :model, options_for_select({"User" => "user", "Post" => "post"}) %>
+    <%= f.select :method, options_for_select({"完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial"}) %>
+    <%= f.submit "検索" %>
+  <% end %>
       <nav class="container d-flex flex-row justify-content-between align-items-center">
            <a class="navbar-brand h1 mb-0 text-decoration-none text-dark" href="/">つむぎ縁側</a>
            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
