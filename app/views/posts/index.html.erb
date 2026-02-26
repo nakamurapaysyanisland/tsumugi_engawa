@@ -1,27 +1,39 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-11 shadow-lg rounded px-3 my-5 bg-white">
+      
+      <div class="row g-3 p-3">
+        <% @posts.each do |post| %>
+          <div class="col-md-6 col-sm-12 mb-3"> <div class="shadow-sm rounded border bg-white h-100 p-3">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="d-flex align-items-center">
+                  <%= image_tag post.user.get_profile_image(100,100), size: "40x40"%>
+                  <%= link_to post.user.nickname, user_path(post.user), class: "text-decoration-none fw-bold text-dark ms-2" %>
+                </div>
+                <div class="bg-light p-1 small rounded border">
+                  <%= post.category.name %>
+                </div>
+              </div>
 
-      <% @posts.each do |post| %>
-        
-        
-         <%= image_tag post.user.get_profile_image(100,100), size: "100x100" %>
-        <div>
-        <strong>ユーザー:</strong>
-        <%= link_to post.user.nickname, user_path(post.user) %>
-        </div>
-        
-        <div>
-        <%= post.category.name %>
-        </div>
-        <div>
-        <%= post.title %>
-        </div>
-        <div>
-        <%= post.body %>
-        </div>
-        <%= post.created_at.strftime('%Y/%m/%d') %>
-        <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
-       
+              <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
+                <div class="mb-3">
+                  <div class="h5 fw-bold"><%= post.title %></div>
+                  <div class="text-muted small text-truncate-2"><%= post.body %></div>
+                </div>
+              <% end %>
 
+              <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-2 small text-secondary">
+                <span><%= post.created_at.strftime('%Y/%m/%d') %></span>
+                <%= link_to post_path(post), class: "text-decoration-none text-secondary" do %>
+                   <i class="far fa-comment"></i> <%= post.post_comments.count %> コメント
+                <% end %>
+              </div>
 
+            </div>
+          </div>
+        <% end %>
+      </div>
 
-        <%= link_to "詳細", post_path(post) %>
-     <% end %>
+    </div>
+  </div>
+</div>
