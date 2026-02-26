@@ -2,3 +2,12 @@
  *= require_tree .
  *= require_self
  */
+
+/* app/assets/stylesheets/application.css */
+
+/* ロゴなど、特定の文字をかっこよくしたい場合 */
+
+/* サイト全体に適用したい場合 */
+* {
+  font-family: 'Kaisei Tokumin', serif !important;
+}
