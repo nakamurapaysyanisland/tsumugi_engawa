@@ -7,16 +7,16 @@
 
 
 
-  <div class="categories-list">
+
  
  
 <div class="row g-3 d-flex justify-content-center p-3"> 
 <% @categories.each do |category| %>
-    <div class="col-6 col-md-4 mb-3 "> 
-      
+    <div class="col-6 col-md-4 mb-3"> 
+      <div class="p-3 shadow-sm rounded border text-center bg-white h-100 mb-3">
       <%= link_to category_path(category), class: "text-decoration-none h-100 d-block" do %>
         
-        <div class="p-3 shadow-sm rounded border text-center bg-white h-100 mb-3">
+        
           <div class="category-name h5 text-dark mb-0">
             <%= category.name %>
           </div>
