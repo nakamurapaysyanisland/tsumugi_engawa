@@ -1,9 +1,11 @@
 Rails.application.routes.draw do 
   
-    devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions'
+  devise_for :admins, skip: [:registrations, :pasword], controllers: {
+    sessions: 'admins/sessions'
   }
+  namespace :admin do
+    get 'dashboard' => 'dashboards#index'
+  end
 
   resources :users, only: [:index, :show, :edit, :update] do
     member do
