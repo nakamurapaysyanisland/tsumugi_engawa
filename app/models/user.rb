@@ -61,5 +61,8 @@ def destroy_posts_if_withdrawn
     end
   end
 
+  def self.search_for(content, method)
+      User.where('nickname LIKE ?', '%'+content+'%')
+  end
 end
 
