@@ -8,4 +8,8 @@ class Post < ApplicationRecord
     belongs_to :category
     belongs_to :user
     has_many :post_comments, dependent: :destroy
+
+    def self.search_for(content, method)
+        Post.where("title LIKE ? OR body LIKE ?", "%#{content}%", "%#{content}%")
+    end
 end
