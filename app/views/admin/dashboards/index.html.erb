@@ -1,0 +1,8 @@
+<h2>-ユーザー一覧-</h2>
+<% @users.each do |user| %>
+<%= user.nickname %>
+<%= user.last_name %>
+<%= user.first_name %>
+<%= link_to '詳細', admin_user_path(user) %>
+<%= link_to '削除', admin_user_path(user), method: :delete, confirm: '本当に削除しますか？' %>
+<% end %>
