@@ -1,0 +1,10 @@
+<h3>ユーザー詳細</h3>
+
+<%= @user.last_name %><%= @user.first_name %>
+<%= @user.nickname %>
+<%= @user.email %>
+<%= @user.created_at.strftime("%Y/%m/%d") %>
+<%= @user.updated_at.strftime("%Y/%m/%d") %>
+<%= @user.status %>
+<%= link_to 'ユーザー一覧に戻る', admin_dashboards_path %>
+<%= link_to '退会', withdraw_admin_user_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" } %>
