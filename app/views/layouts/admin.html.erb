@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>管理者ページ</title>
+         <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
+    <body>
+        <% if admin_signed_in? %>
+        <%= link_to '管理者用ログアウト', destroy_admin_session_path, method: :delete %>
+        <% end %> 
+        <% flash.each do |message_type, message| %>
+        <div class="flash-message <%= message_type %>">
+        <%= message %>
+        </div>
+        <% end %>
+        <%= yield %>
+    </body>
+</html>
