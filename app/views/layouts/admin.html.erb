@@ -10,7 +10,7 @@
     <body>
         <% if admin_signed_in? %>
         <%= link_to '管理者用ログアウト', destroy_admin_session_path, method: :delete %>
-        <%= link_to 'コメント一覧', admin_comments_index_path %>
+        <%= link_to 'コメント一覧', admin_post_comments_path %>
         <% end %> 
         <% flash.each do |message_type, message| %>
         <div class="flash-message <%= message_type %>">
