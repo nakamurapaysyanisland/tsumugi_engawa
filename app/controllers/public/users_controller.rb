@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Public::UsersController < ApplicationController
  before_action :authenticate_user!
   before_action :guest_check, only: [:destroy, :withdraw]
   before_action :ensure_current_user, only: [:edit, :update, :destroy, :withdraw, :edit_upgrade, :upgrade]
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
        bypass_sign_in(@user) 
       flash[:notice] = "ユーザー情報を更新しました。"
-    redirect_to user_path(@user)
+    redirect_to mypage_path
     else
       render :edit
     end
@@ -49,7 +49,6 @@ class UsersController < ApplicationController
   def mypage
     @user = current_user
     @posts = @user.posts
-    
   end
 
   def create_guest

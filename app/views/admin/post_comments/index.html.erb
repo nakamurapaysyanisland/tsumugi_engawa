@@ -1,0 +1,23 @@
+<h4>コメント一覧</h4>
+
+<table>
+<thead>
+<th>ユーザー名</th>
+<th>コメント</th>
+<th>コメント日時</th>
+<th></th>
+<th></th>
+</thead>
+
+<tbody>
+<% @post_comment.each do |post_comment| %>
+<tr>
+<td><%= post_comment.user.nickname %></td>
+<td><%= post_comment.content %></td>
+<td><%= post_comment.created_at %></td>
+<td><%= link_to '投稿を見る', admin_post_path(post_comment.post) %></td>
+<td><%= link_to '削除', admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
