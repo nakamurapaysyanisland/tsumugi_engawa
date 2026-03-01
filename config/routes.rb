@@ -1,4 +1,8 @@
 Rails.application.routes.draw do 
+  namespace :admin do
+    get 'comments/index'
+    get 'comments/destroy'
+  end
   devise_for :users
   devise_for :admin, skip: [:registrations, :pasword], controllers: {
     sessions: 'admin/sessions'
