@@ -65,3 +65,4 @@ group :production do
 end
 gem "net-pop"
 gem "net-imap"
+gem 'kaminari','~> 1.2.1'

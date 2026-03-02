@@ -6,7 +6,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(:user).all.order(created_at: :desc)
+    @posts = Post.page(params[:page])
       @user = current_user
   end
 
