@@ -1,65 +1,63 @@
-<div class="container h-100 d-flex align-items-center justify-content-center">
-<div class="row">
-<div class="col-md-5 col-sm-10">
-<div class="shadow rounded pt-3 pl-5">
-<h2 class="text-center">新規会員登録</h2>
-<div class="text-center">
-<%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="container">
+<div class="row justify-content-center mt-4">
+<div class="col-md-4 col-sm-12">
+<div class="d-flex flex-column align-items-center justify-content-center w-100">
+<h2 class="fw-bold" style="color: #4a463f;">ようこそ</h2>
+ <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_with model: @user, url: user_registration_path, class: "w-100" do |f| %>
+  <div class="d-flex flex-column">
   
-  <div class="d-flex flex-row">
-    <div class="col">
-      <%= f.file_field :image, accept: "image/*" %>
+    <div class="field">
+      <%= f.file_field :image, accept: "image/*", style: "color: #4a463f;" %>
     </div>
-      
-    <div class="col">
-      <%= f.label :姓 %><br />
-      <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+   <div class="d-flex flex-row">
+    <div class="field">
+      <%= f.label :姓, style: "color: #4a463f;" %><br />
+      <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "form-control" %>
     </div>
-
-    <div class="col">
-      <%= f.label :名 %><br />
-      <%= f.text_field :first_name, autocomplete: "first_name" %>
+   
+    <div class="field">
+      <%= f.label :名, style: "color: #4a463f;" %><br />
+      <%= f.text_field :first_name, autocomplete: "first_name", class: "form-control" %>
     </div>
+   </div>
   </div>
-  
-  <div class="field">
-    <%= f.label :ニックネーム %><br />
-    <%= f.text_field :nickname, autocomplete: "nickname" %>
+    <div class="field">
+    <%= f.label :ニックネーム, style: "color: #4a463f;" %><br />
+    <%= f.text_field :nickname, autocomplete: "nickname", class: "form-control" %>
   </div>
-
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+  <div class="field my-1">
+    <%= f.label :メールアドレス, style: "color: #4a463f;" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :パスワード %>
-    <% if @minimum_password_length %>
+  <div class="field my-1">
+    <%= f.label :パスワード, style: "color: #4a463f;" %>
+     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :パスワード（確認用） %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+<div class="field">
+    <%= f.label :パスワード（確認用）, style: "color: #4a463f;" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "登録する" %>
+  <div class="actions mt-3">
+    <%= f.submit "登録", class: "w-100", style: "color: #4a463f;" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
 
-<h3>ニックネームだけでゲスト登録</h3>
-<%= form_with model: User.new, url: users_guest_sign_up_path, local: true do |f| %>
+<h4 class="fw-bold" style="color: #4a463f;">ニックネームだけでゲスト登録</h4>
+<%= form_with model: User.new, url: users_guest_sign_up_path, local: true, class: "w-100" do |f| %>
   <div class="field">
-    <%= f.label :nickname %><br />
-    <%= f.text_field :nickname, placeholder: "たろう" %>
+    <%= f.label :ニックネーム, style: "color: #4a463f;" %><br />
+    <%= f.text_field :nickname, placeholder: "たろう", class: "form-control" %>
   </div>
-  <%= f.submit "ゲスト登録して始める" %>
+  <%= f.submit "ゲスト登録", class: "w-100 mt-3", style: "color: #4a463f;" %>
 <% end %>
 </div>
 </div>
