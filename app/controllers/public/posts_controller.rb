@@ -9,8 +9,7 @@ class Public::PostsController < ApplicationController
     @posts = Post.page(params[:page])
       @user = current_user
   end
-
-  def show
+ def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
   end
