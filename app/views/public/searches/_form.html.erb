@@ -1,6 +1,8 @@
 
 <%= form_with url: search_path, method: :get, local: true do |f| %>
-    <%= f.text_field :content %>
+  <div class="d-flex flex-row",style: "color: #4a463f;">
+    <%= f.text_field :content, class: "form-control mr-1" %>
     <%= f.select :model, options_for_select({"投稿" => "post", "ユーザー" => "user"}) %>
     <%= f.submit "検索" %>
+  </div>
   <% end %>
