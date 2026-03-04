@@ -13,23 +13,20 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"; 
 
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
 
-document.addEventListener('turbolinks:load', () => {
-  const input = document.getElementById('file-input');
-  const preview = document.getElementById('preview');
 
-  if (input) {
-    input.addEventListener('change', (e) => {
-      const file = e.target.files[0];
+$(document).on('turbo:load turbolinks:load', function() {
+  $('#file-input').on('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
       const reader = new FileReader();
-      reader.onload = (event) => {
-        preview.setAttribute('src', event.target.result);
-        preview.style.display = 'block';
-      };
-      if (file) reader.readAsDataURL(file);
-    });
-  }
+      reader.onload = function (e) {
+        // 中のアイコンと文字をまとめて隠す
+        $("#inner-content").hide();
+        // プレビューを表示
+        $("#preview").attr('src', e.target.result).show();
+      }
+      reader.readAsDataURL(file);
+    }
+  });
 });

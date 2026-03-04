@@ -5,7 +5,7 @@
 <h2 class="fw-bold" style="color: #4a463f;">おかえりなさい</h2>
  <%= render "devise/shared/error_messages", resource: resource %>
 <%= form_with model: @user, local: true, class: "w-100" do |f| %>
-  <div class="field my-1">
+  <div class="field mt-4 mb-1">
     <%= f.label :email, style: "color: #4a463f;" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
   </div>

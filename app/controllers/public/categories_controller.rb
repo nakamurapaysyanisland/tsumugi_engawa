@@ -1,5 +1,5 @@
 class Public::CategoriesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index], raise: false
+  skip_before_action :configure_authentication, only: [:index], raise: false
   def show
   end
 
