@@ -1,6 +1,10 @@
 Rails.application.routes.draw do 
 
- 
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+    post 'users/guest_sign_up', to: 'users/registrations#guest_create'
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
   devise_for :users
   devise_for :admin, skip: [:registrations, :pasword], controllers: {
     sessions: 'admin/sessions'
@@ -25,11 +29,7 @@ Rails.application.routes.draw do
       patch :withdraw
     end
   end
-  devise_scope :user do
-    get '/users/sign_out' => 'devise/sessions#destroy'
-    post 'users/guest_sign_up', to: 'users/registrations#guest_create'
-    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
-  end
+ 
   get 'guest_signup', to: 'users#guest_signup'
   post 'guest_signup', to: 'users#create_guest'
   get '/search', to: 'searches#search'

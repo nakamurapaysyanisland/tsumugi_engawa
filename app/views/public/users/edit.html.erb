@@ -13,14 +13,23 @@
         <% end %>
       </div>
 <h5>ユーザー編集画面</h5>
- <div class="form-group">
-      <%= f.label :image, class: "image-upload-label" do %>
-    <div class="image-upload-frame">
-      <i class="fas fa-camera"></i> <p>画像を選択してください</p>
-      <%= f.file_field :profile_image, accept: "image/*", class: "hidden-file-input" %>
+
+ <div class="field text-center">
+  <label for="file-input" style="cursor: pointer; margin: 0 auto; display: block; width: 100px;">
+    <div id="img_field" class="rounded-circle border d-flex align-items-center justify-content-center" 
+         style="width: 100px; height: 100px; background-color: #f8f9fa; overflow: hidden; position: relative;">
+      <img src="" id="preview" style="display: none; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 10;">
+      <div id="inner-content">
+        <i class="fa-solid fa-camera fa-3x", style="color: #4a463f;"></i>
+        <p id="placeholder" style="margin: 0; line-height: 1.2; padding: 0 5px;">
+        </p>
+      </div>
+      
     </div>
-  <% end %>
- </div>
+    <%= f.file_field :profile_image, id: "file-input", accept: "image/*", class: "d-none" %>
+  </label>
+</div>
+
 <% t("enums.user.status.#{@user.status}") %>
 <div class="form-group">
   <%= f.label "ニックネーム" %>

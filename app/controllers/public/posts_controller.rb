@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
- before_action :authenticate_user!, except: [:index, :show]
+ skip_before_action :configure_authentication, only: [:index, :show]
  before_action :ensure_current_user, only: [:edit, :update, :destroy]
   def new
     @post = Post.new
