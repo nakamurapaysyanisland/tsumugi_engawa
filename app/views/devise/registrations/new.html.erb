@@ -6,10 +6,18 @@
  <%= render "devise/shared/error_messages", resource: resource %>
 <%= form_with model: @user, url: user_registration_path, class: "w-100" do |f| %>
   <div class="d-flex flex-column">
+   <div class="field">
+  <%# IDを追加 %>
+  <%= f.file_field :profile_image, id: "file-input", accept: "image/*", style: "color: #4a463f;" %>
   
-    <div class="field">
-      <%= f.file_field :image, accept: "image/*", style: "color: #4a463f;" %>
-    </div>
+  <div id="img_field" onClick="$('#file-input').click()" style="cursor: pointer;">
+    <%# 初期状態では非表示 %>
+    <img src="" id="preview" style="display: none; object-fit: cover;" class="rounded-circle border w-50">
+    <p id="placeholder">画像を選択してください</p>
+  </div>
+</div>
+
+
    <div class="d-flex flex-row">
     <div class="field">
       <%= f.label :姓, style: "color: #4a463f;" %><br />

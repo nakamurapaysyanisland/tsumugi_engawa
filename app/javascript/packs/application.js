@@ -17,4 +17,19 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+document.addEventListener('turbolinks:load', () => {
+  const input = document.getElementById('file-input');
+  const preview = document.getElementById('preview');
 
+  if (input) {
+    input.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        preview.setAttribute('src', event.target.result);
+        preview.style.display = 'block';
+      };
+      if (file) reader.readAsDataURL(file);
+    });
+  }
+});
