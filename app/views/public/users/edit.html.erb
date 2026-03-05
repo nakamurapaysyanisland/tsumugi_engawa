@@ -15,8 +15,9 @@
   <div class="row justify-content-center">
     <div class="col-md-4 col-sm-11">
       <div class="d-flex flex-column align-items-center justify-content-center w-100">
-        <h2 class="fw-bold mt-5" style="color: #4a463f;">ユーザー編集画面</h2>
+        <h2 class="fw-bold mt-4" style="color: #4a463f;">ユーザー編集画面</h2>
         <%= form_with model: @user do |f| %>
+        <div class="d-flex flex-column mt-3">
         <div class="field text-center">
           <label for="file-input" style="cursor: pointer; margin: 0 auto; display: block; width: 100px;">
             <div id="img_field" class="rounded-circle border d-flex align-items-center justify-content-center" 
@@ -31,39 +32,45 @@
           </label>
         </div>
 
-
         <div class="form-group">
-          <% t("enums.user.status.#{@user.status}") %>
-        </div>
-        <div class="form-group">
-          <%= f.label "ニックネーム" %>
-          <%= f.text_field :nickname %>
+          <%= f.label "ニックネーム", style: "color: #4a463f;" %><br />
+          <%= f.text_field :nickname, class: "form-control" %>
         </div>
 
         <% unless current_user.guest?%>
-        <div class="form-group">
-          <%= f.label "姓" %>
-          <%= f.text_field :last_name %>
-          <%= f.label "名" %>
-          <%= f.text_field :first_name %>
+      
+        <div class="d-flex flex-row">
+          <div class="form-group my-1">
+          <%= f.label "姓", style: "color: #4a463f;" %><br />
+          <%= f.text_field :last_name, class: "form-control" %>
+          </div>
+          <div class="form-group my-1">
+          <%= f.label "名", style: "color: #4a463f;" %><br />
+          <%= f.text_field :first_name, class: "form-control" %>
+          </div>
         </div>
-        <div class="form-group">
-          <%= f.label "メールアドレス" %>
-          <%= f.text_field :email %>
+        <div class="form-group my-1">
+          <%= f.label "メールアドレス", style: "color: #4a463f;" %><br />
+          <%= f.text_field :email, class: "form-control" %>
         </div>
-        <div class="form-group">
-          <%= f.label "パスワード" %>
-          <%= f.text_field :password %>
+        <div class="form-group my-1">
+          <%= f.label "パスワード", style: "color: #4a463f;" %><br />
+          <%= f.text_field :password, class: "form-control" %>
         </div>
         <% end %>
-          <%= f.submit "更新" %>
+        <div class="actions mt-2">
+          <%= f.submit "更新",  class: "w-100", style: "color: #4a463f;" %>
+          </div>
+          
         <% end %>
 
         <% unless current_user.guest?%>
-          <h3>退会について</h3>
-            <p>退会するとマイページにログインできなくなります。</p>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <h5 class="mt-5">退会について</h5>
+            <p class="small">退会するとマイページにログインできなくなります。</p>
           <%= link_to "退会する", withdraw_user_path(@user), 
-            method: :patch, data: { confirm: "本当に退会しますか？" }, class: "btn-delete" %>
+            method: :patch, data: { confirm: "本当に退会しますか？" }, class: "btn-delete btn-small w-50 text-center bg-secondary text-light", style: "color: #4a463f;" %>
+        </div>
         <% end %>
       </div>
     </div>
