@@ -1,16 +1,54 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
+<div class="container my-5">
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-10 col-lg-8">
+      <div class="p-4 rounded border-bottom text-center">
+        <div class="mb-3">
+          <%= image_tag @user.get_profile_image(100,100), size: "100x100", class: "rounded-circle border" %>
+        </div>
+        <h4 class="fw-bold"><%= @user.nickname %>さんのページ</small></h4>
+      </div>
+    </div>
+  </div>
+      <div class="row"> <% @posts.each do |post| %>
+      <div class="col-md-4 mb-2">
+        <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+          
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div class="d-flex align-items-center">
+              <%= image_tag post.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border-sm mr-2" %>
+              <%= link_to post.user.nickname, user_path(post.user), class: "text-decoration-none text-dark small" %>
+            </div>
+            <div class="bg-white px-2 py-1 small rounded border text-muted">
+              <%= post.category.name %>
+            </div>
+          </div>
 
-    
-<%= image_tag @user.get_profile_image(100,100), size: "100x100" %>
-<div><%= @user.nickname %>    さんの投稿一覧</div>
-<div><%= @posts.count %> 件の投稿</div>
- <% @posts.each do |post| %>
-        <div><%= post.title %></div>
-        <div><%= post.body %></div>
-        <%= post.created_at.strftime('%Y/%m/%d') %>
+          <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
+            <div class="mb-3">
+              <div class="h5 fw-bold mb-2"><%= post.title %></div>
+              <p class="text-muted small">
+                <%= post.body %>
+              </p>
+            </div>
+          <% end %>
 
-        <%= link_to "詳細", post_path(post) %>
-      
-<% end %>
+          <div class="mt-auto pt-3 border-top">
+            <div class="d-flex justify-content-between align-items-center small text-secondary">
+              <div>
+                <span class="me-3"><%= post.created_at.strftime('%Y/%m/%d') %></span>
+                <%= link_to post_path(post), class: "text-decoration-none text-secondary" do %>
+                  <i class="far fa-comment"></i> <%= post.post_comments.count %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="d-flex justify-content-center mt-5">
+    <%= paginate @posts %>
+  </div>
+</div>
