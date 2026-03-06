@@ -13,7 +13,7 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"; 
 
-
+require("@rails/ujs").start()
 
 $(document).on('turbo:load turbolinks:load', function() {
   $('#file-input').on('change', function(e) {
