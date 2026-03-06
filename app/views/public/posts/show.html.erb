@@ -13,17 +13,25 @@
                   <%= link_to @post.user.nickname, user_path(@post.user), class: "text-decoration-none text-dark ms-2 small" %>
                 </div>
                 <div class-"">
-                <div class="btn-sm">
+                
                 <% if user_signed_in? && @post.user_id == current_user.id %>
-<%= link_to '編集', edit_post_path(@post) %>
-<%= link_to '削除', post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-             <% end %>
-             </div>
-                <div class="bg-white px-2 py-1 small rounded border text-muted">
+                <div class="bg-white px-2 py-1 small rounded border text-center text-secondary">
                   <%= @post.category.name %>
                 </div>
+                <div class="d-flex">
+                <%= button_to '編集', edit_post_path(@post), class: "btn btn-sm text-decoration-none mt-1 mr-1", style: "color: #314a33; border: 1px solid #314a33;" %> 
+                <%= button_to '削除', post_path(@post), 
+    method: :delete, 
+    data: { confirm: "本当に削除しますか？" }, 
+    class: "btn btn-sm text-decoration-none mt-1", 
+    style: "color: #b24a4a; border: 1px solid #b24a4a; background-color: transparent;" %>
                 </div>
-              </div>
+                <% end %>
+            
+                
+                </div>
+                </div>
+              
               
               <%= link_to post_path(@post), class: "text-decoration-none text-dark" do %>
                 <div class="mb-3">
@@ -41,7 +49,7 @@
                 <% end %>
               </div>
 
-  <div class="d-flex flex-row align-items-center justify-content-center mt-auto py-3", style="border-top: 3px double #6c757d; color: #4a463f;">
+  <div class="d-flex flex-row align-items-center justify-content-center mt-auto py-3", style="border-top: 3px double #868e96 ">
    <div class="mx-1">
     <%= image_tag current_user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
     </div>    
@@ -70,9 +78,10 @@
     </div>
     </div>
   <% end %>
+
+<div class="d-flex justify-content-end mt-2">
+  <%= link_to '一覧へ', posts_path, class: "btn btn-outline-secondary btn-sm" %>
 </div>
-<div cass="justfy-content-end">
-<%= link_to '一覧へ戻る', posts_path %>
 </div>
 </div>
 </div>
