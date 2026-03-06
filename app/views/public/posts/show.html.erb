@@ -1,45 +1,74 @@
-<h1>投稿詳細</h1>
+<div class="container">
+<div class="row justify-content-center mt-4">
+<div class="col-md-8 col-sm-12">
+<div class="d-flex flex-column align-items-center justify-content-center w-100">
+<h2 class="fw-bold" style="color: #4a463f;"></h2>
 
-<%= image_tag @post.user.get_profile_image(10,10), size: "100x100" %>
-<div>
-  <strong>ユーザー:</strong>
-  <%= link_to @post.user.nickname, user_path(@post.user) %>
-</div>
-<div>
-  <strong>カテゴリー:</strong>
-  <%= @post.category.name %>
-</div>
-<div>
-  <strong>タイトル:</strong>
-  <%= @post.title %>
-</div>
+<div class="col-md-12 mb-11"> 
+            <div class="rounded border w-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+              
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="d-flex align-items-center">
+                  <%= image_tag @post.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
+                  <%= link_to @post.user.nickname, user_path(@post.user), class: "text-decoration-none text-dark ms-2 small" %>
+                </div>
+                <div class="bg-white px-2 py-1 small rounded border text-muted">
+                  <%= @post.category.name %>
+                </div>
+              </div>
 
-<div>
-  <strong>本文:</strong>
-  <%= @post.body %>
-</div>
-<%= @post.created_at.strftime('%Y/%m/%d') %>
-<div>
+              <%= link_to post_path(@post), class: "text-decoration-none text-dark" do %>
+                <div class="mb-3">
+                  <div class="h5 fw-bold mb-2"><%= @post.title %></div>
+                  <div class="text-muted small">
+                    <%= @post.body %>
+                  </div>
+                </div>
+              <% end %>
+
+              <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3 small text-secondary">
+                <span><%= @post.created_at.strftime('%Y/%m/%d') %></span>
+                <%= link_to post_path(@post), class: "text-decoration-none text-secondary" do %>
+                   <i class="far fa-comment"></i> <%= @post.post_comments.count %>
+                <% end %>
+              </div>
+
+          
   <h5>コメント件数：<%= @post.post_comments.count %></h5>
+  <div class="d-flex flex-row", style="color: #4a463f;">
+   <div class="mx-1">
+    <%= image_tag current_user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
+    </div>    
+   <%= form_with model: [@post, @post_comment] do |f| %>
+    <div class="mx-1">
+    <%= f.text_area :content, rows: 2, placeholder: "コメントを入力してください" , class: "w-100"%>
+    </div>
+    <div class="mx-1">
+    <%= f.submit "投稿する" %>
+    </div>
+  <% end %>
+  </div>
+</div>
+
   <% @post.post_comments.each do |post_comment| %>
     <%= image_tag post_comment.user.get_profile_image(10,10), size: "50x50" %>
     <div>
       <strong><%= post_comment.user.nickname %>:</strong>
       <%= post_comment.content %>
       <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-      <%= link_to '削除', post_post_comment_path(@post, post_comment), method: :delete, data: { confirm: "本当に削除しますか？" } if user_signed_in? && post_comment.user_id == current_user.id %>
+      <%= link_to '削除', post_post_comment_path(post, post_comment), method: :delete, data: { confirm: "本当に削除しますか？" } if user_signed_in? && post_comment.user_id == current_user.id %>
     </div>
   <% end %>
 </div>
-<div>
-  <h5>コメントを投稿する</h5>
-  <%= form_with model: [@post, @post_comment] do |f| %>
-    <%= f.text_area :content, rows: 5, placeholder: "コメントを入力してください" %>
-    <%= f.submit "投稿する" %>
-  <% end %>
-</div>
+
 <% if user_signed_in? && @post.user_id == current_user.id %>
 <%= link_to '編集', edit_post_path(@post) %>
 <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" } %>
 <% end %>
 <%= link_to '一覧へ戻る', posts_path %>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
