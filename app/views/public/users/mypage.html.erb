@@ -1,7 +1,7 @@
 <div class="container my-5">
-  <div class="row justify-content-center mb-5">
+  <div class="row justify-content-center mb-4">
     <div class="col-md-10 col-lg-8">
-      <div class="px-4 pt-4 pb-2 rounded border-bottom text-center">
+      <div class="px-4 pt-4 pb-4 rounded border-bottom text-center">
         <div class="mb-3">
           <%= image_tag @user.get_profile_image(100,100), size: "100x100", class: "rounded-circle border" %>
         </div>
@@ -35,9 +35,9 @@
               <%= image_tag post.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border-sm mr-2" %>
               <strong><%= link_to post.user.nickname, user_path(post.user), class: "text-decoration-none text-dark small" %></strong>
             </div>
-            <div class="bg-white px-2 py-1 small rounded border text-muted">
-              <%= post.category.name %>
-            </div>
+            <div>
+                <%= link_to post.category.name, posts_path(category_id: post.category_id), class: "bg-white p-1 small rounded border text-muted" %>
+                </div>
           </div>
 
           <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
@@ -59,8 +59,8 @@
               </div>
 
               <div class="d-flex">
-                <%= button_to '編集', edit_post_path(post), class: "btn btn-sm text-decoration-none mr-1", style: "color: #314a33; border: 1px solid #314a33;" %>
-                <%= button_to '削除', post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm text-decoration-none", style: "color: #b24a4a; border: 1px solid #b24a4a; background-color: transparent;" %>
+                <%= link_to '編集', edit_post_path(post), class: "btn btn-sm text-decoration-none mr-1", style: "color: #314a33; border: 1px solid #314a33;" %>
+                <%= link_to '削除', post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm text-decoration-none", style: "color: #b24a4a; border: 1px solid #b24a4a; background-color: transparent;" %>
               </div>
             </div>
           </div>

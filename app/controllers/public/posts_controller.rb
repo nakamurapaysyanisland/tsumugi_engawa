@@ -6,7 +6,12 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.page(params[:page])
+    if params[:category_id].present?
+    @category = Category.find(params[:category_id])
+    @posts = @category.posts.page(params[:page]).per(10)
+  else
+    @posts = Post.all.page(params[:page]).per(10)
+  end
       @user = current_user
   end
  def show
