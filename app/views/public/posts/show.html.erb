@@ -67,14 +67,20 @@
 
 
   <% @post.post_comments.each do |post_comment| %>
-    <div class="d-flex flex-row align-items-center justify-content-center mt-auto border-top py-3", style="color: #4a463f;">
-    <div class="flex-grow-1">
-    <%= image_tag post_comment.user.get_profile_image(10,10), size: "40x40", class: "rounded-circle border" %>
+    <div class="d-flex flex-row align-items-center justify-content-center mt-auto border-top border-bottom py-3", style="color: #4a463f;">
+    <div class="flex-grow-1 justify-content-center">
+     <%= image_tag post_comment.user.get_profile_image(10,10), size: "40x40", class: "rounded-circle border" %>
       <strong><%= post_comment.user.nickname %>:</strong>
+      <p class="text-muted small">
       <%= post_comment.content %>
-      <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-    
-      <%= link_to '削除', post_post_comment_path(@post, post_comment), method: :delete, data: { confirm: "本当に削除しますか？" } if user_signed_in? && post_comment.user_id == current_user.id %>
+      </p>
+      <div class="mt-auto pt-2 border-top">
+        <div class="d-flex justify-content-between align-items-center small">
+        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+        <%= button_to '削除', post_post_comment_path(@post, post_comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm text-decoration-none ms-1", style: "color: #b24a4a; border: 1px solid #b24a4a; background-color: transparent;" %>
+        </div>
+      </div>
+
     </div>
     </div>
   <% end %>
