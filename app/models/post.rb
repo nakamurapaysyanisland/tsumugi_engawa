@@ -3,9 +3,9 @@ class Post < ApplicationRecord
     validates :title, presence: true
     validates :body, presence: true
     validates :user_id, presence: true
-    validates :category_id, presence: true
+    validates :category, presence: { message: "を選択してください" }
 
-    belongs_to :category
+    belongs_to :category, optional: true
     belongs_to :user
     has_many :post_comments, dependent: :destroy
 

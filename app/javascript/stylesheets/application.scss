@@ -1,11 +1,14 @@
 @use '~bootstrap/scss/bootstrap';
 
 
+
+
 body {
   background-image: url("../images/AdobeStock_809068755.jpeg");
-background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: cover;      /* 画像を画面いっぱいに広げる */
+  background-position: bottom; /* 画像を中央に寄せる */
+  background-repeat: no-repeat; /* 繰り返しを防ぐ */
+  background-attachment: fixed; /* 【重要】スクロールしても画像を固定する */
+  background-position: 50% 75%; 
   min-height: 100vh;
 }
-

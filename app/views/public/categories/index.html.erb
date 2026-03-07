@@ -13,16 +13,13 @@
  
       <div class="row justify-content-center"> 
 
-    <% @categories.each do |category| %>
+    <% @category.each do |category| %>
     <div class="col-6 col-md-4 mb-3"> 
       
-      <%= link_to category_path(category), class: "text-decoration-none h-100" do %>
-          
-          <div class="p-3 shadow-sm rounded border h-100 d-flex align-item-center justify-content-center" style="background-color: #fcfaf2;">
-          <div class="category-name h5 ", style="color: #4a463f;">
-            <%= category.name %>
-          </div>
-        </div>
+          <%= link_to posts_path(category_id: category.id), class: "text-decoration-none w-100" do %>
+              <div class="p-3 shadow-sm rounded border h-100 d-flex align-items-center justify-content-center" style="background-color: #fcfaf2; min-height: 80px;">
+                <span class="h5 mb-0" style="color: #4a463f;"><%= category.name %></span>
+              </div>
       <% end %>
     
     </div>
