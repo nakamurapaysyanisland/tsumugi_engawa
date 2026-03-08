@@ -3,7 +3,7 @@
 <div class="col-md-4 col-sm-12">
 <div class="d-flex flex-column align-items-center justify-content-center w-100">
 <h2 class="fw-bold" style="color: #4a463f;">ようこそ</h2>
- <%= render "devise/shared/error_messages", resource: resource %>
+
 
 <%= form_with model: @user, url: user_registration_path, class: "w-100" do |f| %>
   <div class="d-flex flex-column mt-3">
@@ -11,21 +11,45 @@
     <div class="field my-1">
       <%= f.label :姓, style: "color: #4a463f;" %><br />
       <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "form-control" %>
+      <% if @user.errors.include?(:last_name) %>
+    <div class="text-danger small mt-1 fw-bold">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <%= @user.errors.full_messages_for(:last_name).first %>
+    </div>
+  <% end %>
     </div>
    
     <div class="field my-1">
       <%= f.label :名, style: "color: #4a463f;" %><br />
       <%= f.text_field :first_name, autocomplete: "first_name", class: "form-control" %>
+      <% if @user.errors.include?(:first_name) %>
+    <div class="text-danger small mt-1 fw-bold">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <%= @user.errors.full_messages_for(:first_name).first %>
+    </div>
+  <% end %>
     </div>
    </div>
   </div>
     <div class="field my-1">
     <%= f.label :ニックネーム, style: "color: #4a463f;" %><br />
     <%= f.text_field :nickname, autocomplete: "nickname", class: "form-control" %>
+    <% if @user.errors.include?(:nickname) %>
+    <div class="text-danger small mt-1 fw-bold">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <%= @user.errors.full_messages_for(:nickname).first %>
+    </div>
+  <% end %>
   </div>
   <div class="field my-1">
     <%= f.label :メールアドレス, style: "color: #4a463f;" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    <% if @user.errors.include?(:email) %>
+    <div class="text-danger small mt-1 fw-bold">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <%= @user.errors.full_messages_for(:email).first %>
+    </div>
+  <% end %>
   </div>
 
   <div class="field my-1">
@@ -34,11 +58,23 @@
     <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    <% if @user.errors.include?(:password) %>
+    <div class="text-danger small mt-1 fw-bold">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <%= @user.errors.full_messages_for(:password).first %>
+    </div>
+  <% end %>
   </div>
 
 <div class="field my-1">
     <%= f.label :パスワード（確認用）, style: "color: #4a463f;" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    <% if @user.errors.include?(:password_confirmation) %>
+    <div class="text-danger small mt-1 fw-bold">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <%= @user.errors.full_messages_for(:password_confirmation).first %>
+    </div>
+  <% end %>
   </div>
 
   <div class="actions mt-3">

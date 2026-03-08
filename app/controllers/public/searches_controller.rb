@@ -1,5 +1,6 @@
 class Public::SearchesController < ApplicationController
 
+skip_before_action :configure_authentication, only: [:search]
     def search
 		@category = Category.all
 		@model = params[:model]

@@ -18,6 +18,22 @@ def after_sign_in_path_for(resource)
     root_path
   end
  end
+ def create
+    build_resource(sign_up_params)
+    resource.save
+    yield resource if block_given?
+    if resource.persisted?
+      
+      set_flash_message! :notice, :signed_up
+      sign_up(resource_name, resource)
+      respond_with resource, location: after_sign_up_path_for(resource)
+    else
+  
+      clean_up_passwords resource
+      set_minimum_password_length
+      render :new
+    end
+  end
  
    protected
 

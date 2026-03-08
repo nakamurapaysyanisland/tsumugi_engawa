@@ -73,3 +73,7 @@ ja:
       previous: "‹"
       next: "›"
       truncate: "..."
+  devise:
+    failure:
+      not_found_in_database: "メールアドレスまたはパスワードが違います。"
+      invalid: "メールアドレスまたはパスワードが違います。"

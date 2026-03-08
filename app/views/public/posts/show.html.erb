@@ -9,8 +9,8 @@
               
               <div class="d-flex align-items-center justify-content-between mb-3">
                 <div class="d-flex align-items-center">
-                  <%= image_tag @post.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border mr-2" %>
-                  <%= link_to @post.user.nickname, user_path(@post.user), class: "font-weight-bold text-decoration-none text-dark ms-2" %>
+                  <%= image_tag @post.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
+                  <%= link_to @post.user.nickname, user_path(@post.user), class: "font-weight-bold text-decoration-none text-dark ml-2" %>
                 </div>
                 <div class-"">
                 
@@ -51,8 +51,13 @@
 
   <div class="d-flex flex-row align-items-center justify-content-center mt-auto py-3", style="border-top: 3px double #868e96 ">
    <div class="mx-1">
+  <% if user_signed_in? %>
     <%= image_tag current_user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
-    </div>    
+  <% else %>
+  
+    <%= image_tag 'no_image.jpg', size: "40x40", class: "rounded-circle border" %>
+  <% end %>
+</div>
    <%= form_with model: [@post, @post_comment], class: "flex-grow-1" do |f| %>
     <div class="d-flex align-items-center">
     <div class="mx-1 flex-grow-1">
