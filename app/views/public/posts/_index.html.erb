@@ -9,12 +9,17 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= image_tag post.user.get_profile_image(100,100), size: '50x50' %></td>
+        <% if user_signed_in? %>
+  <%= image_tag current_user.get_profile_image(40,40), class: "rounded-circle" %>
+<% else %>
+  <%= image_tag 'no_image.jpg', class: "rounded-circle" %>
+<% end %>
         <td><%= post.user.nickname %></td>
         <td><%= post.title %></td>
         <td><%= post.body%></td>
-        <td><%= link_to 'Show', post, class: "post_#{post.id}" %></td>
+        <td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= link_to 'Show', post, class: "post_#{post.id}" %></td>

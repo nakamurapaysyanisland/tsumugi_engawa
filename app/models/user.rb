@@ -8,8 +8,8 @@ class User < ApplicationRecord
   
   validates :nickname, presence: true, uniqueness: true
 
-  validates :last_name, :first_name, :email, presence: true, unless: :guest?
-  validates :password, presence: true, length: { minimum: 6 }, unless: :guest?
+  validates :last_name, :first_name, :email, presence: true
+  validates :password, :password_confirmation, presence: true, length: { minimum: 6 }
 
   enum status: { active: 0, withdrawn: 1 }
   enum role: { guest: 0, member: 1, admin: 2 }

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
   
   scope module: :public do
+    get '/search', to: 'searches#search'
   resources :users, only: [:index, :show, :edit, :update] do
     member do
       get :edit_upgrade
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
  
   get 'guest_signup', to: 'users#guest_signup'
   post 'guest_signup', to: 'users#create_guest'
-  get '/search', to: 'searches#search'
+  
   resources :posts do
     resources :post_comments, only: [:create, :destroy]
   end

@@ -1,6 +1,6 @@
 <div class="container my-4"> <div class="row justify-content-center">
     <div class="col-md-12"> 
-    <h3 class="fw-bold d-flex align-items-center justify-content-center mb-3" style="color: #4a463f;">
+    <h3 class="fw-bold d-flex align-items-center justify-content-center mb-3">
   <%= @category ? "「#{@category.name}」の投稿一覧" : "すべての投稿一覧" %>
 </h3>
 <div class="row mt-2"> <% @posts.each do |post| %>
@@ -10,14 +10,14 @@
               <div class="d-flex align-items-center justify-content-between mb-3">
                 <div class="d-flex align-items-center">
                   <%= image_tag post.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
-                  <%= link_to post.user.nickname, user_path(post.user), class: "text-decoration-none text-dark ms-2 small" %>
+                  <%= link_to post.user.nickname, user_path(post.user), class: "font-weight-bold text-decoration-none text-dark ml-2" %>
                 </div>
                 <div>
                 <%= link_to post.category.name, posts_path(category_id: post.category_id), class: "bg-white p-1 small rounded border text-muted" %>
                 </div>
               </div>
 
-              <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
+              <%= link_to post_path(post) do %>
                 <div class="mb-3">
                   <div class="h5 fw-bold mb-2"><%= post.title %></div>
                   <div class="text-muted small">

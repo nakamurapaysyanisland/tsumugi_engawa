@@ -1,15 +1,67 @@
+ <div class="container py-5">
+ <div class="row d-flex flex-column justify-content-center align-items-center">
+    <div class="col-md-11 col-sm-12">
+    <h1 class="fw-bold mb-3 text-center">
+      ひと息ついて、介護の心を紡ぎ、繋げる場所
+    </h1>
+    <h3 class="mb-5 text-center">
+      「つむぎ緑側」へようこそ
+    </h3>
 
-<div class="container">
-<div class="d-flex flex-column align-items-center justify-content-center mt-5">
-    <div>
-       <h1>ひと息ついて、介護の心を紡ぎ、繋げる場所</h1>
-    </div>
+  
+  <div class="container py-5 my-5 text-center shadow">
+    <h2 class="fw-bold mb-4" style="color: #314a33; border-bottom: 2px solid #314a33; display: inline-block; padding-bottom: 10px;">
+      つむぎ緑側について
+    </h2>
+    <p class="" style="max-width: 800px; margin: 0 auto;">
+      つむぎ緑側は介護職の方や、自宅でご家族を介護する方など、介護に関わる方のコミュニティサイトです。
+      介護の心を紡ぎ、繋げるサイトを目指しています。
+      介護者同士で意見交換や悩み共有ができるため、困ったことや分からないことがあった時はぜひつむぎ緑側をご利用ください。
+    </p>
+  </div>
 
-<h3>つむぎ縁側について</h3>
 
+  <div class="container py-5 mb-5">
+    <h3 class="fw-bold text-center mb-5 japanese-font" style="color: #4a463f;">
+      最近の和み（新着投稿）
+    </h3>
+    
+    <div class="row mt-2"> <% @latest_posts.each do |post| %>
+          <div class="col-md-4 col-sm-11 mb-2"> 
+            <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+              
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="d-flex align-items-center">
+                  <%= image_tag post.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
+                  <%= link_to post.user.nickname, user_path(post.user), class: "font-weight-bold text-decoration-none text-dark ml-2" %>
+                </div>
+                <div>
+                <%= link_to post.category.name, posts_path(category_id: post.category_id), class: "bg-white p-1 small rounded border text-muted" %>
+                </div>
+              </div>
 
-<p>つむぎ縁側は介護職の方や、自宅でご家族を介護する方など、介護に関わる方のコミュニティサイトです。</p>
-<p>介護の心を紡ぎ、繋げるサイトを目指しています。</p>
-<p>介護者同士で意見交換や悩み共有ができるため、困ったことや分からないことがあった時はぜひつむぎ縁側をご利用ください。</p>
+              <%= link_to post_path(post) do %>
+                <div class="mb-3">
+                  <div class="h5 fw-bold mb-2"><%= post.title %></div>
+                  <div class="text-muted small">
+                    <%= post.body %>
+                  </div>
+                </div>
+              <% end %>
 
+              <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3 small text-secondary">
+                <span><%= post.created_at.strftime('%Y/%m/%d') %></span>
+                <%= link_to post_path(post), class: "text-decoration-none text-secondary" do %>
+                   <i class="far fa-comment"></i> <%= post.post_comments.count %>
+                <% end %>
+              </div>
+
+            </div>
+          </div>
+        <% end %>
+      </div>
 </div>
+</div>
+</div>
+
+
