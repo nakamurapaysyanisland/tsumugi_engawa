@@ -6,12 +6,11 @@ class ApplicationController < ActionController::Base
     if resource.is_a?(Admin)
       admin_dashboard_path
     else
-      # 以前のコントローラで設定していた mypage_path を使用
+      
       mypage_path 
     end
   end
 
-  # ログアウト後の遷移先
   def after_sign_out_path_for(resource_or_scope)
     if resource_or_scope == :admin
       new_admin_session_path
