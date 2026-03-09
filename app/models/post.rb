@@ -8,8 +8,13 @@ class Post < ApplicationRecord
     belongs_to :category, optional: true
     belongs_to :user
     has_many :post_comments, dependent: :destroy
+    has_many :favarites, dependent: :destroy
 
     def self.search_for(content, method)
         Post.where("title LIKE ? OR body LIKE ?", "%#{content}%", "%#{content}%")
     end
+
+      def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
 end

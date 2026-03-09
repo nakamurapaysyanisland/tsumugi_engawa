@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   
   resources :posts do
     resources :post_comments, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy] #単数形は/:idがURLに含まれない
   end
   resources :categories, only: [:index, :show]
   get 'mypage' => 'users#mypage', as: 'mypage'
