@@ -11,13 +11,13 @@ def after_sign_in_path_for(resource)
   end
  end
 
- def after_sign_out_path_for(resource)
-  if resource == :admin
+def after_sign_out_path_for(resource_or_scope)
+  if resource_or_scope == :admin
     new_admin_session_path
   else
     root_path
   end
- end
+end
  def create
     build_resource(sign_up_params)
     resource.save
@@ -39,5 +39,8 @@ def after_sign_in_path_for(resource)
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :nickname])
+  end
+  def after_sign_up_path_for(resource)
+    mypage_path
   end
 end
