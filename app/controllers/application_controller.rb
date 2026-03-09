@@ -2,6 +2,23 @@ class ApplicationController < ActionController::Base
  before_action :configure_authentication #どのページを開く時も、最初にこのチェックを行う
  before_action :configure_permitted_parameters, if: :devise_controller? #deviseのコントローラーを開くときだけ、configure_permitted_parametersを呼び出す
  
+ def after_sign_in_path_for(resource)
+    if resource.is_a?(Admin)
+      admin_dashboard_path
+    else
+      # 以前のコントローラで設定していた mypage_path を使用
+      mypage_path 
+    end
+  end
+
+  # ログアウト後の遷移先
+  def after_sign_out_path_for(resource_or_scope)
+    if resource_or_scope == :admin
+      new_admin_session_path
+    else
+      root_path
+    end
+  end
   private
  
   def configure_authentication
