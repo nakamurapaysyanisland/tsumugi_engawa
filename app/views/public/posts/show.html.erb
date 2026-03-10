@@ -5,90 +5,17 @@
 <h2 class="fw-bold" style="color: #4a463f;"></h2>
 
 <div class="col-md-12 mb-11"> 
-            <div class="rounded border w-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
-              
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <div class="d-flex align-items-center">
-                  <%= image_tag @post.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
-                  <%= link_to @post.user.nickname, user_path(@post.user), class: "font-weight-bold text-decoration-none text-dark ml-2" %>
-                </div>
-                <div class-"">
+            <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+            <%= render 'public/posts/post_card', post: @post %>
                 
-                <% if user_signed_in? && @post.user_id == current_user.id %>
-                <div class="bg-white px-2 py-1 small rounded border text-center text-secondary">
-                  <%= @post.category.name %>
-                </div>
-                <div class="d-flex">
-                <%= link_to '編集', edit_post_path(@post), class: "btn btn-sm text-decoration-none mt-1 mr-1", style: "color: #314a33; border: 1px solid #314a33;" %> 
-                <%= link_to '削除', post_path(@post), 
-    method: :delete, 
-    data: { confirm: "本当に削除しますか？" }, 
-    class: "btn btn-sm text-decoration-none mt-1", 
-    style: "color: #b24a4a; border: 1px solid #b24a4a; background-color: transparent;" %>
-                </div>
-                <% end %>
-            
-                
-                </div>
-                </div>
-              
-              
-              <%= link_to post_path(@post), class: "text-decoration-none text-dark" do %>
-                <div class="mb-3">
-                  <div class="h5 fw-bold mb-2"><%= @post.title %></div>
-                  <div class="text-muted small">
-                    <%= @post.body %>
-                  </div>
-                </div>
-              <% end %>
-
-              <div class="d-flex justify-content-between align-items-center mt-auto border-top py-2 small text-secondary">
-                <span><%= @post.created_at.strftime('%Y/%m/%d') %></span>
-                <%= link_to post_path(@post), class: "text-decoration-none text-secondary" do %>
-                   <i class="far fa-comment"></i> <%= @post.post_comments.count %>
-                <% end %>
-              </div>
 
   <div class="d-flex flex-row align-items-center justify-content-center mt-auto py-3", style="border-top: 3px double #868e96 ">
    <div class="mx-1">
-  <% if user_signed_in? %>
-    <%= image_tag current_user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
-  <% else %>
   
-    <%= image_tag 'no_image.jpg', size: "40x40", class: "rounded-circle border" %>
-  <% end %>
-</div>
-   <%= form_with model: [@post, @post_comment], class: "flex-grow-1" do |f| %>
-    <div class="d-flex align-items-center">
-    <div class="mx-1 flex-grow-1">
-    <%= f.text_area :content, rows: 2, placeholder: "コメントを入力してください", class: "w-100 form-control", style: "overflow:hidden;" %>
-    </div>
-    <div class="mx-1">
-    <%= f.submit "投稿" %>
-    </div>
-    </div>
-  <% end %>
-  </div>
-
-
-  <% @post.post_comments.each do |post_comment| %>
-    <div class="d-flex flex-row align-items-center justify-content-center mt-auto border-top border-bottom py-2", style="color: #4a463f;">
-    <div class="flex-grow-1 justify-content-center">
-     <%= image_tag post_comment.user.get_profile_image(10,10), size: "40x40", class: "rounded-circle border mr-1" %>
-      <strong><%= post_comment.user.nickname %></strong>
-      <p class="text-muted small">
-      <%= post_comment.content %>
-      </p>
-      <div class="mt-auto pt-2 border-top">
-        <div class="d-flex justify-content-between align-items-center small">
-        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-        <%= button_to '削除', post_post_comment_path(@post, post_comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm text-decoration-none ms-1", style: "color: #b24a4a; border: 1px solid #b24a4a; background-color: transparent;" %>
-        </div>
-      </div>
-
-    </div>
-    </div>
-  <% end %>
+ 
+<%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
+ </div><%= render 'public/post_comments/index', post: @post %>
+  
 
 <div class="d-flex justify-content-end mt-2">
   <%= link_to '一覧へ', posts_path, class: "btn btn-outline-secondary btn-sm" %>
