@@ -26,53 +26,13 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row mt-2">
     <% @posts.each do |post| %>
-      <div class="col-md-4 mb-3">
-        <div class="rounded border h-100 d-flex flex-column p-0" style="background-color: #fcfaf2;">
-          
-          <%# 上部のコンテンツ部分にだけパディング(p-4)を適用 %>
-          <div class="p-4 flex-grow-1">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <div class="d-flex align-items-center">
-                <%= image_tag post.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border-sm" %>
-                <%= link_to post.user.nickname, user_path(post.user), class: "font-weight-bold text-decoration-none text-dark ms-2" %>
-              </div>
-              <div>
-                <%= link_to post.category.name, posts_path(category_id: post.category_id), class: "bg-white p-1 small rounded border text-muted text-decoration-none" %>
-              </div>
-            </div>
-
-            <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
-              <div class="mb-3">
-                <div class="h5 fw-bold mb-2 text-truncate"><%= post.title %></div>
-                <p class="text-muted small">
-                  <%= post.body %>
-                </p>
-              </div>
-            <% end %>
-          </div>
-
-          <div class="border-top bg-light-subtle rounded-bottom">
-            <div class="py-2 px-3">
-              <div class="d-flex justify-content-between align-items-center small text-secondary">
-                <div>
-                  <span class="me-2"><%= post.created_at.strftime('%Y/%m/%d') %></span>
-                  <%= link_to post_path(post), class: "text-decoration-none text-secondary" do %>
-                    <i class="far fa-comment"></i> <%= post.post_comments.count %>
-                  <% end %>
-                </div>
-
-                <div class="d-flex gap-1">
-                  <%= link_to '編集', edit_post_path(post), class: "btn btn-sm text-decoration-none py-1", style: "color: #314a33; border: 1px solid #314a33;" %>
-                  <%= link_to '削除', post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm text-decoration-none py-1", style: "color: #b24a4a; border: 1px solid #b24a4a; background-color: transparent;" %>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
+     <div class="col-md-4 mb-2">
+     <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+<%= render 'public/posts/post_card', post: post %>
+ </div>
+ </div>
     <% end %>
   </div>
 
