@@ -1,0 +1,4 @@
+var commentIndex = document.querySelector('#comment_index');
+if (commentIndex) {
+  commentIndex.innerHTML = "<%= j(render 'public/post_comments/index', post: @post) %>";
+}

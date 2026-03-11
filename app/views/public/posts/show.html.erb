@@ -2,7 +2,6 @@
 <div class="row justify-content-center mt-4">
 <div class="col-md-8 col-sm-12">
 <div class="d-flex flex-column align-items-center justify-content-center w-100">
-<h2 class="fw-bold" style="color: #4a463f;"></h2>
 
 <div class="col-md-12 mb-11"> 
             <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
@@ -14,7 +13,10 @@
   
  
 <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
- </div><%= render 'public/post_comments/index', post: @post %>
+ </div>
+ <div id="comment_index">
+  <%= render 'public/post_comments/index', post: @post %>
+</div>
   
 
 <div class="d-flex justify-content-end mt-2">
