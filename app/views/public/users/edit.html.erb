@@ -3,7 +3,7 @@
     <div class="col-md-4 col-sm-11">
       <div class="d-flex flex-column align-items-center justify-content-center w-100">
         <h2 class="fw-bold mt-4" style="color: #4a463f;">ユーザー編集画面</h2>
-        <%= form_with model: @user do |f| %>
+        <%= form_with model: @user, local: true do |f| %>
         <div class="d-flex flex-column mt-3">
         <div class="field text-center">
           <label for="file-input" style="cursor: pointer; margin: 0 auto; display: block; width: 100px;">
@@ -11,7 +11,7 @@
               style="width: 100px; height: 100px; background-color: #f8f9fa; overflow: hidden; position: relative;">
               <img src="" id="preview" style="display: none; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 10;">
               <div id="inner-content">
-                <i class="fa-solid fa-camera fa-3x", style="color: #4a463f;"></i>
+                <i class="fa-solid fa-camera fa-3x" style="color: #4a463f;"></i>
                 <p id="placeholder" style="margin: 0; line-height: 1.2; padding: 0 5px;"></p>
               </div>
             </div>
@@ -66,11 +66,22 @@
         </div>
         <div class="form-group my-1">
           <%= f.label "パスワード", style: "color: #4a463f;" %><br />
-          <%= f.text_field :password, class: "form-control" %>
+          <%= f.password_field :password, class: "form-control" %>
            <% if @user.errors.include?(:password) %>
     <div class="text-danger small mt-1 fw-bold">
       <i class="fa-solid fa-circle-exclamation"></i>
       <%= @user.errors.full_messages_for(:password).first %>
+    </div>
+  <% end %>
+        </div>
+        </div>
+        <div class="form-group my-1">
+          <%= f.label "パスワード(確認用)", style: "color: #4a463f;" %><br />
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+           <% if @user.errors.include?(:password_confirmation) %>
+    <div class="text-danger small mt-1 fw-bold">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <%= @user.errors.full_messages_for(:password_confirmation).first %>
     </div>
   <% end %>
         </div>
@@ -79,7 +90,7 @@
           <%= f.submit "更新",  class: "w-100", style: "color: #4a463f;" %>
           </div>
           
-        <% end %>
+    <% end %>
 
         <% unless current_user.guest?%>
         <div class="d-flex flex-column justify-content-center align-items-center">
@@ -93,3 +104,22 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  document.getElementById('file-input').addEventListener('change', function(e) {
+    const file = e.target.files[0]; 
+    const preview = document.getElementById('preview'); 
+    const innerContent = document.getElementById('inner-content'); 
+
+    if (file) {
+      const reader = new FileReader(); 
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block'; 
+        innerContent.style.display = 'none'; 
+      }
+      reader.readAsDataURL(file); 
+    }
+  });
+</script>

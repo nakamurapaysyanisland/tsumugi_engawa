@@ -1,55 +1,48 @@
- 
-        <div class="container">
+<div class="container">
   <div class="row justify-content-center">
-  <div class="d-flex flex-column align-items-center justify-content-center w-100">
-    <div class="col-md-5 col-sm-11">
-      <div class="d-flex flex-column align-items-center justify-content-center w-100">
-        <h2 class="fw-bold mt-5" style="color: #4a463f;">新しい投稿</h2>
+    <div class="d-flex flex-column align-items-center justify-content-center w-100">
+      <div class="col-md-5 col-sm-11">
+        <div class="d-flex flex-column align-items-center justify-content-center w-100">
+          <h2 class="fw-bold mt-5" style="color: #4a463f;">新しい投稿</h2>
 
-  <%= form_with model: @post, class: "w-100" do |f| %> 
+          <%= form_with model: @post, local: true, class: "w-100" do |f| %> 
         
-        <div class="d-flex flex-column my-1", style: "color: #4a463f;"> 
-          <%= f.label :title, "タイトル" %>
-          <%= f.text_area :title, rows: 2, class: "form-control", style: "overflow:hidden;" %> 
-          <% if @post.errors.include?(:title) %>
-    <div class="text-danger small mt-1 fw-bold">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <%= @post.errors.full_messages_for(:title).first %>
-    </div>
-  <% end %>
+            <div class="d-flex flex-column my-1" style="color: #4a463f;"> 
+              <%= f.label :title, "タイトル" %>
+              <%= f.text_area :title, rows: 2, class: "form-control", style: "overflow:hidden;" %> 
+              <% if @post.errors.include?(:title) %>
+                <div class="text-danger small mt-1 fw-bold">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <%= @post.errors.full_messages_for(:title).first %>
+                </div>
+              <% end %>
+            </div>
+            <div class="d-flex flex-column my-1" style= "color: #4a463f;">
+              <%= f.label :body, "本文" %>
+              <%= f.text_area :body, rows: 4, class: "form-control" %>
+              <% if @post.errors.include?(:body) %>
+                <div class="text-danger small mt-1 fw-bold">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <%= @post.errors.full_messages_for(:body).first %>
+                </div>
+              <% end %>
+            </div>
+            <div class="d-flex flex-column my-1" style= "color: #4a463f;">
+              <%= f.label :category_id, "カテゴリー" %>
+              <%= f.collection_select :category_id, Category.all, :id, :name, { include_blank: "選択してください" }, { class: "form-control" } %>
+              <% if @post.errors.include?(:category) %>
+                <div class="text-danger small mt-1 fw-bold">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <%= @post.errors.full_messages_for(:category).first %>
+                </div>
+              <% end %>
+            </div>
+            <div class="my-3" style= "color: #4a463f;">
+              <%= f.submit "投稿", class: "w-100" %>
+            </div>
+          <% end %>   
         </div>
-
-        <div class="d-flex flex-column my-1", style: "color: #4a463f;">
-          <%= f.label :body, "本文" %>
-          <%= f.text_area :body, rows: 4, class: "form-control" %>
-          <% if @post.errors.include?(:body) %>
-    <div class="text-danger small mt-1 fw-bold">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <%= @post.errors.full_messages_for(:body).first %>
-    </div>
-  <% end %>
-        </div>
-
-        <div class="d-flex flex-column my-1", style: "color: #4a463f;">
-          <%= f.label :category_id, "カテゴリー" %>
-           <%= f.collection_select :category_id, Category.all, :id, :name, { include_blank: "選択してください" }, { class: "form-control" } %>
-           <% if @post.errors.include?(:category) %>
-    <div class="text-danger small mt-1 fw-bold">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <%= @post.errors.full_messages_for(:category).first %>
-    </div>
-  <% end %>
-           </div>
-
-
-        <div class="my-3", style: "color: #4a463f;">
-          <%= f.submit "投稿", class: "w-100" %>
-        </div>
-        </div>
-        <% end %>   
       </div>
     </div>
   </div>
-  </div>
-
 </div>

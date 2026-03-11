@@ -13,7 +13,9 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    
+    logger.debug "--- 更新前のバリデーションエラーを確認します ---"
+    @user.assign_attributes(user_params) # 一旦値をセット
+    logger.debug @user.errors.full_messages unless @user.valid?
     if @user.update(user_params)
        bypass_sign_in(@user) 
       flash[:notice] = "ユーザー情報を更新しました。"
