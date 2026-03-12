@@ -4,7 +4,7 @@
   <%= render 'users/index', users: @records %>
 <% elsif @model == 'post' || @model == 'tag' %>
 	<h3>Posts search for "<%= @content %>"</h3>
-  <%= render 'posts/index', posts: @records %>
+  <%= render 'public/posts/index', posts: @records %>
 <% end %>
   <div class="row justify-content-center">
     <div class="col-md-10 col-sm-11 ">

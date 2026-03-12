@@ -1,25 +1,20 @@
-<table class='table'>
-  <thead>
-    <tr>
-      <th>image</th>
-      <th>name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <% if user_signed_in? %>
-  <%= image_tag current_user.get_profile_image(40,40), class: "rounded-circle" %>
-<% else %>
-  <%= image_tag 'no_image.jpg', class: "rounded-circle" %>
-<% end %>
-        <td><%= post.user.nickname %></td>
-        <td><%= post.title %></td>
-        <td><%= post.body%></td>
-        <td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to 'Show', post, class: "post_#{post.id}" %></td>
+<div class="container my-4"> <div class="row justify-content-center">
+    <div class="col-md-12"> 
+    <h3 class="fw-bold d-flex align-items-center justify-content-center mb-3">
+  <%= @category ? "「#{@category.name}」の検索結果" : "すべての投稿一覧" %>
+</h3>
+<div class="row mt-2"> 
+<% @posts.each do |post| %>
+  <div class="col-md-4 mb-2">
+  <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+  <%= render 'public/posts/post_card', post: post %>
+  </div>
+  </div>
+  <% end %>
+  </div>
+      <div class="d-flex justify-content-center mt-5">
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
+</div>
