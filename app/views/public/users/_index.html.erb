@@ -1,18 +1,24 @@
-<table class='table'>
-  <thead>
-    <tr>
-      <th>image</th>
-      <th>name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% users.each do |user| %>
-      <tr>
-        <td><%= image_tag user.get_profile_image(100,100), size: '50x50' %></td>
-        <td><%= user.nickname %></td>
-        <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container my-4"> <div class="row justify-content-center">
+    <div class="col-md-12"> 
+   
+<div class="row mt-2"> 
+<% users.each do |user| %>
+  <div class="col-md-4 mb-2">
+  <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+              <div class="d-flex align-items-center justify-content-center mb-3">
+                
+                  <%= image_tag user.get_profile_image(60,60), size: "60x60", class: "rounded-circle border" %>
+                  <%= link_to user.nickname, user_path(user), class: "font-weight-bold text-decoration-none text-dark ml-2" %>
+                  <span class="mx-3 small text-secondary">投稿件数：<%= user.posts.count %>件</span>
+                
+              </div>
+  </div>
+  </div>
+  <% end %>
+  </div>
+<div class="d-flex justify-content-center mt-5">
+           <%= paginate @users %>
+          </div>
+    </div>
+  </div>
+</div>
