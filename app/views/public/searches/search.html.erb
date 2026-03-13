@@ -7,10 +7,12 @@
      
       <div class="d-flex flex-column justify-content-center align-text-center fw-bold">
         <% if @model == 'user' %>
-	        <h3 class="text-center">「<%= @content %>」の検索結果</h3>
+	        <h3 class="text-center">「<%= @content %>」の検索結果
+          <span class="small">(<%= @users.total_count %>件)</span></h3>
             <%= render 'public/users/index', users: @users %>
         <% elsif @model == 'post' || @model == 'tag' %>
-	          <h3 class="text-center">「<%= @content %>」の検索結果</h3>
+	          <div><h3 class="text-center">「<%= @content %>」の検索結果
+             <span class="small">(<%= @posts.total_count %>件)</span></h3>
           <%= render 'public/posts/index', posts: @posts %>
         <% end %>
       </div>
