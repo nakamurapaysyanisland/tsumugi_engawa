@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     
     if @user.save
       sign_in(@user)
-      redirect_to root_path, notice: "ゲストとして登録しました！"
+      redirect_to mypage_path, notice: "ゲストとして登録しました！"
     else
       flash.now[:alert] = "ゲスト登録に失敗しました。"
       render :new

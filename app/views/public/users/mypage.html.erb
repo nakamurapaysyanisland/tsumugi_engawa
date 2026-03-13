@@ -8,7 +8,7 @@
         <h4 class="fw-bold"><%= @user.nickname %>さん</h4>
         
         <div class="d-flex justify-content-center my-3 small text-secondary">
-          <span class="mx-3">ステータス：<%= t(@user.status, scope: 'enums.user.status') %></span>
+          <span class="mx-3">会員種別：<%= t(@user.role, scope: 'enums.user.role') %></span>
           <span class="mx-3">登録日：<%= @user.created_at.strftime('%Y/%m/%d') %></span>
           <span class="mx-3">投稿件数：<%= @posts.count %>件</span>
         </div>

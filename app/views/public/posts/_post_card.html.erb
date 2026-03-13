@@ -8,8 +8,8 @@
                  <div>
                 
                 <div class="d-flex">
-                <div class="bg-white px-2 py-1 small rounded border text-center text-secondary">
-                  <%= post.category.name %>
+                <div>
+                  <%= link_to post.category.name, posts_path(category_id: post.category_id), class: "bg-white p-1 small rounded border text-secondary" %>
                 </div>
                 <% if user_signed_in? && post.user_id == current_user.id %>
     <div class="dropdown">

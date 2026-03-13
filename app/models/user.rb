@@ -9,8 +9,13 @@ class User < ApplicationRecord
   
   validates :nickname, presence: true, uniqueness: true
 
-  validates :last_name, :first_name, :email, presence: true
-  validates :password, :password_confirmation, presence: true, length: { minimum: 6 }
+  with_options unless: :guest_user? do
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :email, presence: true
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
+  validates :password_confirmation, presence: true, on: :create
+end
 
   enum status: { active: 0, withdrawn: 1 }
   enum role: { guest: 0, member: 1, admin: 2 }

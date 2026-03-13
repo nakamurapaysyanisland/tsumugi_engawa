@@ -65,6 +65,11 @@ ja:
       status:
         active: "有効"
         withdrawn: "退会"
+      role:
+        guest: "ゲスト"
+        member: "一般ユーザー"
+        admin: "管理者"
+  
   
   views:
     pagination:
