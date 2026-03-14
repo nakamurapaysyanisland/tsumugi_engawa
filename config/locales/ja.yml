@@ -67,7 +67,7 @@ ja:
         withdrawn: "退会"
       role:
         guest: "ゲスト"
-        member: "一般ユーザー"
+        member: "会員"
         admin: "管理者"
   
   
