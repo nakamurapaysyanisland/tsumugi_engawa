@@ -1,7 +1,7 @@
 class Public::GroupsController < ApplicationController
   def index
-    @group = Group.all
-    @post = Post.all
+    @groups = Group.all
+    @posts = Post.all
   end
 
   def new
@@ -10,16 +10,19 @@ class Public::GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    @group.owner.user_id = current.user_id
+    @group.owner_id = current_user.id
     if @group.save
-      redirect_to group_path, notice: 'コミュニティーを作成しました。'
+      redirect_to groups_path, notice: 'コミュニティーを作成しました。'
     else
       render :new
     end
   end
 
   def show
-    @group = Group.find(params[:id])
+    @group = Group.find_by(id: params[:id])
+    if @group.nil?
+      redirect_to groups_path
+    end
   end
 
   def edit
@@ -28,6 +31,6 @@ class Public::GroupsController < ApplicationController
 
   private
   def group_params
-    params.require(:group).permit(:name, :introduction)
+    params.require(:group).permit(:name, :introduction, :group_image)
   end
 end
