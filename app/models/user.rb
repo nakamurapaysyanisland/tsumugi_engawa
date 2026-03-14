@@ -6,7 +6,10 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  
+  has_many :owned_groups, class_name: 'Group', foreign_key: 'owner_id'
+  has_many :group_users, dependent: :destroy
+  has_many :groups, through: :group_users
+
   validates :nickname, presence: true, uniqueness: true
 
   with_options unless: :guest_user? do
