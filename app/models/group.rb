@@ -3,11 +3,15 @@ belongs_to :owner, class_name: 'User'
 
 has_many :group_users, dependent: :destroy
 has_many :users, through: :group_users
+has_many :posts, dependent: :destroy
+has_many :post_comments, dependent: :destroy
 has_one_attached :group_image
 
     validates :name, presence: true
     validates :introduction, presence: true
     validates :owner_id, presence: true
+
+    
 
     def get_group_image(width, height)
     unless group_image.attached?

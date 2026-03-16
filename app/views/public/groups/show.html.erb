@@ -3,17 +3,17 @@
     <div class="col-md-10 col-lg-8">
       <div class="px-4 pt-4 pb-4 rounded border-bottom text-center">
         <div class="mb-3">
-          <%= image_tag @group_image(100,100), size: "100x100", class: "rounded-circle border" %>
+          <%= image_tag @group.get_group_image(100,100), size: "100x100", class: "rounded-circle border" %>
         </div>
         <h4 class="fw-bold"><%= @group.name %></h4>
         
         <div class="d-flex justify-content-center my-3 small text-secondary">
-        <%= image_tag @group_image(50,50), size: "50x50", class: "rounded-circle border" %>
+        <%= image_tag @group.get_group_image(50,50), size: "50x50", class: "rounded-circle border" %>
           <span class="mx-3">グループ管理者：<%= @group.owner.nickname %></span>
           <span class="mx-3">作成日：<%= @group.created_at.strftime('%Y/%m/%d') %></span>
           <span class="mx-3">メンバー数：<%= @group.users.count %>件</span>
         </div>
-<%= link_to "参加" path%>
+        
         <%= link_to edit_group_path(@group), class: "btn btn-outline-secondary btn-sm rounded-pill px-4" do %>
           <i class="fa-solid fa-user me-1"></i>
         <% end %>
@@ -28,10 +28,10 @@
   </div>
 
   <div class="row mt-2">
-    <% @group_posts.each do |post| %>
+    <% @group.posts.each do |post| %>
      <div class="col-md-4 mb-2">
      <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
-<%= render 'public/posts/post_card', post: post %>
+       <%= render 'public/posts/post_card', post: post %>
  </div>
  </div>
     <% end %>

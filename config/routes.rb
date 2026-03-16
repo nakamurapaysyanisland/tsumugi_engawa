@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   
   scope module: :public do
     get '/search', to: 'searches#search'
-    resources :groups   #resoucesのs忘れないように
+    resources :groups do #resoucesのs忘れないように
+      resources :group_users, only: [:create, :destroy, :update]
+    end
   resources :users, only: [:index, :show, :edit, :update] do
     member do
       get :edit_upgrade

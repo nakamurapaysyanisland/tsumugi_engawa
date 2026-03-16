@@ -69,6 +69,11 @@ ja:
         guest: "ゲスト"
         member: "会員"
         admin: "管理者"
+    group_user:
+      status:
+        pending: "参加申請"
+        accepted: "参加中"
+        rejected: "見送り"
   
   
   views:

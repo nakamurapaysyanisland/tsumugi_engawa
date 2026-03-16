@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_03_14_025503) do
+ActiveRecord::Schema.define(version: 2026_03_16_114011) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2026_03_14_025503) do
     t.integer "group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0, null: false
   end
 
   create_table "groups", force: :cascade do |t|
@@ -97,7 +98,9 @@ ActiveRecord::Schema.define(version: 2026_03_14_025503) do
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "group_id"
     t.index ["body"], name: "index_posts_on_body"
+    t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["title"], name: "index_posts_on_title"
   end
 
@@ -121,4 +124,9 @@ ActiveRecord::Schema.define(version: 2026_03_14_025503) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "group_users", "groups"
+  add_foreign_key "group_users", "users"
+  add_foreign_key "posts", "categories"
+  add_foreign_key "posts", "groups"
+  add_foreign_key "posts", "users"
 end
