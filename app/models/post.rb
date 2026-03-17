@@ -3,13 +3,13 @@ class Post < ApplicationRecord
     validates :title, presence: true
     validates :body, presence: true
     validates :user_id, presence: true
-    validates :category, presence: { message: "を選択してください" }
-    validates :group, optional: true
+    validates :category, presence: { message: "を選択してください" }, if: -> { group_id.blank? }
+    
 
 
     belongs_to :category, optional: true
     belongs_to :user
-    belongs_to :group
+    belongs_to :group, optional: true
     has_many :post_comments, dependent: :destroy
     has_many :favorites, dependent: :destroy
 

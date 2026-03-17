@@ -23,7 +23,8 @@ class Public::GroupsController < ApplicationController
       redirect_to groups_path, alert: "グループが見つかりませんでした。"
     end
     @post = Post.new
-    @posts = @group.posts
+    @posts = @group.posts.page(params[:page]).per(10)
+    @post_comment = PostComment.new
   end
 
   def edit

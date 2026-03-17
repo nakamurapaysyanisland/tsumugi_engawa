@@ -8,9 +8,9 @@ class Public::PostsController < ApplicationController
   def index
     if params[:category_id].present?
     @category = Category.find(params[:category_id])
-    @posts = @category.posts.page(params[:page]).per(10)
+    @posts = @category.posts.where(group_id: nil).page(params[:page]).per(10)
   else
-    @posts = Post.all.page(params[:page]).per(10)
+    @posts = Post.where(group_id: nil).page(params[:page]).per(10)
   end
       @user = current_user
   end
