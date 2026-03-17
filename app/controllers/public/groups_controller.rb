@@ -1,7 +1,6 @@
 class Public::GroupsController < ApplicationController
   def index
     @groups = Group.all
-    @posts = Post.all
   end
 
   def new
@@ -21,8 +20,10 @@ class Public::GroupsController < ApplicationController
   def show
     @group = Group.find_by(id: params[:id])
     if @group.nil?
-      redirect_to groups_path
+      redirect_to groups_path, alert: "グループが見つかりませんでした。"
     end
+    @post = Post.new
+    @posts = @group.posts
   end
 
   def edit

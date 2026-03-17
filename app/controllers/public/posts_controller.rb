@@ -25,7 +25,11 @@ class Public::PostsController < ApplicationController
     
     if @post.save
       flash[:notice] = "投稿に成功しました。"
+      if @post.group_id.present? #postの中にgroup_idはある？
+        redirect_to group_path(@post.group_id)
+      else
       redirect_to post_path(@post)
+      end
     else
       render :new
     end
@@ -53,7 +57,7 @@ class Public::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :body, :category_id)
+    params.require(:post).permit(:title, :body, :category_id, :group_id)
   end
 
   def ensure_current_user

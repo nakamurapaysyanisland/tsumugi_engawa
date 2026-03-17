@@ -23,12 +23,30 @@
 
   <div class="row mb-4">
     <div class="col-12 text-center">
-      <h4 class="fw-bold" style="color: #4a463f;">投稿一覧</h4>
+      <h4 class="fw-bold" style="color: #4a463f;">コミュニティに投稿</h4>
     </div>
   </div>
+  <%= form_with model: @post, local :true do |f| %>
+    <%= f.hidden_field :group_id, value: @group.id %>
+    <div class="form-group">
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :body, "本文" %>
+      <%= f.text_area :body %>
+    </div>
+
+    <div class="action">
+      <%= f.submit "投稿" %>
+    </div>
+
+
+
 
   <div class="row mt-2">
-    <% @group.posts.each do |post| %>
+    <% @posts.each do |post| %>
      <div class="col-md-4 mb-2">
      <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
        <%= render 'public/posts/post_card', post: post %>
