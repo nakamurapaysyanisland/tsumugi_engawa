@@ -5,7 +5,7 @@
     <%= image_tag 'no_image.jpg', size: "40x40", class: "rounded-circle border" %>
   <% end %>
  </div>
-   <%= form_with model: [post, post_comment], class: "flex-grow-1" do |f| %>
+   <%= form_with model: [post, post_comment], local: false, class: "flex-grow-1" do |f| %>
     <div class="d-flex align-items-center">
     <div class="mx-1 flex-grow-1">
     <%= f.text_area :content, rows: 2, placeholder: "コメントを入力してください", class: "w-100 form-control", style: "overflow:hidden;" %>

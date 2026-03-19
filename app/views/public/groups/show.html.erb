@@ -1,108 +1,52 @@
 <div class="container my-5">
   <div class="row justify-content-center mb-4">
-    <div class="col-md-10 col-lg-8">
+    <div class="col-md-4">
+    <%= render 'public/groups/sidebar', group: @group %>
+    </div>
+    <div class="col-md-8 col-lg-8">
       <div class="px-4 pt-4 pb-4 rounded border-bottom text-center">
-        <div class="mb-3">
-          <%= image_tag @group.get_group_image(100,100), size: "100x100", class: "rounded-circle border" %>
-        </div>
-        <h4 class="fw-bold"><%= @group.name %></h4>
         
-        <div class="d-flex justify-content-center my-3 small text-secondary">
-        <%= image_tag @group.get_group_image(50,50), size: "50x50", class: "rounded-circle border" %>
-          <span class="mx-3">グループ管理者：<%= @group.owner.nickname %></span>
-          <span class="mx-3">作成日：<%= @group.created_at.strftime('%Y/%m/%d') %></span>
-          <span class="mx-3">メンバー数：<%= @group.users.count %>件</span>
-        </div>
-        
-        <%= link_to edit_group_path(@group), class: "btn btn-outline-secondary btn-sm rounded-pill px-4" do %>
-          <i class="fa-solid fa-user me-1"></i>
-        <% end %>
-      </div>
-    </div>
-  </div>
+    
 
-  <div class="row mb-4">
-    <div class="col-12 text-center">
-      <h4 class="fw-bold" style="color: #4a463f;">コミュニティに投稿</h4>
-    </div>
-  </div>
-  <%= form_with model: @post, local: true do |f| %>
-    <%= f.hidden_field :group_id, value: @group.id %>
-    <div class="form-group">
-      <%= f.label :title, "タイトル" %>
-      <%= f.text_field :title %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :body, "本文" %>
-      <%= f.text_area :body %>
-    </div>
-
-    <div class="action">
-      <%= f.submit "投稿" %>
-    </div>
-  <% end %>
-
-
-
-  <div class="row mt-2">
-    <% @posts.each do |post| %>
-       <div class="col-md-12 mb-11"> 
-            <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
-            <%= render 'public/posts/post_card', post: post %>
-                
-
-  <div class="d-flex flex-row align-items-center justify-content-center mt-auto py-3", style="border-top: 3px double #868e96 ">
-   <div class="mx-1">
   
- 
-<%= render 'public/post_comments/form', post: post, post_comment: @post_comment %>
- </div>
- <div id="comment_index">
-  <%= render 'public/post_comments/index', post: post %>
-</div>
-  
-<% @posts.each do |post| %>
-  <div class="post-card-container mb-4">
-    <%# 1. 投稿本体（既存のパーシャル） %>
-    <%= render 'public/posts/post_card', post: post %>
+    
 
-
-    <div class="ml-3"> 
+  <div class="mt-2">
+    <% @posts.each do |post| %> 
+      <div class="h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+        <div class="post-card-container mb-4">
+          <%= render 'public/posts/post_card', post: post %>
+            <div class="ml-3"> 
       
      
-      <button class="btn btn-link btn-sm text-secondary text-decoration-none p-0 mb-2" 
-              type="button" 
-              data-toggle="collapse" 
-              data-target="#collapseComments<%= post.id %>">
-        <i class="far fa-comment"></i> 
-        コメント（<%= post.post_comments.count %>件）を表示
-      </button>
-
-  
-      <div class="collapse" id="collapseComments<%= post.id %>">
-        <div class="card card-body bg-light border-0 py-2 mb-3 shadow-sm">
+              <button class="btn btn-link btn-sm text-secondary text-decoration-none p-0 mb-2" type="button" data-toggle="collapse" data-target="#collapseComments<%= post.id %>">
+                <i class="far fa-comment"></i> 
+                  コメント（<%= post.post_comments.count %>件）を表示
+              </button>
+              <div class="collapse" id="collapseComments<%= post.id %>">
+                <div class="card card-body bg-light border-0 py-2 mb-3 shadow-sm">
        
-          <div id="comment_index_<%= post.id %>">
-            <%= render 'public/post_comments/index', post: post %>
-          </div>
-          
-          <hr class="my-2">
-
-          <div class="comment-form">
-            <%= render 'public/post_comments/form', post: post, post_comment: @post_comment %>
-          </div>
+              <div id="comment_index_<%= post.id %>">
+                <%= render 'public/post_comments/index', post: post %>
+              </div>
+              <div class="my-2">
+                <div class="comment-form">
+                    <%= render 'public/post_comments/form', post: post, post_comment: @post_comment %>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
-    </div>
-  </div>
-<% end %>
- </div>
- </div>
     <% end %>
+  </div>
+ 
+    
   </div>
 
   <div class="d-flex justify-content-center mt-5">
     <%= paginate @posts %>
+  </div>  
+      </div>
+    </div>
   </div>
 </div>

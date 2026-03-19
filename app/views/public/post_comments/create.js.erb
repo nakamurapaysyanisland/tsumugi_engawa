@@ -1,5 +1,8 @@
+<% if @comment.errors.any? %>
+    alert("コメントを入力してください")
+<% else %>
 
 $('#comment_index_<%= @post.id %>').html("<%= j(render 'public/post_comments/index', post: @post) %>");
+$('#collapseComments<%= @post.id %> textarea').val("");
 
-
-$('.comment-form textarea').val("");
+<% end %>

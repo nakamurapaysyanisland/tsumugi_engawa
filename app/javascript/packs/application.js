@@ -8,6 +8,9 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import jQuery from "jquery"; // 
+window.$ = window.jQuery = jQuery;
+
 import "jquery";
 import "popper.js";
 import "bootstrap";
@@ -21,9 +24,9 @@ $(document).on('turbo:load turbolinks:load', function() {
     if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {
-        // 中のアイコンと文字をまとめて隠す
+        // 
         $("#inner-content").hide();
-        // プレビューを表示
+        // 
         $("#preview").attr('src', e.target.result).show();
       }
       reader.readAsDataURL(file);
