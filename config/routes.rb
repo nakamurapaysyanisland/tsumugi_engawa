@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   scope module: :public do
     get '/search', to: 'searches#search'
     resources :groups do #resoucesのs忘れないように
-      resources :group_users, only: [:create, :destroy, :update]
+      resource :group_users, only: [:create, :destroy, :update]
+      resource :membership, only: [:create, :destroy] 
     end
   resources :users, only: [:index, :show, :edit, :update] do
     member do
@@ -33,6 +34,8 @@ Rails.application.routes.draw do
       patch :withdraw
     end
   end
+
+  get 'group/:id/membership' => 'group#membership', as: 'membership'
  
   get 'guest_signup', to: 'users#guest_signup'
   post 'guest_signup', to: 'users#create_guest'

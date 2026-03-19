@@ -1,4 +1,4 @@
-var commentIndex = document.querySelector('#comment_index');
-if (commentIndex) {
-  commentIndex.innerHTML = "<%= j(render 'public/post_comments/index', post: @post) %>";
-}
+
+
+$('#comment_index_<%= @post.id %>').html("<%= j(render 'public/post_comments/index', post: @post) %>");
+$('#collapseComments<%= @post.id %> textarea').val("");

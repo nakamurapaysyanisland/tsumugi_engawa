@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :owned_groups, class_name: 'Group', foreign_key: 'owner_id'
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
+  has_many :membership, dependent: :destroy
 
   validates :nickname, presence: true, uniqueness: true
 

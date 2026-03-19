@@ -9,12 +9,12 @@
                 
 
   <div class="d-flex flex-row align-items-center justify-content-center mt-auto py-3", style="border-top: 3px double #868e96 ">
-   <div class="mx-1">
+   <div class="comment-form mx-1">
   
  
 <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
  </div>
- <div id="comment_index">
+ <div id="comment_index_<%= @post.id %>">
   <%= render 'public/post_comments/index', post: @post %>
 </div>
   

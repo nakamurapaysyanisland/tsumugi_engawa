@@ -5,6 +5,7 @@ has_many :group_users, dependent: :destroy
 has_many :users, through: :group_users
 has_many :posts, dependent: :destroy
 has_many :post_comments, dependent: :destroy
+has_many :membership, dependent: :destroy
 has_one_attached :group_image
 
     validates :name, presence: true
