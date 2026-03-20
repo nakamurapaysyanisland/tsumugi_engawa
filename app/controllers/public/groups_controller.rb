@@ -34,10 +34,13 @@ class Public::GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
-  def memberships
+  def destroy
     @group = Group.find(params[:id])
-    @memberships = @group.memberships.page(params[:page])
+    @group.destroy
+    redirect_to groups_path, notice: "<%= @group.name %>を削除しました。"
   end
+  
+  
   private
   def group_params
     params.require(:group).permit(:name, :introduction, :group_image)

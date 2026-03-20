@@ -1,52 +1,40 @@
 <div class="container my-5">
-  <div class="row justify-content-center mb-4">
+  <div class="row d-flex justify-content-center mb-4">
     <div class="col-md-4">
-    <%= render 'public/groups/sidebar', group: @group %>
+      <%= render 'public/groups/sidebar', group: @group %>
     </div>
     <div class="col-md-8 col-lg-8">
       <div class="px-4 pt-4 pb-4 rounded border-bottom text-center">
-        
-    
-
-  
-    
-
-  <div class="mt-2">
-    <% @posts.each do |post| %> 
-      <div class="h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
-        <div class="post-card-container mb-4">
-          <%= render 'public/posts/post_card', post: post %>
-            <div class="ml-3"> 
-      
-     
-              <button class="btn btn-link btn-sm text-secondary text-decoration-none p-0 mb-2" type="button" data-toggle="collapse" data-target="#collapseComments<%= post.id %>">
-                <i class="far fa-comment"></i> 
-                  コメント（<%= post.post_comments.count %>件）を表示
-              </button>
-              <div class="collapse" id="collapseComments<%= post.id %>">
-                <div class="card card-body bg-light border-0 py-2 mb-3 shadow-sm">
-       
-              <div id="comment_index_<%= post.id %>">
-                <%= render 'public/post_comments/index', post: post %>
-              </div>
-              <div class="my-2">
-                <div class="comment-form">
-                    <%= render 'public/post_comments/form', post: post, post_comment: @post_comment %>
-                </div>
+        <div class="mt-2">
+          <% @posts.each do |post| %> 
+            <div class="h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+              <div class="post-card-container mb-4">
+                <%= render 'public/posts/post_card', post: post %>
+                  <div class="ml-3"> 
+                    <button class="btn btn-link btn-sm text-secondary text-decoration-none p-0 mb-2" type="button" data-toggle="collapse" data-target="#collapseComments<%= post.id %>">
+                      <i class="far fa-comment"></i> 
+                          コメント（<%= post.post_comments.count %>件）を表示
+                    </button>
+                    <div class="collapse" id="collapseComments<%= post.id %>">
+                      <div class="card card-body bg-light border-0 py-2 mb-3 shadow-sm">
+                        <div id="comment_index_<%= post.id %>">
+                          <%= render 'public/post_comments/index', post: post %>
+                        </div>
+                        <div class="my-2">
+                        <div class="comment-form">
+                          <%= render 'public/post_comments/form', post: post, post_comment: @post_comment %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
- 
-    
-  </div>
-
+          <% end %>
+        
   <div class="d-flex justify-content-center mt-5">
     <%= paginate @posts %>
-  </div>  
-      </div>
     </div>
+   </div>
   </div>
+  </div>  
 </div>

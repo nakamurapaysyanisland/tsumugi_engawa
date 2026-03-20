@@ -17,14 +17,19 @@
         <%= link_to edit_group_path(@group), class: "btn btn-outline-secondary btn-sm rounded-pill px-4" do %>
           <i class="fa-solid fa-user me-1"></i>
         <% end %>
+        </div>
         <% if @group.owner_id == current_user.id %>
           <div class="dropdown">
           <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           オーナー専用
           </button>
-          
-    
-
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <%= link_to "承認待ち一覧", group_group_users_path(@group), class: "dropdown-item bg-transparent" %>
+            <%= link_to "グループ編集", edit_group_path(@group), class: "dropdown-item bg-transparent" %>
+            <%= link_to "グループ削除", group_path(@group), method: :delete, class: "dropdown-item bg-transparent", data: { confirm: "本当に削除しますか？" } %>
+          </div>
+          </div>
+        <% end %>
   <div class="row mb-4">
     <div class="col-12 text-center">
       <h4 class="fw-bold" style="color: #4a463f;">コミュニティに投稿</h4>
