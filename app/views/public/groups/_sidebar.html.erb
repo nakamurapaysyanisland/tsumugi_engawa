@@ -17,6 +17,12 @@
         <%= link_to edit_group_path(@group), class: "btn btn-outline-secondary btn-sm rounded-pill px-4" do %>
           <i class="fa-solid fa-user me-1"></i>
         <% end %>
+        <% if @group.owner_id == current_user.id %>
+          <div class="dropdown">
+          <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          オーナー専用
+          </button>
+          
     
 
   <div class="row mb-4">
