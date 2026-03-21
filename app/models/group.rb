@@ -18,4 +18,8 @@ has_one_attached :group_image
     end
     group_image.variant(resize_to_limit: [width, height]).processed
     end
+
+    def group_user_for(user)
+      group_users.find_by(user_id: user.id)
+    end
 end

@@ -28,12 +28,17 @@
           <div class="card-footer bg-transparent border-0 text-end pb-3">
             <%= link_to '詳細', group_path(group) %>
           </div>
-          <% if group.group_users.exists?(user_id: current_user.id) %>
-            <%= link_to 'グループ退出', group_group_users_path(group), method: :delete, class: "btn btn-sm btn-danger", data: {confirm: "本当にグループを退出しますか？"} %>
-          <% elsif group.group_users.exists?(user_id: current_user.id) %>
-            <%= link_to '申請取消', group_group_users_path(group), method: :delete, class: "btn btn-sm btn-danger" %>
+
+          <% group_user = group.group_users.find_by(user_id: current_user.id) %>
+          <% if group.owner_id == current_user.id %>
+            <span>あなたは管理者です</span>
+
+          <% elsif group_user&.accepted? %>
+            <%= link_to 'グループ退出', group_group_user_path(group, group_user), method: :delete, remote: true, class: "btn btn-sm btn-danger", data: {confirm: "本当にグループを退出しますか？"} %>
+          <% elsif group_user&.pending? %>
+            <%= link_to '申請取消', group_group_user_path(group, group_user), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
           <% else %>
-            <%= link_to '参加申請', group_group_users_path(group), method: :post, class: "btn btn-sm btn-success" %>
+            <%= link_to '参加申請', group_group_users_path(group), method: :post, remote: true, class: "btn btn-sm btn-success" %>
           <% end %>
 
         </div>

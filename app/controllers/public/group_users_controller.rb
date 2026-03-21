@@ -8,7 +8,8 @@ class Public::GroupUsersController < ApplicationController
     end
 
     def destroy
-        @group_user = current_user.group_user.find_by(group_id: params[:group_id])
+        @group_users = GroupUser.find(params[:id])
+        @group_user =current_user.group_users.find(params[:id])
         @group_user.destroy
         redirect_to request.referer, alert: "グループへの参加申請を取り消しました。"
     end
