@@ -1,0 +1,10 @@
+<% if group.owner_id == current_user.id %>
+            <span>あなたは管理者です</span>
+          <div id="groups_index_<%= group.id %>">
+          <% elsif group_user&.accepted? %>
+            <%= link_to 'グループ退出', group_group_user_path(group, group_user), method: :delete, remote: true, class: "btn btn-sm btn-danger", data: {confirm: "本当にグループを退出しますか？"} %>
+          <% elsif group_user&.pending? %>
+            <%= link_to '申請取消', group_group_user_path(group, group_user), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+          <% else %>
+            <%= link_to '参加申請', group_group_users_path(group), method: :post, remote: true, class: "btn btn-sm btn-success" %>
+          <% end %>

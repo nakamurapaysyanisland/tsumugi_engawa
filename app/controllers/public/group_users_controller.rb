@@ -4,14 +4,13 @@ class Public::GroupUsersController < ApplicationController
         @group = Group.find(params[:group_id])
         @group_user = current_user.group_users.new(group_id: params[:group_id])
         @group_user.save
-        redirect_to request.referer, notice: "グループへの参加申請をしました。"
     end
 
     def destroy
+        @group = Group.find(params[:group_id])
         @group_users = GroupUser.find(params[:id])
         @group_user =current_user.group_users.find(params[:id])
         @group_user.destroy
-        redirect_to request.referer, alert: "グループへの参加申請を取り消しました。"
     end
 
     def index
