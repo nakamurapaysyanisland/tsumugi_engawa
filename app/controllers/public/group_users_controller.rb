@@ -22,6 +22,7 @@ class Public::GroupUsersController < ApplicationController
     @group = Group.find(params[:group_id])
     @group_user = GroupUser.find(params[:id])
     if @group_user.update(status: 1)
+        @group.create_notification_group_approval!(current_user, @group_user.user_id)
         redirect_to group_group_users_path(@group), notice: "グループへの参加を承認しました。"
     else
         redirect_to group_group_users_path(@group), notice: "グループへの承認に失敗しました。"

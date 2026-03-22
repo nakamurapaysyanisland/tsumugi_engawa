@@ -24,14 +24,14 @@
               <%= truncate(group.introduction, length: 60) %>
             </p>
           </div>
-          <div><%= group.created_at.strftime('%Y/%m/%d') %></div>
+          
           <div class="card-footer bg-transparent border-0 text-end pb-3">
+            <div><%= group.created_at.strftime('%Y/%m/%d') %></div>
             <%= link_to '詳細', group_path(group) %>
+          <div id="group_index_<%= group.id %>">
+            <%= render 'public/groups/btn', group: group %>
           </div>
-
-          <% group_user = group.group_users.find_by(user_id: current_user.id) %>
-          <%= render 'public/groups/btn', group: group %>
-
+          </div>
         </div>
       </div>
     <% end %>
