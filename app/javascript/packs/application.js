@@ -33,3 +33,8 @@ $(document).on('turbo:load turbolinks:load', function() {
     }
   });
 });
+
+
+$(function(){  
+  $('.js-flash').fadeOut(5000);  
+});

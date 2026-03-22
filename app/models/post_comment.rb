@@ -1,17 +1,19 @@
 class PostComment < ApplicationRecord
+  belongs_to :post
+  belongs_to :user
+  validates :content, presence: true
+  has_many :notifications, dependent: :destroy
 
-    belongs_to :post
-    belongs_to :user
-    validates :content, presence: true
-
-    def create
-  @post = Post.find(params[:post_id])
-  @comment = current_user.post_comments.new(post_comment_params)
-  @comment.post_id = @post.id
-  if @comment.save
-  
-    @post.create_notification_comment!(current_user, @comment.id)
-
+  def create_notification_comment!(current_user)
+    notification = current_user.active_notifications.new(
+      post_id: post_id,
+      comment_id: id,    
+      visited_id: post.user_id,
+      action: 'comment'
+    )
+    if notification.visitor_id == notification.visited_id
+      notification.checked = true
+    end
+    notification.save if notification.valid?
   end
-end
 end

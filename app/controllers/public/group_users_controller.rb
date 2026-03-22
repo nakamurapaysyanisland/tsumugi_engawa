@@ -2,15 +2,27 @@ class Public::GroupUsersController < ApplicationController
     before_action :authenticate_user!
     def create
         @group = Group.find(params[:group_id])
-        @group_user = current_user.group_users.new(group_id: params[:group_id])
-        @group_user.save
+        @group_user = current_user.group_users.find_or_initialize_by(group_id: @group.id)
+        if @group_user.save
+        @group.create_notification_group_approval!(current_user, @group.owner_id)
+        end
+
+        respond_to do |format|
+            format.html { redirect_to post_path(@post)}
+            format.js
+        end
     end
 
     def destroy
         @group = Group.find(params[:group_id])
-        @group_users = GroupUser.find(params[:id])
+        @group_user = GroupUser.find(params[:id])
         @group_user =current_user.group_users.find(params[:id])
         @group_user.destroy
+
+        respond_to do |format|
+            format.html { redirect_to post_path(@post)}
+            format.js
+        end
     end
 
     def index

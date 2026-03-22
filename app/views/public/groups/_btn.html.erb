@@ -1,4 +1,4 @@
-<div id="groups_index_<%= group.id %>">
+<div>
 <% group_user = group.group_users.find_by(user_id: current_user.id) %>
 <% if group.owner_id == current_user.id %>
             <span>あなたは管理者です</span>
@@ -10,5 +10,5 @@
           <% else %>
             <%= link_to '参加申請', group_group_users_path(group), method: :post, remote: true, class: "btn btn-sm btn-success" %>
         
-            <% end %>
+      <% end %>
             </div>

@@ -1,0 +1,44 @@
+<div class="container">
+<div class="row justify-content-center mt-4">
+<div class="col-md-8 col-sm-12">
+
+<h3>通知一覧</h3>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th style="width: 150px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+<% if @notifications.exists? %>
+    <% @notifications.each do |notification| %>
+        <tr>
+            <td>
+        <%= link_to notification.post.present? ? post_path(notification.post) : "#" do %>
+
+            <strong><%= notification.visitor.nickname %></strong>さんが
+            <% case notification.action %>
+            <% when 'like' %>
+               あなたの投稿にいいねしました。
+            <% when 'comment' %>
+                あなたの投稿にコメントしました。
+                <p class="small text-muted">「<%= notification.comment.content %>」</p>
+            <% when 'group_approved' %>
+                <%= notification.group.name %>への参加が承認されました。
+            <% end %>
+        <% end %>
+        </td>
+        <td>
+        <span class="time"><%= time_ago_in_words(notification.created_at) %></span>
+        </td>
+        </tr>
+    <% end %>
+<% else %>
+        <tr>通知はありません。</tr>
+<% end %>
+<tbody>
+</table>
+</div>
+</div>
+</div>

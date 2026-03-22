@@ -20,8 +20,6 @@ a {
   transition: opacity 0.3s;
 }
 
-/* 2. ホバー時：ロゴ以外にだけ下線を出す */
-/* :not(.navbar-brand) を付けることで、ロゴだけ仲間外れにします */
 a:not(.navbar-brand):hover {
   text-decoration: underline !important;
   text-decoration-color: #4a463f !important;
@@ -29,14 +27,12 @@ a:not(.navbar-brand):hover {
   opacity: 0.6;
 }
 
-/* 3. ロゴ（navbar-brand）のホバー：下線なし、透明度だけ変える */
 .navbar-brand:hover {
-  text-decoration: none !important; /* 念のためここでも消す */
+  text-decoration: none !important; 
   opacity: 0.6;
 }
 
 
-/* ホバーした時もメイン内は下線を出さない */
 main a:hover, 
 .card a:hover {
   text-decoration: none !important;
@@ -47,7 +43,7 @@ main a:hover,
   
   .page-item {
     .page-link {
-      color: #4a463f;           /* 落ち着いた墨色 */
+      color: #4a463f;          
       background-color: #fcfaf2;
       border: 1px solid #d1cfc7;
     }
@@ -56,4 +52,16 @@ main a:hover,
       color: #ffffff;
     }
   }
+}
+
+.flash-message.notice {
+  background-color: #fcfaf2
+  color: #000000;
+  border: solid 1px #b3b3b0;
+}
+ 
+.flash-message.alert {
+  background-color: #ffd4d1;
+  color: #000000;
+  border: solid 1px #b3b3b0;
 }

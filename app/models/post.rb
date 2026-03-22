@@ -12,6 +12,7 @@ class Post < ApplicationRecord
     belongs_to :group, optional: true
     has_many :post_comments, dependent: :destroy
     has_many :favorites, dependent: :destroy
+    has_many :notifications, dependent: :destroy
 
     def self.search_for(content, method)
         Post.where("title LIKE ? OR body LIKE ?", "%#{content}%", "%#{content}%")
@@ -40,27 +41,5 @@ class Post < ApplicationRecord
   end
 end
 
-  def create_notification_comment!(current_user, comment_id)
-
-  notification = current_user.active_notifications.new(
-    post_id: id,
-    comment_id: comment_id,
-    visited_id: user_id,
-    action: 'comment'
-  )
-
-  if notification.visitor_id == notification.visited_id
-    notification.checked = true
-  end
-  notification.save if notification.valid?
-end
-
-def create_notification_group_approval!(current_user, member_id)
-  notification = current_user.active_notifications.new(
-    group_id: id,
-    visited_id: member_id,
-    action: 'group_approved'
-  )
-  notification.save if notification.valid?
-end
+  
 end

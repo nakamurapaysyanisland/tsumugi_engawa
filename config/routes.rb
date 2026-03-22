@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :groups do #resoucesのs忘れないように
       resources :group_users, only: [:create, :destroy, :update, :index] 
     end
+  
   resources :users, only: [:index, :show, :edit, :update] do
     member do
       get :edit_upgrade
@@ -33,7 +34,9 @@ Rails.application.routes.draw do
       patch :withdraw
     end
   end
- 
+resources :notifications, only: [:index]
+  
+
   get 'guest_signup', to: 'users#guest_signup'
   post 'guest_signup', to: 'users#create_guest'
   
