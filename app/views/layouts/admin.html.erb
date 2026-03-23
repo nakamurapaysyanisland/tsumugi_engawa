@@ -2,21 +2,41 @@
 <html>
     <head>
         <title>管理者ページ</title>
-         <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+        <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
-    <body>
-        <% if admin_signed_in? %>
-        <%= link_to '管理者用ログアウト', destroy_admin_session_path, method: :delete %>
-        <%= link_to 'コメント一覧', admin_post_comments_path %>
-        <% end %> 
-        <% flash.each do |message_type, message| %>
-        <div class="flash-message <%= message_type %>">
-        <%= message %>
-        </div>
-        <% end %>
-        <%= yield %>
+    
+    <body class="d-flex flex-column vh-100">
+            <header class="shadow-sm">
+            <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+            <a class="navbar-brand p-3">つむぎ縁側-管理者</a>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                
+                        
+                        <li class="nav-item">
+                            <%= link_to admin_post_comments_path, class: "mr-4" do %>
+                                コメント一覧
+                            <% end %>
+                        </li>
+                <li class="nav-item">
+                            <%= link_to destroy_admin_session_path, method: :delete, class: "mr-4" do %>
+                            ログアウト(管理者)
+                            <% end %>
+                        </li>
+                </ul>
+            </div>
+            </div>
+            </nav>
+            </header>
+        <main class="mb-auto mt-3">
+            <% flash.each do |message_type, message| %>
+     <div class="flash-message <%= message_type %> text-center js-flash w-50 mx-auto rounded"><i class="fa-solid fa-circle-exclamation"></i><%= message %></div>
+   <% end %>
+            <%= yield %>
+        </main>
     </body>
 </html>

@@ -1,4 +1,4 @@
-class Admin::PostCommentsController < ApplicationController
+class Admin::PostCommentsController < Admin::BaseController
   def index
     @post_comment = PostComment.all
   end

@@ -19,10 +19,11 @@
 
   <body class="d-flex flex-column vh-100">
   <%= render 'layouts/header' %>
-  <main class="mb-auto">
+  <main class="mb-auto mt-3">
     <% flash.each do |message_type, message| %>
-     <div class="flash-message <%= message_type %> text-center js-flash w-50 mx-auto rounded"><%= message %></div>
+     <div class="flash-message <%= message_type %> text-center js-flash w-50 mx-auto rounded"><i class="fa-solid fa-circle-exclamation"></i><%= message %></div>
    <% end %>
+   
     <%= yield %>
   </main>
     <%= render 'layouts/footer' %>

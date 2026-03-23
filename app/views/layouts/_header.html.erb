@@ -46,8 +46,15 @@
                 <% end %>
               </li>
               <li class="nav-item">
-                  <%= link_to notifications_path, class: "mr-4" do %>
+                  <%= link_to notifications_path, class: "mr-4 position-relative" do %>
                     <i class="fa-solid fa-bell"></i>
+                    <% if current_user.passive_notifications.where(checked: false).exists? %>
+                      <span class="position-absolute translate-middle badge border border-light rounded-circle bg-danger p-1" style="top: 0px; left: 10px;">
+                      
+                      </span>
+  <span class="sr-only">未読あり</span>
+      </span>
+                    <% end %>
                   <% end %>
                 </li>
               <% else %>

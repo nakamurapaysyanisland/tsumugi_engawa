@@ -55,13 +55,13 @@ main a:hover,
 }
 
 .flash-message.notice {
-  background-color: #fcfaf2
+  background-color: #fcfaf2;
   color: #000000;
-  border: solid 1px #b3b3b0;
+  border: solid 1px #fcfaf2;
 }
  
 .flash-message.alert {
-  background-color: #ffd4d1;
-  color: #000000;
-  border: solid 1px #b3b3b0;
+  
+  color: #f32828;
+
 }

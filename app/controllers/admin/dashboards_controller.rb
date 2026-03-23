@@ -1,6 +1,5 @@
-class Admin::DashboardsController < ApplicationController
-    layout 'admin'
-    before_action :authenticate_admin!
+class Admin::DashboardsController < Admin::BaseController
+    
 
     def index
         @users = User.all
