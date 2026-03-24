@@ -1,23 +1,37 @@
-<h4>コメント一覧</h4>
+<div class="container">
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-12 col-sm-11">
+            <div class="text-center w-100">
+                <h2 class="fw-bold mb-4" style="color: #4a463f;">-コメント一覧-</h2>
+                
+                <table class="table table-bordered table-hover", style="background-color: #fcfaf2;">
+                    <thead>
+                        <tr>
+                            <th style="width: 130px;">ユーザー名</th>
+                            <th>コメント</th>
+                            <th style="width: 120px;">日時</th>
+                            <th style="width: 150px;"></th> 
+                        </tr>
+                    </thead>
 
-<table>
-<thead>
-<th>ユーザー名</th>
-<th>コメント</th>
-<th>コメント日時</th>
-<th></th>
-<th></th>
-</thead>
-
-<tbody>
-<% @post_comment.each do |post_comment| %>
-<tr>
-<td><%= post_comment.user.nickname %></td>
-<td><%= post_comment.content %></td>
-<td><%= post_comment.created_at %></td>
-<td><%= link_to '投稿を見る', admin_post_path(post_comment.post) %></td>
-<td><%= link_to '削除', admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
-</tr>
-<% end %>
-</tbody>
-</table>
+                    <tbody>
+                        <% @post_comment.each do |post_comment| %>
+                            <tr>
+                                <td class="text-center align-middle"><%= post_comment.user.nickname %></td>
+                                <td class="text-left align-middle"><%= post_comment.content %></td>
+                                <td class="text-center align-middle"><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+                                <td class="text-center align-middle">
+                                    <%= link_to '詳細', admin_post_path(post_comment.post), class: "btn btn-link p-0" %> |
+                                    <%= link_to '削除', admin_post_comment_path(post_comment), 
+                                                method: :delete, 
+                                                data: { confirm: '本当に削除しますか？' },
+                                                class: "btn btn-link text-danger p-0" %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

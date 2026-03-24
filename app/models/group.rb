@@ -32,4 +32,19 @@ has_one_attached :group_image
   )
   notification.save if notification.valid?
 end
+
+ def self.search_for(content, method)
+        Group.where("name LIKE ? OR introduction LIKE ?", "%#{content}%", "%#{content}%")
+    end
+
+  def search
+    @model = params[:model]
+  @content = params[:content]
+
+  if @model == 'group' && !user_signed_in?
+    flash[:alert] = "コミュニティ機能を利用するにはログインが必要です"
+    redirect_to new_user_session_path
+    return 
+  end
+end
 end

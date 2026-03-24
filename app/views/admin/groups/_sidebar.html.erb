@@ -1,0 +1,25 @@
+<div class="container my-5">
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-12 col-lg-12">
+      <div class="px-4 pt-4 pb-4 rounded text-center">
+        <div class="mb-3">
+          <%= image_tag @group.get_group_image(100,100), size: "100x100", class: "rounded-circle border" %>
+        </div>
+        <h4 class="fw-bold"><%= @group.name %></h4>
+        <span><%= @group.introduction %></span>
+        <div class="d-flex flex-column justify-content-center my-3 small text-secondary">
+        <%= image_tag @group.get_group_image(50,50), size: "50x50", class: "rounded-circle border" %>
+          <span class="mx-3">グループ管理者：<%= @group.owner.nickname %></span>
+          <span class="mx-3">作成日：<%= @group.created_at.strftime('%Y/%m/%d') %></span>
+          <span class="mx-3">メンバー数：<%= @group.users.count %>件</span>
+        </div>
+        
+        </div>
+            <%= link_to "グループ削除", group_path(@group), method: :delete, class: "dropdown-item bg-transparent", data: { confirm: "本当に削除しますか？" } %>
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
