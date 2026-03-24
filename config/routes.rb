@@ -1,5 +1,8 @@
 Rails.application.routes.draw do 
 
+  namespace :admin do
+    get 'groups/index'
+  end
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
     post 'users/guest_sign_up', to: 'users/registrations#guest_create'
@@ -11,6 +14,7 @@ Rails.application.routes.draw do
   }
   namespace :admin do
     resources :dashboards, only: [:index]
+    resources :groups, only: [:index, :destroy]
     resources :post_comments, only: [:index, :destroy]
     resources :posts, only: [:show, :destroy]
     resources :users, only: [:show, :destroy, :index] do

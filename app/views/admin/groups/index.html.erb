@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-12 col-sm-11">
+            <div class="d-flex flex-column align-items-center justify-content-center w-100">
+                <h2 class="fw-bold" style="color: #4a463f;">-グループ一覧-</h2>
+ <table class="table table-bordered table-hover text-center">
+ <thead>
+ <tr>
+ <th>ID</th>
+ <th>グループ名</th>
+ <th>オーナーID</th>
+ <th>オーナー名</th>
+ <th>参加人数</th>
+<th>登録日</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<% @groups.each do |group| %>
+    <tr>
+    <td width="5px"><%= group.id %></td>
+    <td width="150px"><%= group.name %></td>
+    <td width="5px"><%= group.owner_id %></td>
+<td width="100px"><%= group.owner.nickname %></td>
+<td width="5px"><%= group.users.count %>人</td>
+<td width="80px"><%= group.created_at.strftime('%Y/%m/%d') %></td>
+
+</td>
+<td width="80px">
+<%= link_to '詳細', admin_group_path(group) %>
+<%= link_to '削除', admin_group_path(group), method: :delete, confirm: '本当に削除しますか？' %>
+</td>
+</tr>
+<% end %>
+</tbody>
+</table>
+
