@@ -10,7 +10,7 @@ class Public::PostsController < ApplicationController
     @category = Category.find(params[:category_id])
     @posts = @category.posts.where(group_id: nil).page(params[:page]).per(10)
   else
-    @posts = Post.where(group_id: nil).page(params[:page]).per(10)
+    @posts = Post.where(group_id: nil).order(created_at: :desc).page(params[:page]).per(12)
   end
       @user = current_user
   end

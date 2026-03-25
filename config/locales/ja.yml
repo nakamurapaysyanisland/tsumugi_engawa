@@ -113,7 +113,7 @@ ja:
         other: 約%{count}時間前
       x_days:
         one:   1日前
-        other: "%{count}日前前"
+        other: "%{count}日前"
       about_x_months:
         one:   約1ヶ月前
         other: 約%{count}ヶ月前

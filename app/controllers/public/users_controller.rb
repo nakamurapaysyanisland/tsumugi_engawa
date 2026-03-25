@@ -50,7 +50,7 @@ class Public::UsersController < ApplicationController
 
   def mypage
     @user = current_user
-    @posts = @user.posts.page(params[:page]).per(6)
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(6)
   end
 
   def create_guest
