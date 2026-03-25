@@ -12,6 +12,12 @@
         </div>
       <% end %>
     </div>
-    <%= rendr 'public/groups/group_card', group: @group %>
+    <% @groups.each do |group| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0" style="background-color: #fcfaf2;">
+    <%= render 'public/groups/group_card', group: group %>
+    </div>
+    </div>
+    <% end %>
   </div>
 </div>

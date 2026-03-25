@@ -1,9 +1,6 @@
-<% @groups.each do |group| %>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm border-0" style="background-color: #fcfaf2;">
-          <div class="card_body p-4">
+ <div class="card_body p-4">
             <div class="d-flex align-items-center mb-3">
-              <%= image_tag group.get_group_image(100,100), size: "50x50", class: "rounded-circle border me-3" %>
+              <%= image_tag group.get_group_image(100,100), size: "50x50", class: "rounded-circle border mr-3" %>
               <h5 class="card-title fw-bold mb-0"><%= group.name %></h5>
             </div>
             <p class="card-text small text-secondary">
@@ -11,13 +8,11 @@
             </p>
           </div>
           
-          <div class="card-footer bg-transparent border-0 text-end pb-3">
+          <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
             <div><%= group.created_at.strftime('%Y/%m/%d') %></div>
             <%= link_to '詳細', group_path(group) %>
           <div id="groups_btn_<%= group.id %>">
             <%= render 'public/groups/btn', group: group %>
           </div>
           </div>
-        </div>
-      </div>
-    <% end %>
+      
