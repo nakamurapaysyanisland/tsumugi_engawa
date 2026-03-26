@@ -5,6 +5,7 @@ class Admin::UsersController < Admin::BaseController
 
      def show
         @user = User.find(params[:id])
+        @posts = @user.posts.page(params[:page]).per(12)
     end
     def withdraw
         @user = User.find(params[:id])

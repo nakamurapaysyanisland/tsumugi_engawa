@@ -1,6 +1,7 @@
 class Admin::PostsController < Admin::BaseController
   def show
     @post = Post.find(params[:id])
+    @post_comments = @post.post_comments
   end
   def destroy
     @Post.destroy

@@ -1,50 +1,48 @@
 <div class="d-flex align-items-center justify-content-between mb-3">
+
   <div class="d-flex align-items-center">
     <%= image_tag post.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
-    <%= link_to post.user.nickname, user_path(post.user), class: "font-weight-bold text-decoration-none text-dark ml-2" %>
+    <span class="font-weight-bold text-dark ml-2">
+      <%= post.user.nickname %>
+    </span>
   </div>
-  <div class="d-flex">
+  
+
+  <div class="d-flex align-items-center">
     <% if post.category.present? %>
-      <div class="mr-2">
-        <%= link_to post.category.name, posts_path(category_id: post.category_id), class: "bg-white p-1 small rounded border text-secondary text-decoration-none" %>
+      <div class="mr-1 bg-white p-1 small rounded border text-secondary">
+        <%= post.category.name %>
       </div>
     <% end %>
     <% if post.group.present? %>
-    <div class="mr-2">
-      <%= link_to group_path(post.group_id), class: "bg-white p-1 small rounded border text-secondary text-decoration-none", title: post.group.name do %>
+      <div class="mr-1 bg-white p-1 small rounded border text-secondary">
         <i class="fas fa-users mr-1"></i><%= truncate(post.group.name, length: 10) %>
-      <% end %>
-    </div>
-    <% end %>
-    <% if user_signed_in? && post.user_id == current_user.id %>
-      <div class="dropdown">
-        <button class="btn btn-sm text-secondary p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="box-shadow: none;">
-          <i class="fas fa-ellipsis-h"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right shadow-sm" aria-labelledby="dropdownMenuButton">
-          <%= link_to "編集", edit_post_path(post), class: "dropdown-item small" %>
-          <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item small text-danger" %>
-        </div>
       </div>
+    <% end %>
+    <% if post.user == current_user %>
+      <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "small text-danger ml-2 text-decoration-none" %>
     <% end %>
   </div>
 </div>
 
-<%= link_to post_path(post), class: "text-decoration-none text-dark d-block mb-3" do %>
-  <div class="h5 fw-bold mb-3">「<%= post.title %>」</div>
-  <div class="text-muted small">
-    <%= truncate(post.body, length: 50) %>
-  </div>
-<% end %>
+<div class="h5 fw-bold mb-2" style="color: #4a463f;">
+  「<%= post.title %>」
+</div>
+
+
+<div class="text-muted small mb-3">
+  <%= post.body %>
+</div>
+
 
 <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3 small text-secondary">
-  <span><%= time_ago_in_words(post.created_at) %></span>
+  <span><%= time_ago_in_words(post.created_at) %>前</span>
   <div class="d-flex align-items-center">
+  
     <div class="mr-3"> 
-      <%= link_to post_path(post), class: "text-decoration-none text-secondary" do %>
-        <i class="far fa-comment"></i> <%= post.post_comments.count %>
-      <% end %>
+      <i class="far fa-comment"></i> <%= post.post_comments.count %>
     </div>
+
     <%= render 'public/favorites/favorite', post: post %>
   </div>
 </div>

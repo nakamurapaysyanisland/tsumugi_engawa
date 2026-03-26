@@ -1,0 +1,28 @@
+<% post.post_comments.order(created_at: :desc).each do |post_comment| %>
+
+  <div class="border-bottom py-3" style="color: #4a463f;">
+    
+    <div class="d-flex align-items-center justify-content-between mb-2">
+      <div class="d-flex align-items-center">   
+        <%= image_tag post_comment.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border mr-2" %>
+        <strong class="small">
+          <%= link_to user_path(post_comment.user) do %>
+            <%= post_comment.user.nickname %>
+          <% end %>
+        </strong>
+      </div>
+      
+        <div>
+            <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item small text-danger" %>
+        </div>
+    </div>
+ 
+    <p class="small mb-2">
+      <%= post_comment.content %>
+    </p>
+
+    <div class="text-secondary small ml-2">
+      <%= time_ago_in_words(post_comment.created_at) %>
+    </div>
+  </div> 
+<% end %>

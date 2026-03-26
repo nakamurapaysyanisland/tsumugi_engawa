@@ -2,41 +2,40 @@
     <div class="row justify-content-center mt-4">
         <div class="col-md-12 col-sm-11">
             <div class="d-flex flex-column align-items-center justify-content-center w-100">
-                <h2 class="fw-bold" style="color: #4a463f;">-ユーザー一覧-</h2>
- <table class="table table-bordered table-hover text-center">
- <thead>
- <tr>
- <th>ID</th>
- <th>名前</th>
- <th>ユーザー名</th>
- <th>メールアドレス</th>
- <th>ステータス</th>
-<th>登録日</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<% @users.each do |user| %>
-    <tr>
-    <td width="5px"><%= user.id %></td>
-    <td width="150px">
-<%= user.last_name %>
-<%= user.first_name %>
-</td>
-<td width="150px">
-<%= user.nickname %>
-</td>
-<td width="150px"><%= user.email %></td>
-<td width="80px"><%= user.role %></td>
-<td width="80px"><%= user.created_at.strftime('%Y/%m/%d') %></td>
-
-</td>
-<td width="80px">
-<%= link_to '詳細', admin_user_path(user) %>
-<%= link_to '削除', admin_user_path(user), method: :delete, confirm: '本当に削除しますか？' %>
-</td>
-</tr>
-<% end %>
-</tbody>
-</table>
-
+                <h2 class="fw-bold mb-4" style="color: #4a463f;">- ユーザー一覧 -</h2>
+                    <table class="table table-bordered table-hover text-center" style="background-color: #fcfaf2;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>名前</th>
+                                <th>ユーザー名</th>
+                                <th>メールアドレス</th>
+                                <th>ステータス</th>
+                                <th>登録日</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @users.each do |user| %>
+                                <tr>
+                                    <td width="5%"><%= user.id %></td>
+                                    <td width="20%">
+                                        <%= user.last_name %>
+                                        <%= user.first_name %>
+                                    </td>
+                                    <td width="20%"><%= user.nickname %></td>
+                                    <td width="15%"><%= user.email %></td>
+                                    <td width="10%"><%= user.role %></td>
+                                    <td width="15%"><%= user.created_at.strftime('%Y/%m/%d') %></td>
+                                    <td width="15%">
+                                        <%= link_to '詳細', admin_user_path(user), class: "text-success" %> |
+                                        <%= link_to '削除', admin_user_path(user), method: :delete, class: "text-danger", confirm: '本当に削除しますか？' %>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>
