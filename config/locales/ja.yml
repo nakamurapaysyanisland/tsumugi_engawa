@@ -97,32 +97,32 @@ ja:
     distance_in_words:
       half_a_minute: 半分
       less_than_x_seconds:
-        one:   1秒未満
+        one: 1秒未満
         other: "%{count}秒未満前"
       x_seconds:
-        one:   1秒
+        one: 1秒
         other: "%{count}秒前"
       less_than_x_minutes:
-        one:   今
+        one: 今
         other: 今
       x_minutes:
-        one:   1分前
+        one: 1分前
         other: "%{count}分前"
       about_x_hours:
-        one:   約1時間前
-        other: 約%{count}時間前
+        one: 1時間前
+        other: "%{count}時間前"
       x_days:
-        one:   1日前
+        one: 1日前
         other: "%{count}日前"
       about_x_months:
-        one:   約1ヶ月前
-        other: 約%{count}ヶ月前
+        one: 1ヶ月前
+        other: "%{count}ヶ月前"
       x_months:
-        one:   1ヶ月前
+        one: 1ヶ月前
         other: "%{count}ヶ月前"
       about_x_years:
-        one:   約1年前
-        other: 約%{count}年前
+        one: 1年前
+        other: "%{count}年前"
       over_x_years:
-        one:   1年以上前
+        one: 1年以上前
         other: "%{count}年以上前"

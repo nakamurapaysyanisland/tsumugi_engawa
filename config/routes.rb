@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       patch :withdraw
     end
   end
-resources :notifications, only: [:index]
+  resources :notifications, only: [:index, :destroy]
   
 
   get 'guest_signup', to: 'users#guest_signup'

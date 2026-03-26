@@ -47,4 +47,15 @@ end
     return 
   end
 end
+def is_owned_by?(user)
+  owner_id == user.id
+end
+
+def is_owned_by?(user)
+  owner_id == user.id
+end
+
+def includes_user?(user)
+  group_users.exists?(user_id: user.id, status: 'accepted')
+end
 end

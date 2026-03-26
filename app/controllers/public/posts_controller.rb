@@ -24,11 +24,11 @@ class Public::PostsController < ApplicationController
     @post.user_id = current_user.id
     
     if @post.save
-      flash[:notice] = "投稿に成功しました。"
+      
       if @post.group_id.present? #postの中にgroup_idはある？
-        redirect_to group_path(@post.group_id)
+        redirect_to group_path(@post.group_id), notice: "投稿に成功しました。"
       else
-      redirect_to post_path(@post)
+      redirect_to post_path(@post), notice: "投稿に成功しました。"
       end
     else
       render :new
@@ -40,8 +40,7 @@ class Public::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:notice] = "更新に成功しました。"
-      redirect_to post_path(@post)
+      redirect_to post_path(@post), notice: "更新に成功しました。"
     else
       render :edit
     end
@@ -50,7 +49,7 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path, notice: "削除しました。"
+    redirect_to posts_path, notice: "投稿を削除しました。"
   end
 
  

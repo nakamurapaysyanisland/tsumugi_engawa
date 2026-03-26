@@ -1,45 +1,67 @@
-<div class="container">
-<div class="row justify-content-center mt-4">
-<div class="col-md-8 col-sm-12">
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-sm-12">
+      <div class="d-flex flex-column align-items-center mb-4">
+        <h2 class="fw-bold" style="color: #4a463f;">- 通知一覧 -</h2>
+      </div>
 
-<h3>通知一覧</h3>
-<table>
-    <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th style="width: 150px;"></th>
-        </tr>
-    </thead>
-    <tbody>
-<% if @notifications.exists? %>
-    <% @notifications.each do |notification| %>
-        <tr>
-            <td>
-        <%= link_to notification.post.present? ? post_path(notification.post) : "#" do %>
+      <% if @notifications.exists? %>
+        <table class="table table-bordered table-hover text-center">
+            <thead>
+              <tr>
+                <th style="width: 150px;">詳細</th>
+                <th style="width: 20%;">日時</th>
+                <th style="width: 10%;" class="text-center"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @notifications.each do |notification| %>
+                <tr>
+                    <td>
+                <% 
+                      path = case notification.action
+                             when 'group_approved' then group_path(notification.group_id)
+                             when 'like', 'comment' then notification.post.present? ? post_path(notification.post_id) : "#"
+                             else "#"
+                             end 
+                    %>
+                    
+                    <%= link_to path, class: "text-decoration-none text-dark" do %>
+                      <strong><%= notification.visitor.nickname %></strong>さんが
+                      <% case notification.action %>
+                      <% when 'like' %>
+                        あなたの投稿にいいねしました。
+                      <% when 'comment' %>
+                        あなたの投稿にコメントしました。
+                        <% if notification.comment.present? %>
+                          <p class="small text-muted mb-0">「<%= truncate(notification.comment.content, length: 30) %>」</p>
+                        <% end %>
+                      <% when 'group_approved' %>
+                        「<%= notification.group.name %>」への参加が承認されました！
+                      <% end %>
+                    <% end %>
+                  </td>
+                  <td class="small text-secondary">
+                    <%= time_ago_in_words(notification.created_at) %>
+                  </td>
+                  <td class="text-center">
+                    <%= link_to "削除", notification_path(notification), method: :delete, data: { confirm: '通知を削除しますか？' }, class: "text-danger" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+        </table>
+        
+        <div class="d-flex justify-content-center mt-4">
+          <%= paginate @notifications %>
+        </div>
 
-            <strong><%= notification.visitor.nickname %></strong>さんが
-            <% case notification.action %>
-            <% when 'like' %>
-               あなたの投稿にいいねしました。
-            <% when 'comment' %>
-                あなたの投稿にコメントしました。
-                <p class="small text-muted">「<%= notification.comment.content %>」</p>
-            <% when 'group_approved' %>
-                <%= notification.group.name %>への参加が承認されました。
-            <% end %>
-        <% end %>
-        </td>
-        <td>
-        <span class="time"><%= time_ago_in_words(notification.created_at) %></span>
-        </td>
-        </tr>
-    <% end %>
-<% else %>
-        <tr>通知はありません。</tr>
-<% end %>
-<tbody>
-</table>
-</div>
-</div>
+      <% else %>
+        <div class="text-center py-5 shadow-sm rounded" style="background-color: #fcfaf2;">
+          <p class="mb-0 text-muted">通知はありません。</p>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
 </div>

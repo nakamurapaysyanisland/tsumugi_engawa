@@ -1,17 +1,20 @@
-<% if user_signed_in? %>
-    <%= image_tag current_user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border" %>
-  <% else %>
+<div class="d-flex align-items-start mb-3">
   
-    <%= image_tag 'no_image.jpg', size: "40x40", class: "rounded-circle border" %>
-  <% end %>
- </div>
-   <%= form_with model: [post, post_comment], local: false, class: "flex-grow-1" do |f| %>
-    <div class="d-flex align-items-center">
-    <div class="mx-1 flex-grow-1">
-    <%= f.text_area :content, rows: 2, placeholder: "コメントを入力してください", class: "w-100 form-control", style: "overflow:hidden;" %>
-    </div>
-    <div class="mx-1">
+  <div class="me-2">
+    <% if user_signed_in? %>
+      <%= image_tag current_user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border mr-2" %>
+    <% else %>
+      <%= image_tag 'no_image.jpg', size: "40x40", class: "rounded-circle border" %>
+    <% end %>
+  </div>
+
+  <%= form_with model: [post, post_comment], local: false, class: "d-flex align-items-center flex-grow-1" do |f| %>
+    
+  
+    <%= f.text_area :content, rows: 1, placeholder: "コメントを入力...", class: "form-control mr-2" %>
+    
+    
     <%= f.submit "投稿" %>
-    </div>
-    </div>
+    
   <% end %>
+</div>

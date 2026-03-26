@@ -26,7 +26,7 @@ class Public::GroupsController < ApplicationController
       redirect_to groups_path, alert: "グループが見つかりませんでした。"
     end
     @post = Post.new
-    @posts = @group.posts.page(params[:page]).per(10)
+    @posts = @group.posts.order(created_at: :desc).page(params[:page]).per(10)
     @post_comment = PostComment.new
   end
 
@@ -45,7 +45,7 @@ class Public::GroupsController < ApplicationController
   def destroy
     @group = Group.find(params[:id])
     @group.destroy
-    redirect_to groups_path, notice: "<%= @group.name %>を削除しました。"
+    redirect_to groups_path, notice: "#{ @group.name }を削除しました。"
   end
   
   

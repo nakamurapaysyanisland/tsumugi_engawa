@@ -5,16 +5,21 @@ class Public::PostCommentsController < ApplicationController
         @comment = current_user.post_comments.new(post_comment_params)
         @comment.post_id = @post.id
         if @comment.save
-            @post.create_notification_comment!(current_user, @comment.id)
-        else
-            @comment.errors.full_messages
+          
+  @comment.create_notification_comment!(current_user)
+            
+
+            end
+        respond_to do |format|
+                format.html { redirect_to post_path(@post)}
+                format.js
         end
     end
     def destroy
-        @post = Post.find(params[:post_id])
-        comment = current_user.post_comments.find(params[:id])
-        comment.destroy
-
+        @comment = PostComment.find(params[:id])
+        @post = @comment.post
+        @comment.destroy
+            
         respond_to do |format|
             format.html { redirect_to post_path(@post)}
             format.js

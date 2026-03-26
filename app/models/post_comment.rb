@@ -2,11 +2,11 @@ class PostComment < ApplicationRecord
   belongs_to :post
   belongs_to :user
   validates :content, presence: true
-  has_many :notifications, dependent: :destroy
+  has_many :notifications, foreign_key: 'comment_id', dependent: :destroy
 
-  def create_notification_comment!(current_user)
+   def create_notification_comment!(current_user)
     notification = current_user.active_notifications.new(
-      post_id: post_id,
+      post_id: post.id,
       comment_id: id,    
       visited_id: post.user_id,
       action: 'comment'
@@ -16,4 +16,5 @@ class PostComment < ApplicationRecord
     end
     notification.save if notification.valid?
   end
+       
 end

@@ -1,59 +1,53 @@
-<div class="container my-5">
-  <div class="row justify-content-center mb-4">
-    <div class="col-md-12 col-lg-12">
-      <div class="px-4 pt-4 pb-4 rounded text-center">
-        <div class="mb-3">
-          <%= image_tag @group.get_group_image(100,100), size: "100x100", class: "rounded-circle border" %>
-        </div>
-        <h4 class="fw-bold"><%= @group.name %></h4>
-        <span><%= @group.introduction %></span>
-        <div class="d-flex flex-column justify-content-center my-3 small text-secondary">
-        <%= image_tag @group.get_group_image(50,50), size: "50x50", class: "rounded-circle border" %>
-          <span class="mx-3">グループ管理者：<%= @group.owner.nickname %></span>
-          <span class="mx-3">作成日：<%= @group.created_at.strftime('%Y/%m/%d') %></span>
-          <span class="mx-3">メンバー数：<%= @group.users.count %>件</span>
-        </div>
-        
-        <%= link_to edit_group_path(@group), class: "btn btn-outline-secondary btn-sm rounded-pill px-4" do %>
-          <i class="fa-solid fa-user me-1"></i>
-        <% end %>
-        </div>
-        <% if @group.owner_id == current_user.id %>
-          <div class="dropdown">
-          <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          オーナー専用
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <%= link_to "承認待ち一覧", group_group_users_path(@group), class: "dropdown-item bg-transparent" %>
-            <%= link_to "グループ編集", edit_group_path(@group), class: "dropdown-item bg-transparent" %>
-            <%= link_to "グループ削除", group_path(@group), method: :delete, class: "dropdown-item bg-transparent", data: { confirm: "本当に削除しますか？" } %>
-          </div>
+<div class="card shadow-sm border-0 mb-4" style="background-color: #fcfaf2;">
+  <div class="card-body text-center p-4">
+    <div class="mb-3">
+      <%= image_tag group.get_group_image(100,100), size: "100x100", class: "rounded-circle border shadow-sm" %>
+    </div>
+    <h5 class="fw-bold mb-2" style="color: #4a463f;"><%= group.name %></h5>
+    <p class="text-muted small mb-3"><%= group.introduction %></p>
+
+    <hr class="my-3" style="border-top: 1px dashed #d1c9bc;">
+
+    <div class="text-secondary small mb-4">
+      <div class="mb-1"><i class="fa-solid fa-user-shield me-1"></i> 管理者：<%= group.owner.nickname %></div>
+      <div class="mb-1"><i class="fa-solid fa-users me-1"></i> メンバー：<%= group.users.count %>名</div>
+    </div>
+
+    <% if @group.owner_id == current_user.id %>
+          <div class="dropdown mb-3">
+            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              オーナー専用
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <%= link_to "承認待ち一覧", group_group_users_path(@group), class: "dropdown-item bg-transparent" %>
+              <%= link_to "グループ編集", edit_group_path(@group), class: "dropdown-item bg-transparent" %>
+              <%= link_to "グループ削除", group_path(@group), method: :delete, class: "dropdown-item bg-transparent", data: { confirm: "本当に削除しますか？" } %>
+            </div>
           </div>
         <% end %>
-  <div class="row mb-4">
-    <div class="col-12 text-center">
-      <h4 class="fw-bold" style="color: #4a463f;">コミュニティに投稿</h4>
-    </div>
-  </div>
-  <%= form_with model: @post, local: true do |f| %>
-    <%= f.hidden_field :group_id, value: @group.id %>
-    <div class="form-group">
-      <%= f.label :title, "タイトル" %>
-      <%= f.text_field :title %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :body, "本文" %>
-      <%= f.text_area :body %>
-    </div>
-
-    <div class="action">
-      <%= f.submit "投稿" %>
-    </div>
-  <% end %>
-
- 
-      </div>
-    </div>
+      
   </div>
 </div>
+
+<% if group.is_owned_by?(current_user) || group.includes_user?(current_user) %>
+  <div class="card shadow-sm border-0 p-4" style="background-color: #fcfaf2;">
+    <h6 class="fw-bold text-center mb-3" style="color: #4a463f;">コミュニティに投稿</h6>
+    <%= form_with model: @post, local: true do |f| %>
+      <%= f.hidden_field :group_id, value: group.id %>
+      
+      <div class="form-group mb-2">
+        <%= f.label :title, "タイトル", class: "x-small fw-bold text-secondary" %>
+        <%= f.text_field :title, class: "form-control form-control-sm" %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label :body, "本文", class: "x-small fw-bold text-secondary" %>
+        <%= f.text_area :body, class: "form-control form-control-sm", rows: 3 %>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit "投稿する", class: "w-100" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
