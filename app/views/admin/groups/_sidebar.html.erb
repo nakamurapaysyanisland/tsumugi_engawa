@@ -1,25 +1,46 @@
-<div class="container my-5">
-  <div class="row justify-content-center mb-4">
-    <div class="col-md-12 col-lg-12">
-      <div class="px-4 pt-4 pb-4 rounded text-center">
-        <div class="mb-3">
-          <%= image_tag @group.get_group_image(100,100), size: "100x100", class: "rounded-circle border" %>
+<div class="card shadow-sm border-0 mb-4" style="background-color: #fcfaf2;">
+  <div class="card-body text-center p-4">
+    <div class="mb-3">
+      <%= image_tag group.get_group_image(100,100), size: "100x100", class: "rounded-circle border shadow-sm" %>
+    </div>
+    <h5 class="fw-bold mb-2" style="color: #4a463f;"><%= group.name %></h5>
+    <p class="text-muted small mb-3"><%= group.introduction %></p>
+
+    <hr class="my-3" style="border-top: 1px dashed #d1c9bc;">
+
+    <div class="text-secondary small mb-4">
+      <div class="mb-1"><i class="fa-solid fa-user-shield me-1"></i> 管理者：<%= group.owner.nickname %></div>
+      <div class="mb-1"><i class="fa-solid fa-users me-1"></i> メンバー：<%= group.users.count %>名</div>
+    </div>
+
+        <div>
+          <%= link_to 'グループ削除', admin_group_path(group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "dropdown-item small text-danger" %>   
         </div>
-        <h4 class="fw-bold"><%= @group.name %></h4>
-        <span><%= @group.introduction %></span>
-        <div class="d-flex flex-column justify-content-center my-3 small text-secondary">
-        <%= image_tag @group.get_group_image(50,50), size: "50x50", class: "rounded-circle border" %>
-          <span class="mx-3">グループ管理者：<%= @group.owner.nickname %></span>
-          <span class="mx-3">作成日：<%= @group.created_at.strftime('%Y/%m/%d') %></span>
-          <span class="mx-3">メンバー数：<%= @group.users.count %>件</span>
+      
+      <div class="mt-4 border-top" style="background-color: #fcfaf2;">
+  
+    <h5 class="fw-bold my-3" style="color: #4a463f;">
+      参加メンバー (<%= group.group_users.count %>人)
+    </h5>
+    
+    <div class="member-list">
+      <% group.users.each do |user| %>
+        <div class="d-flex align-items-center mb-3">
+          <%= link_to admin_user_path(user), class: "text-decoration-none d-flex align-items-center" do %>
+            <%= image_tag user.get_profile_image(35,35), size: "35x35", class: "rounded-circle border mr-2" %>
+            <span class="small fw-bold text-dark">
+              <%= user.nickname %>
+            </span>
+          <% end %>
         </div>
-        
-        </div>
-            <%= link_to "グループ削除", group_path(@group), method: :delete, class: "dropdown-item bg-transparent", data: { confirm: "本当に削除しますか？" } %>
-        </div>
-        
-        
-      </div>
+      <% end %>
+
+      <% if group.users.empty? %>
+        <p class="small text-muted">メンバーはいません</p>
+      <% end %>
     </div>
   </div>
+
+  </div>
 </div>
+

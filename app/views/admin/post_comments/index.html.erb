@@ -2,7 +2,7 @@
     <div class="row justify-content-center mt-4">
         <div class="col-md-12 col-sm-11">
             <div class="d-flex flex-column align-items-center justify-content-center w-100">
-                <h2 class="fw-bold mb-4" style="color: #4a463f;">- コメント一覧 -</h2>
+                <h2 class="fw-bold mb-3" style="color: #4a463f;">- コメント一覧 -</h2>
                     <table class="table table-bordered table-hover text-center" style="background-color: #fcfaf2;">
                         <thead>
                             <tr>
@@ -18,7 +18,7 @@
                                 <tr>
                                     <td width="15%" class="text-center align-middle"><%= post_comment.user.nickname %></td>
                                     <td width="10%" class="text-center align-middle"><%= post_comment.id %></td>
-                                    <td width="55%" class="text-center align-middle"><%= truncate(post_comment.content, length: 30) %></td>
+                                    <td width="50%" class="text-center align-middle"><%= truncate(post_comment.content, length: 30) %></td>
                                     <td width="10%" class="text-center align-middle"><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
                                     <td width="10%" class="text-center align-middle">
                                        <%= link_to '詳細', admin_post_path(post_comment.post), class: "text-success" %> |
@@ -28,6 +28,9 @@
                             <% end %>
                         </tbody>
                     </table>
+                <div class="d-flex justify-content-center mt-4">
+                    <%= paginate @post_comment %>
+                </div>
             </div>
         </div>
     </div>

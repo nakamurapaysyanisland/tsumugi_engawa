@@ -51,8 +51,9 @@ def is_owned_by?(user)
   owner_id == user.id
 end
 
-def is_owned_by?(user)
-  owner_id == user.id
+def is_member?(user)
+  return false if user.nil?
+  group_users.exists?(user_id: user.id)
 end
 
 def includes_user?(user)

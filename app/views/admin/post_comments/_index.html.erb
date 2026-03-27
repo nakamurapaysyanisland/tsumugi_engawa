@@ -6,22 +6,27 @@
       <div class="d-flex align-items-center">   
         <%= image_tag post_comment.user.get_profile_image(40,40), size: "40x40", class: "rounded-circle border mr-2" %>
         <strong class="small">
-          <%= link_to user_path(post_comment.user) do %>
+          <%= link_to admin_user_path(post_comment.user) do %>
             <%= post_comment.user.nickname %>
           <% end %>
         </strong>
       </div>
-      
-        <div>
-            <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item small text-danger" %>
+        <div class="dropdown">
+        <button class="btn btn-link text-secondary p-0 text-decoration-none" type="button" data-toggle="dropdown">
+          <i class="fas fa-ellipsis-v"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" style="min-width: 80px;">
+          
+          <%= link_to '削除', admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "dropdown-item small text-danger" %>   
         </div>
+      </div>
     </div>
  
-    <p class="small mb-2">
+    <p class="small mb-2" style="line-height: 1.5;">
       <%= post_comment.content %>
     </p>
 
-    <div class="text-secondary small ml-2">
+    <div class="text-secondary" style="font-size: 0.75rem;">
       <%= time_ago_in_words(post_comment.created_at) %>
     </div>
   </div> 

@@ -1,47 +1,43 @@
 <div class="container">
-  <h2 class="text-center"><%= @group.name %></h2>
-  <h4 class="text-center">承認待ち一覧</h4>
-
-  <div class="row mt-5">
-    <div class="col-11 col-md-12 mx-auto">
-    <% if @group_users.present? %>
-      <div>
-        <table>
-          <thead
-            <tr>
-              <th>名前</th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @group_users.each do |group_user| %>
-              <tr>
-                <td><%= link_to group_user.user.nickname, user_path(@group, group_user), class: "text-dark" %></td>
-             
-                <td class="text-right">
-                  <%= link_to '加入許可', group_group_user_path(@group, group_user), method: :patch, class: "btn btn-sm btn-success" %>
-                </td>
-                <td class="text-right">
-                  <%= link_to '加入見送り', group_group_user_path(@group, group_user), method: :delete, class: "btn btn-sm btn-danger" %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-12 col-sm-11">
+            <div class="d-flex flex-column align-items-center justify-content-center w-100">
+                <h2 class="fw-bold mb-4" style="color: #4a463f;">- 承認待ち一覧 -</h2>
+                  <h4 class="fw-bold mb-4" style="color: #4a463f;">- <%= @group.name %> -</h4>
+                    <% if @group_users.present? %>
+                    <table class="table table-bordered table-hover text-center" style="background-color: #fcfaf2;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>ユーザー名</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                      <% @group_users.each do |group_user| %>
+                        <tr>
+                          <td><%= group_user.created_at.strtime('%Y/%m/%d') %></td>
+                          <td><%= group_user.user_id %></td>
+                          <td><%= link_to group_user.user.nickname, user_path(@group, group_user), class: "text-dark" %></td>
+                          <td class="text-right">
+                            <%= link_to '加入許可', group_group_user_path(@group, group_user), method: :patch, class: "btn btn-sm btn-success" %> |
+                            <%= link_to '加入見送り', group_group_user_path(@group, group_user), method: :delete, class: "btn btn-sm btn-danger" %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                    </table>
+                    <% else %>
+                      <P class="text-center">承認待ちユーザーはいません。</P>
+                    <% end %>
+            </div>
+              <div class="mx-auto mt-5">
+                <%= paginate @group_users %></div>
+              </div>
+              <div class="col-md-9 mx-auto">
+                <p class="text-center"><%= link_to "戻る", group_path(@group), class: 'text-dark font-weight-bold' %></p>
+              </div>
+        </div>
       </div>
-    <% else %>
-      <P class="text-center">承認待ちユーザーはいません。</P>
-    <% end %>
-    </div>
-    <div class="mx-auto mt-5"><%= paginate @group_users %></div>
-  </div>
-
-  <div class="row mt-5">
-    <div class="col-md-9 mx-auto">
-    <p class="text-center"><%= link_to "戻る", group_path(@group), class: 'text-dark font-weight-bold' %></p>
-    </div>
-  </div>
-
 </div>

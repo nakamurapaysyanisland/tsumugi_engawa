@@ -6,7 +6,7 @@
       </div>
 
       <% if @notifications.exists? %>
-        <table class="table table-bordered table-hover text-center">
+        <table class="table table-bordered table-hover text-center" style="background-color: #fcfaf2;" %>
             <thead>
               <tr>
                 <th style="width: 150px;">詳細</th>
@@ -16,7 +16,7 @@
             </thead>
             <tbody>
               <% @notifications.each do |notification| %>
-                <tr>
+                <tr class="<%= 'text-muted' if notification.checked %>" style="<%= 'background-color: #fbfbf8;' if notification.checked %>">
                     <td>
                 <% 
                       path = case notification.action
