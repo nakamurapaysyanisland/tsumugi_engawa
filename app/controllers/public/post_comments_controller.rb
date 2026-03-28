@@ -6,7 +6,7 @@ class Public::PostCommentsController < ApplicationController
         @comment.post_id = @post.id
         if @comment.save
           
-  @comment.create_notification_comment!(current_user)
+  @post.create_notification_comment!(current_user, @comment.id)
             
 
             end

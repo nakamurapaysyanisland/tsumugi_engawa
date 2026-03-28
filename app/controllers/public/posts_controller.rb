@@ -24,7 +24,6 @@ class Public::PostsController < ApplicationController
     @post.user_id = current_user.id
     
     if @post.save
-      
       if @post.group_id.present? #postの中にgroup_idはある？
         redirect_to group_path(@post.group_id), notice: "投稿に成功しました。"
       else
@@ -49,7 +48,11 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path, notice: "投稿を削除しました。"
+    
+    respond_to do |format|
+    format.html { redirect_to posts_path, notice: '投稿を削除しました' }
+    format.js   
+  end
   end
 
  

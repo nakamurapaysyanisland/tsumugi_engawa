@@ -27,12 +27,13 @@ has_one_attached :group_image
   def create_notification_group_approval!(current_user, member_id)
   notification = current_user.active_notifications.new(
     group_id: id,
-    visited_id: current_user.id,
+    visited_id: owner_id, 
     action: 'group_approval'
   )
+  return if notification.visitor_id == notification.visited_id
+
   notification.save if notification.valid?
 end
-
  def self.search_for(content, method)
         Group.where("name LIKE ? OR introduction LIKE ?", "%#{content}%", "%#{content}%")
     end

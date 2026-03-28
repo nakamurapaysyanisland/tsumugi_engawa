@@ -19,16 +19,16 @@
                         <tbody>
                             <% @users.each do |user| %>
                                 <tr>
-                                    <td width="5%"><%= user.id %></td>
-                                    <td width="20%">
+                                    <td width="5%" class="text-center align-middle"><%= user.id %></td>
+                                    <td width="20%" class="text-center align-middle">
                                         <%= user.last_name %>
                                         <%= user.first_name %>
                                     </td>
-                                    <td width="20%"><%= user.nickname %></td>
-                                    <td width="15%"><%= user.email %></td>
-                                    <td width="10%"><%= t(user.role, scope: 'enums.user.role') %></td>
-                                    <td width="10%"><%= t(user.status, scope: 'enums.user.status') %></td>
-                                    <td width="15%"><%= user.created_at.strftime('%Y/%m/%d') %></td>
+                                    <td width="20%" class="text-center align-middle"><%= user.nickname %></td>
+                                    <td width="15%" class="text-center align-middle"><%= user.email %></td>
+                                    <td width="10%" class="text-center align-middle"><%= t(user.role, scope: 'enums.user.role') %></td>
+                                    <td width="10%" class="text-center align-middle"><%= t(user.status, scope: 'enums.user.status') %></td>
+                                    <td width="15%" class="text-center align-middle"><%= user.created_at.strftime('%Y/%m/%d') %></td>
                                     <td width="5%">
                                         <%= link_to '詳細', admin_user_path(user), class: "text-success" %>
                                     </td>

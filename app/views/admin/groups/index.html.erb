@@ -18,15 +18,15 @@
                         <tbody>
                             <% @groups.each do |group| %>
                                 <tr>
-                                    <td width="5%"><%= group.id %></td>
-                                    <td width="30%"><%= group.name %></td>
-                                    <td width="10%"><%= group.owner_id %></td>
-                                    <td width="15%"><%= group.owner.nickname %></td>
-                                    <td width="10%"><%= group.users.count %>人</td>
-                                    <td width="15%"><%= group.created_at.strftime('%Y/%m/%d') %></td>
-                                    <td width="15%">
+                                    <td width="5%" class="text-center align-middle"><%= group.id %></td>
+                                    <td width="30%" class="text-center align-middle"><%= group.name %></td>
+                                    <td width="10%" class="text-center align-middle"><%= group.owner_id %></td>
+                                    <td width="15%" class="text-center align-middle"><%= group.owner.nickname %></td>
+                                    <td width="10%" class="text-center align-middle"><%= group.users.count %>人</td>
+                                    <td width="15%" class="text-center align-middle"><%= group.created_at.strftime('%Y/%m/%d') %></td>
+                                    <td width="15%" class="text-center align-middle">
                                         <%= link_to '詳細', admin_group_path(group), class: "text-success" %> |
-                                        <%= link_to '削除', admin_group_path(group), method: :delete, confirm: '本当に削除しますか？', class: "text-danger" %>
+                                        <%= link_to '削除', admin_group_path(group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "text-danger" %>
                                     </td>
                                 </tr>
                             <% end %>

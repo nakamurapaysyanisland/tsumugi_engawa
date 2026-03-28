@@ -5,12 +5,12 @@
     </h3>
   </div>
   
-
+  
   <div class="row justify-content-center">
     <% @posts.each do |post| %>
      
       <div class="col-md-4 col-sm-6 mb-4">
-        <div class="card h-100 shadow-sm border-0 p-3" style="background-color: #fcfaf2;">
+        <div id="post_<%= post.id %>" class="card h-100 shadow-sm border-0 p-3" style="background-color: #fcfaf2;">
           <%= render 'public/posts/post_card', post: post %>
         </div>
       </div>

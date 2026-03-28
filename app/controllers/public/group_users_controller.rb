@@ -4,7 +4,7 @@ class Public::GroupUsersController < ApplicationController
         @group = Group.find(params[:group_id])
         @group_user = current_user.group_users.find_or_initialize_by(group_id: @group.id)
         if @group_user.save
-        @group.create_notification_group_approval!(current_user, @group.owner_id)
+        @group.create_notification_group_approval!(current_user, current_user.id)
         end
 
         respond_to do |format|

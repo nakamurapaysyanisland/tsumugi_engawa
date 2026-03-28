@@ -9,4 +9,12 @@ class Admin::GroupsController < Admin::BaseController
     @posts = @group.posts.page(params[:page]).per(10)
     
   end
+  def destroy
+  @group = Group.find(params[:id])
+  if @group.destroy
+    redirect_to admin_groups_path, notice: "グループ「#{@group.name}」を削除しました。"
+  else
+    redirect_to admin_group_path(@group), alert: "削除に失敗しました。"
+  end
+end
 end

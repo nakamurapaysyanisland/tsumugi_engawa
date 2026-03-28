@@ -1,3 +1,4 @@
+ 
 <div class="d-flex align-items-center justify-content-between mb-4">
 
   <div class="d-flex align-items-center">
@@ -35,7 +36,7 @@
             編集
           <% end %>
           <div class="dropdown-divider"></div>
-          <%= link_to post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item small text-danger" do %>
+          <%= link_to post_path(post), method: :delete, remote: true, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item small text-danger" do %>
            削除
           <% end %>
         </div>

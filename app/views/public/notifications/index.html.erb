@@ -27,12 +27,11 @@
                     %>
                     
                     <%= link_to path, class: "text-decoration-none text-dark" do %>
-                      <strong><%= notification.visitor.nickname %></strong>さんが
                       <% case notification.action %>
                       <% when 'like' %>
-                        あなたの投稿にいいねしました。
+                        <strong><%= notification.visitor.nickname %></strong>さんがあなたの投稿にいいねしました。
                       <% when 'comment' %>
-                        あなたの投稿にコメントしました。
+                        <strong><%= notification.visitor.nickname %></strong>さんがあなたの投稿にコメントしました。
                         <% if notification.comment.present? %>
                           <p class="small text-muted mb-0">「<%= truncate(notification.comment.content, length: 30) %>」</p>
                         <% end %>

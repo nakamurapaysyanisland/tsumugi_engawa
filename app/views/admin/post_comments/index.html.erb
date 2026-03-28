@@ -20,7 +20,7 @@
                                     <td width="10%" class="text-center align-middle"><%= post_comment.id %></td>
                                     <td width="50%" class="text-center align-middle"><%= truncate(post_comment.content, length: 30) %></td>
                                     <td width="10%" class="text-center align-middle"><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
-                                    <td width="10%" class="text-center align-middle">
+                                    <td width="15%" class="text-center align-middle">
                                        <%= link_to '詳細', admin_post_path(post_comment.post), class: "btn btn-sm btn-outline-success text-success" %> |
                                        <%= link_to '削除', admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline-danger text-danger" %>   
                                     </td>

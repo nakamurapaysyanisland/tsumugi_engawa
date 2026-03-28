@@ -54,9 +54,8 @@
 
 <div class="card border-0 mt-4" style="background-color: #fcfaf2;">
   <div class="card-body">
-    <h5 class="fw-bold mb-3" style="color: #4a463f;">
-      参加メンバー (<%= group.group_users.count %>人)
-    </h5>
+  <h6 class="fw-bold text-center mb-3" style="color: #4a463f;">参加メンバー (<%= group.group_users.count %>人)</h6>
+    
     
     <div class="member-list">
       <% group.users.each do |user| %>

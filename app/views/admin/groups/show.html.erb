@@ -1,12 +1,16 @@
 <div class="container my-5">
   <div class="row"> <div class="col-md-4">
       <%= render 'admin/groups/sidebar', group: @group %>
+
+      <div class="d-flex justify-content-center mt-4">
+          <%= link_to '一覧へ', admin_groups_path, class: "btn btn-outline-secondary btn-sm" %>
+        </div>
     </div>
 
 <div class="col-md-8 col-lg-8">
   <div class="px-4 pt-4 pb-4">
     <div class="mt-2">
-        
+        <% if @post.present? %>
         <% @posts.each do |post| %> 
           <div class="p-4 d-flex flex-column mb-4" style="background-color: #fcfaf2; border-radius: 15px; border: 1px solid #e0d9c1;">
             
@@ -25,12 +29,18 @@
     </div>
   </div>
 </div>
+
+
               </div>
           </div>
           <div class="d-flex justify-content-center mt-5">
             <%= paginate @posts %>
           </div>
-        <% end %>
+        <% end %><% else %>
+            <div class="text-center py-5 border rounded shadow-sm" style="background-color: #fcfaf2;">
+              <h5 class="text-secondary">まだ投稿がありません</h5>
+            </div>
+          <% end %> 
     </div>
   </div>
 </div>

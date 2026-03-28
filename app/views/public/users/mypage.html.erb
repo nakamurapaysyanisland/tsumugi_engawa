@@ -10,7 +10,7 @@
         <div class="d-flex justify-content-center my-3 small text-secondary">
           <span class="mx-3">会員種別：<%= t(@user.role, scope: 'enums.user.role') %></span>
           <span class="mx-3">登録日：<%= @user.created_at.strftime('%Y/%m/%d') %></span>
-          <span class="mx-3">投稿件数：<%= @posts.count %>件</span>
+          <span class="mx-3">投稿件数：<%= @posts.total_count %>件</span>
         </div>
 
         <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-sm px-4" do %>
@@ -29,7 +29,7 @@
   <div class="row"> 
     <% @posts.each do |post| %>
       <div class="col-md-4 mb-4">
-        <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+        <div id="post_<%= post.id %>" class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
           <%= render 'public/posts/post_card', post: post %>
         </div>
       </div>
