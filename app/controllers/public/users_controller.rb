@@ -5,7 +5,7 @@ class Public::UsersController < ApplicationController
 
   def show
    @user = User.find(params[:id])  
-   @posts = @user.posts.page(params[:page]).per(6)
+   @posts = @user.posts.where(group_id: nil).order(created_at: :desc).page(params[:page]).per(12)
   end
 
   def edit

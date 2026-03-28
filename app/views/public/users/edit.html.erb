@@ -5,97 +5,98 @@
         <div class="d-flex flex-column align-items-center">
           <h2 class="fw-bold mb-4" style="color: #4a463f;">- ユーザー編集 -</h2>
 
-        <%= form_with model: @user, local: true do |f| %>
-        <div class="d-flex flex-column mt-3">
-        <div id="img_field" class="mx-auto rounded-circle border shadow-sm d-flex align-items-center justify-content-center" 
-                   style="width: 120px; height: 120px; background-color: #ffffff; overflow: hidden; position: relative;">
+            <%= form_with model: @user, local: true, class: "w-75" do |f| %>
+              <div class="d-flex flex-column mt-3 align-items-center">
+                <div id="img_field" class="mx-auto rounded-circle border shadow-sm d-flex align-items-center justify-content-center" 
+                   style="width: 110px; height: 110px; background-color: #ffffff; overflow: hidden; position: relative;">
                 
-                <%= image_tag @user.get_profile_image(120,120), id: "preview", 
+                  <%= image_tag @user.get_profile_image(100,100), id: "preview", 
                     style: "width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 10;" %>
                 
-                <div id="inner-content" style="display: none;">
-                  <i class="fa-solid fa-camera fa-2x" style="color: #8c7e6d;"></i>
+                  <div id="inner-content" style="display: none;">
+                    <i class="fa-solid fa-camera fa-2x" style="color: #8c7e6d;"></i>
+                  </div>
                 </div>
+                <label for="file-input" class="btn btn-sm mt-3 px-3 w-50" style="cursor: pointer; background-color: #ffffff; border: 1px solid #d1c9bc; color: #4a463f;">
+                  画像を選択
+                  <%= f.file_field :group_image, id: "file-input", accept: "image/*", class: "d-none" %>
+                </label>
               </div>
 
-              <label for="file-input" class="btn btn-sm mt-3 px-3 w-50" style="cursor: pointer; background-color: #ffffff; border: 1px solid #d1c9bc; color: #4a463f;">
-                画像を選択
-                <%= f.file_field :group_image, id: "file-input", accept: "image/*", class: "d-none" %>
-              </label>
-            </div>
+              <div class="form-group mt-2">
+                <%= f.label "ニックネーム", style: "color: #4a463f;" %><br />
+                <%= f.text_field :nickname, class: "form-control" %>
+                <% if @user.errors.include?(:nickname) %>
+                  <div class="text-danger small mt-1 fw-bold">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <%= @user.errors.full_messages_for(:nickname).first %>
+                  </div>
+                <% end %>
+              </div>
 
-        <div class="form-group">
-          <%= f.label "ニックネーム", style: "color: #4a463f;" %><br />
-          <%= f.text_field :nickname, class: "form-control" %>
-          <% if @user.errors.include?(:nickname) %>
-    <div class="text-danger small mt-1 fw-bold">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <%= @user.errors.full_messages_for(:nickname).first %>
-    </div>
-  <% end %>
-        </div>
-
-        <% unless current_user.guest?%>
+              <% unless current_user.guest?%>
       
-        <div class="d-flex flex-row">
-          <div class="form-group my-1">
-          <%= f.label "姓", style: "color: #4a463f;" %><br />
-          <%= f.text_field :last_name, class: "form-control" %>
-          <% if @user.errors.include?(:last_name) %>
-    <div class="text-danger small mt-1 fw-bold">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <%= @user.errors.full_messages_for(:last_name).first %>
-    </div>
-  <% end %>
-          </div>
-          <div class="form-group my-1">
-          <%= f.label "名", style: "color: #4a463f;" %><br />
-          <%= f.text_field :first_name, class: "form-control" %>
-           <% if @user.errors.include?(:first_name) %>
-    <div class="text-danger small mt-1 fw-bold">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <%= @user.errors.full_messages_for(:first_name).first %>
-    </div>
-  <% end %>
-          </div>
-        </div>
-        <div class="form-group my-1">
-          <%= f.label "メールアドレス", style: "color: #4a463f;" %><br />
-          <%= f.text_field :email, class: "form-control" %>
-           <% if @user.errors.include?(:email) %>
-    <div class="text-danger small mt-1 fw-bold">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <%= @user.errors.full_messages_for(:email).first %>
-    </div>
-  <% end %>
-        </div>
-        <div class="form-group my-1">
-          <%= f.label "パスワード", style: "color: #4a463f;" %><br />
-          <%= f.password_field :password, class: "form-control" %>
-           <% if @user.errors.include?(:password) %>
-    <div class="text-danger small mt-1 fw-bold">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <%= @user.errors.full_messages_for(:password).first %>
-    </div>
-  <% end %>
-        </div>
-        </div>
-        <div class="form-group my-1">
-          <%= f.label "パスワード(確認用)", style: "color: #4a463f;" %><br />
-          <%= f.password_field :password_confirmation, class: "form-control" %>
-           <% if @user.errors.include?(:password_confirmation) %>
-    <div class="text-danger small mt-1 fw-bold">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <%= @user.errors.full_messages_for(:password_confirmation).first %>
-    </div>
-  <% end %>
-        </div>
-        <% end %>
-        <div class="actions mt-2">
-          <%= f.submit "更新",  class: "w-100", style: "color: #4a463f;" %>
-          </div>
-          
-    <% end %>
+                <div class="row">
+                  <div class="col-6 form-group my-1">
+                    <%= f.label "姓", style: "color: #4a463f;" %><br />
+                    <%= f.text_field :last_name, class: "form-control" %>
+                    <% if @user.errors.include?(:last_name) %>
+                      <div class="text-danger small mt-1 fw-bold">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <%= @user.errors.full_messages_for(:last_name).first %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="col-6 form-group my-1">
+                    <%= f.label "名", style: "color: #4a463f;" %><br />
+                    <%= f.text_field :first_name, class: "form-control" %>
+                    <% if @user.errors.include?(:first_name) %>
+                      <div class="text-danger small mt-1 fw-bold">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <%= @user.errors.full_messages_for(:first_name).first %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="form-group my-1">
+                  <%= f.label "メールアドレス", style: "color: #4a463f;" %><br />
+                  <%= f.text_field :email, class: "form-control" %>
+                  <% if @user.errors.include?(:email) %>
+                    <div class="text-danger small mt-1 fw-bold">
+                      <i class="fa-solid fa-circle-exclamation"></i>
+                      <%= @user.errors.full_messages_for(:email).first %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="form-group my-1">
+                  <%= f.label "パスワード", style: "color: #4a463f;" %><br />
+                  <%= f.password_field :password, class: "form-control" %>
+                  <% if @user.errors.include?(:password) %>
+                    <div class="text-danger small mt-1 fw-bold">
+                      <i class="fa-solid fa-circle-exclamation"></i>
+                      <%= @user.errors.full_messages_for(:password).first %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="form-group my-1">
+                  <%= f.label "パスワード(確認用)", style: "color: #4a463f;" %><br />
+                  <%= f.password_field :password_confirmation, class: "form-control" %>
+                  <% if @user.errors.include?(:password_confirmation) %>
+                    <div class="text-danger small mt-1 fw-bold">
+                      <i class="fa-solid fa-circle-exclamation"></i>
+                      <%= @user.errors.full_messages_for(:password_confirmation).first %>
+                    </div>
+                  <% end %>
+                </div>
+                <% end %>
+              <div class="actions mt-3">
+                <%= f.submit "更新",  class: "w-100", style: "color: #4a463f;" %>
+              </div>
+            <% end %>
+
+            <div class="mt-4">
+              <p class="text-center"><%= link_to "マイページに戻る", mypage_path, class: 'btn btn-outline-dark btn-sm font-weight-bold' %></p>
+            </div>
 
         <% unless current_user.guest?%>
         <div class="d-flex flex-column justify-content-center align-items-center mt-3 mb-5">
