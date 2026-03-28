@@ -11,9 +11,11 @@
   
   <div class="d-flex align-items-center">
     <% if post.category.present? %>
+     <%= link_to posts_path(category_id: post.category.id), class: "text-decoration-none" do %>
       <div class="mr-2 bg-white p-1 small rounded border text-secondary">
         <%= post.category.name %>
       </div>
+     <% end %>
     <% end %>
     
     <% if post.group.present? %>
