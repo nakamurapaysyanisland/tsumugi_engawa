@@ -37,6 +37,8 @@
                         <% end %>
                       <% when 'group_approved' %>
                         「<%= notification.group.name %>」への参加が承認されました！
+                      <% when 'group_join' %>
+                          <%= notification.visitor.nickname %>さんから「<%= notification.group&.name %>」に参加申請が届きました！
                       <% end %>
                     <% end %>
                   </td>

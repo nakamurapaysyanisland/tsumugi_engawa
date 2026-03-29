@@ -4,7 +4,8 @@ class Public::GroupUsersController < ApplicationController
         @group = Group.find(params[:group_id])
         @group_user = current_user.group_users.find_or_initialize_by(group_id: @group.id)
         if @group_user.save
-        @group.create_notification_group_approval!(current_user, current_user.id)
+        @group.create_notification_group_approved!(current_user, current_user.id)
+        @group.create_notification_group_join!(current_user)
         end
 
         respond_to do |format|
@@ -34,7 +35,7 @@ class Public::GroupUsersController < ApplicationController
     @group = Group.find(params[:group_id])
     @group_user = GroupUser.find(params[:id])
     if @group_user.update(status: 1)
-        @group.create_notification_group_approval!(current_user, @group_user.user_id)
+        @group.create_notification_group_approved!(current_user, @group_user.user_id)
         redirect_to group_group_users_path(@group), notice: "グループへの参加を承認しました。"
     else
         redirect_to group_group_users_path(@group), notice: "グループへの承認に失敗しました。"
