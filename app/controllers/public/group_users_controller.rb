@@ -15,16 +15,17 @@ class Public::GroupUsersController < ApplicationController
     end
 
     def destroy
-        @group = Group.find(params[:group_id])
-        @group_user = GroupUser.find(params[:id])
-        @group_user =current_user.group_users.find(params[:id])
-        @group_user.destroy
+  @group_user = GroupUser.find(params[:id])
+  @group = @group_user.group 
+  
+  @group_user.destroy
 
-        respond_to do |format|
-            format.html { redirect_to post_path(@post)}
-            format.js
-        end
-    end
+  respond_to do |format|
+
+    format.html { redirect_to group_path(@group), notice: "参加を取り消しました。" }
+    format.js
+  end
+end
 
     def index
     @group = Group.find(params[:group_id])
