@@ -1,13 +1,13 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :membership]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
     @groups = Group.all.order(created_at: :desc).page(params[:page]).per(12)
   end
 
   def new
-    @group =Group.new
+    @group = Group.new
   end
 
   def create
@@ -42,6 +42,7 @@ class Public::GroupsController < ApplicationController
       render :edit
     end
   end
+
   def destroy
     @group = Group.find(params[:id])
     @group.destroy
@@ -50,6 +51,7 @@ class Public::GroupsController < ApplicationController
   
   
   private
+
   def group_params
     params.require(:group).permit(:name, :introduction, :group_image)
   end

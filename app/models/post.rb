@@ -18,39 +18,36 @@ class Post < ApplicationRecord
         Post.where("title LIKE ? OR body LIKE ?", "%#{content}%", "%#{content}%")
     end
 
-      def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
+    def favorited_by?(user)
+      favorites.exists?(user_id: user.id)
     end
 
-def create_notification_comment!(current_user, post_comment_id)
+    def create_notification_comment!(current_user, post_comment_id)
  
-  return if user_id == current_user.id
+      return if user_id == current_user.id
 
-  notification = current_user.active_notifications.new(
-    post_id: id,
-    comment_id: post_comment_id,
-    visited_id: user_id,
-    action: 'comment'
-  )
-  notification.save if notification.valid?
+      notification = current_user.active_notifications.new(
+        post_id: id,
+        comment_id: post_comment_id,
+        visited_id: user_id,
+        action: 'comment'
+      )
+        notification.save if notification.valid?
+    end
   
-end
+    def create_notification_like!(current_user)
+      return if user_id == current_user.id
+      temp = Notification.where(["visitor_id = ? AND visited_id = ? AND post_id = ? AND action = ? ", current_user.id, user_id, id, 'like'])
   
-  
+      if temp.blank?
+        notification = current_user.active_notifications.new(
+        post_id: id,
+        visited_id: user_id,
+        action: 'like'
+      )
 
-def create_notification_like!(current_user)
-  return if user_id == current_user.id
-  temp = Notification.where(["visitor_id = ? AND visited_id = ? AND post_id = ? AND action = ? ", current_user.id, user_id, id, 'like'])
-  
-  if temp.blank?
-    notification = current_user.active_notifications.new(
-      post_id: id,
-      visited_id: user_id,
-      action: 'like'
-    )
-
-      notification.save if notification.valid?
-   end
-end
+        notification.save if notification.valid?
+      end
+    end
   
 end

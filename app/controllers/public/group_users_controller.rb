@@ -26,9 +26,9 @@ class Public::GroupUsersController < ApplicationController
     end
 
     def index
-    @group = Group.find(params[:group_id])
-    @group_users = @group.group_users.pending.page(params[:page])
-   end
+        @group = Group.find(params[:group_id])
+        @group_users = @group.group_users.pending.page(params[:page])
+    end
 
    def update
         @group = Group.find(params[:group_id])

@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
- before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :guest_check, only: [:destroy, :withdraw]
   before_action :ensure_current_user, only: [:edit, :update, :destroy, :withdraw, :edit_upgrade, :upgrade]
 
@@ -17,9 +17,8 @@ class Public::UsersController < ApplicationController
     @user.assign_attributes(user_params)
     logger.debug @user.errors.full_messages unless @user.valid?
     if @user.update(user_params)
-       bypass_sign_in(@user) 
-      flash[:notice] = "ユーザー情報を更新しました。"
-    redirect_to mypage_path
+      bypass_sign_in(@user) 
+      redirect_to mypage_path, notice: "ユーザー情報を更新しました。"
     else
       render :edit
     end
@@ -35,17 +34,12 @@ class Public::UsersController < ApplicationController
       render :new
     end
   end
-  def unsubscrilbe
-  end
 
   def withdraw
     @user.update(status: :withdrawn)
     @user.posts.destroy_all
     sign_out @user
     redirect_to new_user_registration_path, notice: "退会処理が完了しました。またのご利用をお待ちしております。"
-  end
-
-  def index
   end
 
   def mypage
@@ -65,13 +59,8 @@ class Public::UsersController < ApplicationController
       render :new_guest
     end
   end
- 
-  def edit_upgrade
-  
-  end
 
   def upgrade
-    
     if @user.update(user_upgrade_params.merge(role: :member))
       redirect_to mypage_path, notice: "会員登録が完了しました。"
     else
@@ -83,6 +72,7 @@ class Public::UsersController < ApplicationController
     super
     resource.role = :member if action_name == 'create'
   end
+
   private
 
   def guest_check
@@ -90,6 +80,7 @@ class Public::UsersController < ApplicationController
       redirect_to mypage_path, alert: "ゲストユーザーはこの操作はできません。"
     end
   end
+  
   def ensure_current_user
     @user = User.find(params[:id])
     unless @user.id == current_user.id

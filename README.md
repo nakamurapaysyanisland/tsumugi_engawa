@@ -29,12 +29,13 @@
 後ほど作成予定です
 ​
 ## 開発環境
-- OS：Windows
+- OS：Mac
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Visual Studio Code（VSCode）
 ​
 ## 使用素材
-Adobe stock　ファイル番号:809068755
+Adobe stock　
+ファイル番号:809068755
 https://stock.adobe.com/jp/images/%E5%A4%8F%E3%83%BB%E6%9A%91%E4%B8%AD%E8%A6%8B%E8%88%9E%E3%81%84%E3%80%80%E5%92%8C%E6%9F%84%E3%80%80%E6%B0%B4%E8%89%B2%E3%83%BB%E9%9D%92%E3%83%BB%E9%87%91%E3%83%BB%E9%AB%98%E7%B4%9A%E6%84%9F%E3%83%BB%E9%9B%B2%E3%80%80%E5%92%8C%E7%B4%99%E3%80%80%E8%83%8C%E6%99%AF/809068755?prev_url=detail

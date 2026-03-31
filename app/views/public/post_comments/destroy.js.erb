@@ -1,5 +1,3 @@
-
-
 $('#comment_index_<%= @post.id %>').html("<%= j(render 'public/post_comments/index', post: @post) %>");
 $('#collapseComments<%= @post.id %> textarea').val("");
 

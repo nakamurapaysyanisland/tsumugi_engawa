@@ -8,7 +8,7 @@ skip_before_action :configure_authentication, only: [:search]
 		@method = params[:method]
 		
 		if @model == 'post'
-			@posts = Post.search_for(@content, @method).page(params[:page]).per(12)
+			@posts = Post.search_for(@content, @method).where(group_id: nil).page(params[:page]).per(12)
 		elsif @model == 'user'
 			@users = User.search_for(@content, @method).page(params[:page]).per(12)
 		elsif @model == 'tag'

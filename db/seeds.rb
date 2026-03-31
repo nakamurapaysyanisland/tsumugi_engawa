@@ -111,7 +111,8 @@ group_data = [
       group_id: group.id,
       user_id: User.pluck(:id).sample,
       title: "#{group.name}のトピック No.#{n+1}",
-      body: "これは「#{group.name}」のテスト投稿 No.#{n+1}です。"
+      body: "これは「#{group.name}」のテスト投稿 No.#{n+1}です。",
+      created_at: rand(1..100).days.ago
     )
   end
 end

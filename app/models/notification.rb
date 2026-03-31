@@ -9,6 +9,5 @@ class Notification < ApplicationRecord
   belongs_to :post, optional: true
   belongs_to :group, optional: true
 
-  
   belongs_to :comment, class_name: 'PostComment', foreign_key: 'comment_id', optional: true
 end

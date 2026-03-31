@@ -3,45 +3,40 @@
       <%= render 'admin/groups/sidebar', group: @group %>
 
       <div class="d-flex justify-content-center mt-4">
-          <%= link_to '一覧へ', admin_groups_path, class: "btn btn-outline-secondary btn-sm" %>
-        </div>
-    </div>
+        <%= link_to '一覧へ', admin_groups_path, class: "btn btn-outline-secondary btn-sm" %>
+      </div>
+  </div>
 
-<div class="col-md-8 col-lg-8">
-  <div class="px-4 pt-4 pb-4">
-    <div class="mt-2">
+  <div class="col-md-8 col-lg-8">
+    <div class="px-4 pt-4 pb-4">
+      <div class="mt-2">
+
         <% if @post.present? %>
-        <% @posts.each do |post| %> 
-          <div class="p-4 d-flex flex-column mb-4" style="background-color: #fcfaf2; border-radius: 15px; border: 1px solid #e0d9c1;">
-            
-            
+          <% @posts.each do |post| %> 
+            <div class="p-4 d-flex flex-column mb-4" style="background-color: #fcfaf2; border-radius: 15px; border: 1px solid #e0d9c1;">
               <%= render 'admin/posts/post_card', post: post %>
-              
-              <div class="ml-3 mt-2">
-                <button class="btn btn-link btn-sm text-secondary text-decoration-none p-0" type="button" data-toggle="collapse" data-target="#collapseComments<%= post.id %>">
-                  <i class="far fa-comment"></i> コメントを表示
-                </button>
-                <div class="collapse" id="collapseComments<%= post.id %>">
-    <div class="pt-3 border-top" style="border-color: #e0d9c1 !important;">
-      <div id="comment_index_<%= post.id %>" class="mb-2">
-        <%= render 'admin/post_comments/index', post: post %>
+                <div class="ml-3 mt-2">
+                  <button class="btn btn-link btn-sm text-secondary text-decoration-none p-0" type="button" data-toggle="collapse" data-target="#collapseComments<%= post.id %>">
+                    <i class="far fa-comment"></i> コメントを表示
+                  </button>
+                  <div class="collapse" id="collapseComments<%= post.id %>">
+                    <div class="pt-3 border-top" style="border-color: #e0d9c1 !important;">
+                      <div id="comment_index_<%= post.id %>" class="mb-2">
+                        <%= render 'admin/post_comments/index', post: post %>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="d-flex justify-content-center mt-5">
+              <%= paginate @posts %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="text-center py-5 border rounded shadow-sm" style="background-color: #fcfaf2;">
+            <h5 class="text-secondary">まだ投稿がありません</h5>
+          </div>
+        <% end %> 
       </div>
     </div>
   </div>
-</div>
-
-
-              </div>
-          </div>
-          <div class="d-flex justify-content-center mt-5">
-            <%= paginate @posts %>
-          </div>
-        <% end %><% else %>
-            <div class="text-center py-5 border rounded shadow-sm" style="background-color: #fcfaf2;">
-              <h5 class="text-secondary">まだ投稿がありません</h5>
-            </div>
-          <% end %> 
-    </div>
-  </div>
-</div>
 </div>

@@ -17,12 +17,12 @@ class User < ApplicationRecord
   validates :nickname, presence: true, uniqueness: true
 
   with_options unless: :guest_user? do
-  validates :last_name, presence: true
-  validates :first_name, presence: true
-  validates :email, presence: true
-  validates :password, presence: true, length: { minimum: 6 }, on: :create
-  validates :password_confirmation, presence: true, on: :create
-end
+    validates :last_name, presence: true
+    validates :first_name, presence: true
+    validates :email, presence: true
+    validates :password, presence: true, length: { minimum: 6 }, on: :create
+    validates :password_confirmation, presence: true, on: :create
+  end
 
   enum status: { active: 0, withdrawn: 1 }
   enum role: { guest: 0, member: 1, admin: 2 }
@@ -31,18 +31,16 @@ end
   before_save :destroy_posts_if_withdrawn, if: -> { status_changed? && withdrawn? } 
   before_save :check_role
   
-def get_profile_image(width, height)
+  def get_profile_image(width, height)
     unless profile_image.attached?
       return 'no_image.jpg'
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
-  
-end
+  end
 
   def password_required?
     return false if guest? 
     !persisted? || !password.nil? || !password_confirmation.nil?
-  
   end
 
   def email_required?
@@ -51,26 +49,27 @@ end
 
   
   def inactive_message
-  active? ? super : :withdrawn_account 
+    active? ? super : :withdrawn_account 
   end
 
   def guest_user?
     self.guest? 
   end
-private
-def set_default_status
-  self.role ||= :guest
-  self.status ||= :active
-end
 
-def destroy_posts_if_withdrawn
+  private
+  
+  def set_default_status
+    self.role ||= :guest
+    self.status ||= :active
+  end
+
+  def destroy_posts_if_withdrawn
     posts.destroy_all
   end
 
   def check_role
     if last_name.present? && first_name.present? && email.present?
       self.role = 'member' if self.role == 'guest'
- 
     end
   end
 

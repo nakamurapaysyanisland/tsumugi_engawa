@@ -1,19 +1,21 @@
 class Public::PostsController < ApplicationController
  skip_before_action :configure_authentication, only: [:index, :show]
  before_action :ensure_current_user, only: [:edit, :update, :destroy]
+
   def new
     @post = Post.new
   end
 
   def index
     if params[:category_id].present?
-    @category = Category.find(params[:category_id])
-    @posts = @category.posts.where(group_id: nil).page(params[:page]).per(10)
-  else
-    @posts = Post.where(group_id: nil).order(created_at: :desc).page(params[:page]).per(12)
-  end
+      @category = Category.find(params[:category_id])
+      @posts = @category.posts.where(group_id: nil).page(params[:page]).per(15)
+    else
+      @posts = Post.where(group_id: nil).order(created_at: :desc).page(params[:page]).per(12)
+    end
       @user = current_user
   end
+
  def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
@@ -64,7 +66,7 @@ class Public::PostsController < ApplicationController
 
   def ensure_current_user
     @post = Post.find(params[:id])
-     unless @post.user_id == current_user.id
+    unless @post.user_id == current_user.id
       redirect_to posts_path, alert: "他のユーザーの投稿は編集・削除は出来ません。"
     end
   end

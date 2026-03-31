@@ -1,42 +1,40 @@
  <div class="container py-5">
- <div class="row d-flex flex-column justify-content-center align-items-center">
+  <div class="row d-flex flex-column justify-content-center align-items-center">
     <div class="col-md-11 col-sm-12">
-    <h1 class="fw-bold mb-3 text-center">
-      ひと息ついて、介護の心を紡ぎ、繋げる場所
-    </h1>
-    <h3 class="mb-5 text-center">
+      <h1 class="fw-bold mb-3 text-center">
+        ひと息ついて、介護の心を紡ぎ、繋げる場所
+      </h1>
+      <h3 class="mb-5 text-center">
       「つむぎ緑側」へようこそ
-    </h3>
+      </h3>
 
-  
-  <div class="container py-5 my-5 text-center shadow">
-    <h2 class="fw-bold mb-4" style="color: #314a33; border-bottom: 2px solid #314a33; display: inline-block; padding-bottom: 10px;">
-      つむぎ緑側について
-    </h2>
-    <p class="" style="max-width: 800px; margin: 0 auto;">
-      つむぎ緑側は介護職の方や、自宅でご家族を介護する方など、介護に関わる方のコミュニティサイトです。</br>
-      介護の心を紡ぎ、繋げるサイトを目指しています。
-      介護者同士で意見交換や悩み共有ができるため、困ったことや分からないことがあった時はぜひつむぎ緑側をご利用ください。
-    </p>
-  </div>
+      <div class="container py-5 my-5 text-center shadow">
+        <h2 class="fw-bold mb-4" style="color: #314a33; border-bottom: 2px solid #314a33; display: inline-block; padding-bottom: 10px;">
+          つむぎ緑側について
+        </h2>
+        <p class="" style="max-width: 800px; margin: 0 auto;">
+          つむぎ緑側は介護職の方や、自宅でご家族を介護する方など、介護に関わる方のコミュニティサイトです。</br>
+          介護の心を紡ぎ、繋げるサイトを目指しています。
+          介護者同士で意見交換や悩み共有ができるため、困ったことや分からないことがあった時はぜひつむぎ緑側をご利用ください。
+        </p>
+      </div>
 
-
-  <div class="container py-5 mb-5">
-    <h3 class="fw-bold text-center mb-5 japanese-font" style="color: #4a463f;">
-      最近の和み（新着投稿）
-    </h3>
-    <div class="row justify-content-center">
-    <% @latest_posts.each do |post| %>
-     
-      <div class="col-md-4 col-sm-6 mb-4">
-        <div id="post_<%= post.id %>" class="card h-100 shadow-sm border-0 p-3" style="background-color: #fcfaf2;">
-          <%= render 'public/posts/post_card', post: post %>
+      <div class="container py-5 mb-5">
+        <h3 class="fw-bold text-center mb-5 japanese-font" style="color: #4a463f;">
+          最近の和み（新着投稿）
+        </h3>
+        <div class="row justify-content-center">
+          <% @posts.each do |post| %>
+            <div class="col-md-4 col-sm-6 mb-4">
+              <div id="post_<%= post.id %>" class="card h-100 shadow-sm border-0 p-3" style="background-color: #fcfaf2;">
+                <%= render 'public/posts/post_card', post: post %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
   </div>
-</div>
-</div>
 </div>
 
 
