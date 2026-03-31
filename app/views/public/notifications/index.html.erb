@@ -18,30 +18,29 @@
               <% @notifications.each do |notification| %>
                 <tr class="<%= 'text-muted' if notification.checked %>" style="<%= 'background-color: #fbfbf8;' if notification.checked %>">
                     <td>
-                <% 
-                      path = case notification.action
-                             when 'group_approved' then group_path(notification.group_id)
-                             when 'like', 'comment' then notification.post.present? ? post_path(notification.post_id) : "#"
-                             else "#"
-                             end 
-                    %>
-                    
-                    <%= link_to path, class: "text-decoration-none text-dark" do %>
                       <% case notification.action %>
                       <% when 'like' %>
-                        <strong><%= notification.visitor.nickname %></strong>さんがあなたの投稿にいいねしました。
-                      <% when 'comment' %>
-                        <strong><%= notification.visitor.nickname %></strong>さんがあなたの投稿にコメントしました。
-                        <% if notification.comment.present? %>
-                          <p class="small text-muted mb-0">「<%= truncate(notification.comment.content, length: 30) %>」</p>
+                        <%= link_to post_path(notification.post_id), class: "text-decoration-none" do %>
+                          <strong><%= notification.visitor.nickname %></strong>さんがあなたの投稿にいいねしました。
+                        <% end %>
+                        <% when 'comment' %>
+                        <%= link_to post_path(notification.post_id), class: "text-decoration-none" do %>
+                          <strong><%= notification.visitor.nickname %></strong>さんがあなたの投稿にコメントしました。
+                          <% if notification.comment.present? %>
+                            <p class="small text-muted mb-0">「<%= truncate(notification.comment.content, length: 30) %>」</p>
+                          <% end %>
                         <% end %>
                       <% when 'group_approved' %>
-                        「<%= notification.group.name %>」への参加が承認されました！
+                        <%= link_to group_path(notification.group_id), class: "text-decoration-none text-dark" do %>
+                          「<%= notification.group.name %>」への参加が承認されました！
+                        <% end %>
                       <% when 'group_join' %>
+                        <%= link_to group_group_users_path(notification.group_id), class: "tect-decoration-none" do %>
                           <%= notification.visitor.nickname %>さんから「<%= notification.group&.name %>」に参加申請が届きました！
+                        <% end %>
+                    
                       <% end %>
-                    <% end %>
-                  </td>
+                    </td>
                   <td class="small text-secondary">
                     <%= time_ago_in_words(notification.created_at) %>
                   </td>
