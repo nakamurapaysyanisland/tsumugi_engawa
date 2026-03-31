@@ -6,6 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first
 
+Admin.find_or_create_by!(email: "admin@example.com") do |a|
+  a.password = "password"
+  a.password_confirmation = "password"
+end
+
 dietary_care       = Category.find_or_create_by!(name: "食事・レシピ")
 consultation       = Category.find_or_create_by!(name: "相談")
 hygiene_and_safety = Category.find_or_create_by!(name: "衛生・安全管理")
@@ -26,11 +31,11 @@ nicknames = %w[さとちゃん すずっち たかさん たなやん いとく�
   user = User.find_or_create_by!(email: "test#{n}@example.com") do |u|
     u.last_name = last_names[n]
     u.first_name = first_names[n]
-    u.nickname = nickname[n]
+    u.nickname = nicknames[n]
     u.password = "password"
     u.password_confirmation = "passwprd"
 
-    image_number = (n % 10) + 1
+    image_number = (n % 5) + 1
     image_path = Rails.root.join("db/fixtures/sample-user#{image_number}.jpg")
     
     if File.exist?(image_path)
@@ -54,10 +59,10 @@ puts "全カテゴリーにテスト投稿を作成中"
 
 all_categories.each do |cat|
   20.times do |n|
-    post.create!(
+    Post.create!(
       category_id: cat.id,
       user_id: User.pluck(:id).sample,
-      title: "#{cat.name}のテスト投稿 No.#{n+1}"
+      title: "#{cat.name}のテスト投稿 No.#{n+1}",
       body: "#{cat.name}に関する本文のテストです。ページネーションの動作確認用データです。"
     )
   end
@@ -65,36 +70,53 @@ end
 
 puts "完了"
 
-pusts "9件のコミュニティと投稿を作成中"
+puts "コミュニティと投稿を作成中"
 
-community_data = [
-  { title: "夜勤・交代制の広場", introduction: "夜勤の過ごし方や、交代制勤務の悩み相談" },
-  { title: "食事・調理レクリエーション", introduction: "献立作成や、調理レクのアイデア共有" },
-  { title: "新人・実習生指導の部屋", introduction: "教育担当の悩みや、マニュアル作成のコツ" },
-  { title: "認知症ケアの知恵袋", introduction: "具体的な対応方法や、心のケアについて語り合う" },
-  { title: "福祉用具・ICT活用術", introduction: "最新の車椅子や、記録アプリの使い心地をシェア" },
-  { title: "自宅介護のサポーター", introduction: "在宅介護を支える家族やヘルパーの交流場所" },
-  { title: "資格試験・勉強部", introduction: "介護福祉士やケアマネ試験の合格を目指す仲間" },
-  { title: "メンタル・リフレッシュ", introduction: "仕事の疲れを癒やす方法や、趣味の話題で息抜き" },
-  { title: "キャリア・働き方相談室", introduction: "転職、昇進、副業など、将来のキャリアプラン" }
+group_data = [
+  { name: "夜勤・交代制の広場", introduction: "夜勤の過ごし方や、交代制勤務の悩み相談" },
+  { name: "食事・調理レクリエーション", introduction: "献立作成や、調理レクのアイデア共有" },
+  { name: "新人・実習生指導の部屋", introduction: "教育担当の悩みや、マニュアル作成のコツ" },
+  { name: "認知症ケアの知恵袋", introduction: "具体的な対応方法や、心のケアについて語り合う" },
+  { name: "福祉用具", introduction: "最新の車椅子や、記録アプリの使い心地をシェア" },
+  { name: "自宅介護のサポーター", introduction: "在宅介護を支える家族やヘルパーの交流場所" },
+  { name: "資格試験・勉強部", introduction: "介護福祉士やケアマネ試験の合格を目指す仲間" },
+  { name: "メンタル・リフレッシュ", introduction: "仕事の疲れを癒やす方法や、趣味の話題で息抜き" },
+  { name: "キャリア・働き方相談室", introduction: "転職、昇進、副業など、将来のキャリアプラン" },
+  { name: "記録アプリ活用術", introduction: "最新の記録ソフトやタブレット導入のコツ、使い心地をシェアしましょう。" }
 ]
 
-community_sata.each do |data|
-  community = Community.find_or_create_by!(title: data[:title]) do |c|
+25.times do |i|
+  data = group_data[i % 10]
+  rand_owner = User.all.sample
+
+  group_name = "#{data[:name]}(#{i + 1})"
+
+  group = Group.find_or_create_by!(name: group_name) do |c|
     c.introduction = data[:introduction]
+    c.owner_id = rand_owner.id
   end
+    image_number = (i % 5) + 1
+    image_path = Rails.root.join("db/fixtures/sample-group#{image_number}.jpg")
+    
+    if File.exist?(image_path)
+      group.group_image.attach(
+        io: File.open(image_path),
+        filename: "sample-group#{image_number}.jpg"
+      )
+    end
+  
 
   15.times do |n|
-    CommunityPost.create!(
-      community_id: community.id,
+    Post.create!(
+      group_id: group.id,
       user_id: User.pluck(:id).sample,
-      title: "#{community.title}のトピック No.#{n+1}"
-      body: "これは「#{community.title}」の15件中#{n+1}番目のテスト投稿です。"
+      title: "#{group.name}のトピック No.#{n+1}",
+      body: "これは「#{group.name}」のテスト投稿 No.#{n+1}です。"
     )
   end
 end
 
-puts "9件のコミュニティの作成完了"
+puts "コミュニティの作成完了"
 
 puts "コメントの作成中"
 
@@ -109,20 +131,31 @@ comment_samples = [
   "応援しています！"
 ]
 
-Post.all.each do |post|
-  rand(0..3).times do |n|
-    post.comments.create!(
-      user_id: User.pluck(:id).sample,
-      body: comment_samples.sample
+Group.all.each do |group|
+  User.all.sample(5).each do |user|
+    GroupUser.find_or_create_by!(
+      user_id: user.id,
+      group_id: group.id,
+      status: :accepted
+    )
+  end
+
+  accepted_user_ids = group.group_users.accepted.pluck(:user_id)
+
+  3.times do |n|
+    group.posts.create!(
+      title: "#{group.name}のメンバー投稿 No.#{n+1}",
+      body: "コミュニティの参加者のみのテスト投稿です。",
+      user_id: accepted_user_ids.sample,
     )
   end
 end
 
-CommunityPost.all.each do |c_post|
+Post.all.each do |post|
   rand(0..3).times do |n|
-    c_post.community_post_comments.create!(
+   post.post_comments.create!(
       user_id: User.pluck(:id).sample,
-      body: comment_samples.sample
+      content: comment_samples.sample
     )
   end
 end
