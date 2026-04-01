@@ -1,10 +1,10 @@
 <div class="container my-5">
-  <div class="row"> <div class="col-md-4">
-      <%= render 'admin/groups/sidebar', group: @group %>
-
-      <div class="d-flex justify-content-center mt-4">
+  <div class="row"> 
+    <div class="col-md-4">  
+      <div class="d-flex justify-content-left my-3">
         <%= link_to '一覧へ', admin_groups_path, class: "btn btn-outline-secondary btn-sm" %>
       </div>
+      <%= render 'admin/groups/sidebar', group: @group %>
   </div>
 
   <div class="col-md-8 col-lg-8">

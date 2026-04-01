@@ -14,7 +14,7 @@
     </div>
 
         <div>
-          <%= link_to 'グループ削除', admin_group_path(group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "dropdown-item small text-danger" %>   
+          <%= link_to 'グループ削除', admin_group_path(group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline-danger text-danger" %>   
         </div>
       
       <div class="mt-4 border-top" style="background-color: #fcfaf2;">
@@ -23,9 +23,9 @@
       参加メンバー (<%= group.group_users.count %>人)
     </h5>
     
-    <div class="member-list">
+    <div class="member-list row">
       <% group.users.each do |user| %>
-        <div class="d-flex align-items-center mb-3">
+        <div class="d-flex align-items-center mb-3 col-md-6">
           <%= link_to admin_user_path(user), class: "text-decoration-none d-flex align-items-center" do %>
             <%= image_tag user.get_profile_image(35,35), size: "35x35", class: "rounded-circle border mr-2" %>
             <span class="small fw-bold text-dark">
