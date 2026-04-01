@@ -28,9 +28,9 @@
                                     <td width="15%" class="text-center align-middle"><%= user.email %></td>
                                     <td width="10%" class="text-center align-middle"><%= t(user.role, scope: 'enums.user.role') %></td>
                                     <td width="10%" class="text-center align-middle"><%= t(user.status, scope: 'enums.user.status') %></td>
-                                    <td width="15%" class="text-center align-middle"><%= user.created_at.strftime('%Y/%m/%d') %></td>
-                                    <td width="5%">
-                                        <%= link_to '詳細', admin_user_path(user), class: "text-success" %>
+                                    <td width="10%" class="text-center align-middle"><%= user.created_at.strftime('%Y/%m/%d') %></td>
+                                    <td width="10%">
+                                        <%= link_to '詳細', admin_user_path(user), class: "btn btn-sm btn-outline-success text-success" %>
                                     </td>
                                 </tr>
                             <% end %>
