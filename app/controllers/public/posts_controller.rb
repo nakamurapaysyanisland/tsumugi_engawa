@@ -59,7 +59,7 @@ class Public::PostsController < ApplicationController
     @post.destroy
     
     respond_to do |format|
-    format.html { redirect_to posts_path, notice: '投稿を削除しました' }
+    format.html { redirect_to mypage_path, notice: '投稿を削除しました' }
     format.js   
   end
   end

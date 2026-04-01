@@ -44,7 +44,9 @@
               <%= f.submit "更新", class: "w-100" %>
             </div>
           
-          <% end %>
+        <% end %>
+          <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-outline-danger text-danger w-25" %>
+         
         </div>
       </div>
     </div>
