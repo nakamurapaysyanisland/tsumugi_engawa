@@ -44,14 +44,24 @@
     <% end %>
   </div>
 </div>
-
-<%= link_to post_path(post), class: "text-decoration-none text-dark mb-2" do %>
-  <div class="h5 fw-bold mb-2" style="color: #4a463f;">
-    「<%= post.title %>」
-  </div>
-  <div class="small">
-    <%= truncate(post.body, length: 100) %>
-  </div>
+<% if user_signed_in? %>
+  <%= link_to post_path(post), class: "text-decoration-none mb-2" do %>
+    <div class="h5 fw-bold mb-2" style="color: #4a463f;">
+      「<%= post.title %>」
+    </div>
+    <div class="small">
+      <%= truncate(post.body, length: 100) %>
+    </div>
+  <% end %>
+  <% else %>
+  <%= link_to new_user_session_path, data: { confirm: "詳細を閲覧するにはログインが必要です。"}, class: "text-decoration-none mb-2" do %> 
+    <div class="h5 fw-bold mb-2" style="color: #4a463f;">
+      「<%= post.title %>」
+    </div>
+    <div class="small">
+      <%= truncate(post.body, length: 100) %>
+    </div>
+  <% end %>
 <% end %>
 
 <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3 small text-secondary">
