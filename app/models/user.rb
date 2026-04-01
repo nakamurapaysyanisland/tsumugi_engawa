@@ -33,7 +33,7 @@ class User < ApplicationRecord
   
   def get_profile_image(width, height)
     unless profile_image.attached?
-      return 'no_image.jpg'
+      ActionController::Base.helpers.asset_path('no_image.jpg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
