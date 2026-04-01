@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_03_22_035056) do
+ActiveRecord::Schema.define(version: 2026_04_01_055514) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 2026_03_22_035056) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "post_id"
+    t.bigint "user_id"
+    t.bigint "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -77,26 +77,17 @@ ActiveRecord::Schema.define(version: 2026_03_22_035056) do
   create_table "groups", force: :cascade do |t|
     t.string "name", null: false
     t.text "introduction", null: false
-    t.integer "owner_id", null: false
+    t.bigint "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "memberships", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "group_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_memberships_on_group_id"
-    t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "visitor_id", null: false
-    t.integer "visited_id", null: false
-    t.integer "post_id"
-    t.integer "comment_id"
-    t.integer "group_id"
+    t.bigint "visitor_id", null: false
+    t.bigint "visited_id", null: false
+    t.bigint "post_id"
+    t.bigint "comment_id"
+    t.bigint "group_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -107,8 +98,8 @@ ActiveRecord::Schema.define(version: 2026_03_22_035056) do
 
   create_table "post_comments", force: :cascade do |t|
     t.text "content"
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -117,7 +108,7 @@ ActiveRecord::Schema.define(version: 2026_03_22_035056) do
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.string "body", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.integer "category_id"
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
@@ -150,8 +141,6 @@ ActiveRecord::Schema.define(version: 2026_03_22_035056) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
-  add_foreign_key "memberships", "groups"
-  add_foreign_key "memberships", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "groups"
   add_foreign_key "posts", "users"

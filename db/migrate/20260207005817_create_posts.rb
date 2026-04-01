@@ -3,8 +3,8 @@ class CreatePosts < ActiveRecord::Migration[6.1]
     create_table :posts do |t|
 	  t.string :title
 	  t.string :body
-	  t.integer :user_id
-	  t.integer :category_id
+	  t.bigint :user_id
+	  t.bigint :category_id
 	  t.datetime :deleted_at
 	  t.timestamps
 	end
