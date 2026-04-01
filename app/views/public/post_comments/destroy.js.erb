@@ -1,4 +1,5 @@
-$('#comment_index_<%= @post.id %>').html("<%= j(render 'public/post_comments/index', post: @post) %>");
-$('#collapseComments<%= @post.id %> textarea').val("");
+$('#comment_<%= @post_comment.id %>').fadeOut(300, function(){
+  $(this).remove();
+});
 
-
+$('#comment_count_<%= @post.id %>').html("<%= @post.post_comments.count %>");
