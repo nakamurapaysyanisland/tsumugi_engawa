@@ -1,2 +1,1 @@
-
-document.querySelector('#favorite_buttons_<%= @post.id %>').innerHTML = "<%= j(render 'public/favorites/favorite', post: @post) %>";
+$('#favorite_buttons_<%= @post.id %>').html("<%= j(render 'public/favorites/favorite', post: @post) %>");
