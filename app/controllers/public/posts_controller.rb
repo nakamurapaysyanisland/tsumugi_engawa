@@ -9,9 +9,15 @@ class Public::PostsController < ApplicationController
   def index
     if params[:category_id].present?
       @category = Category.find(params[:category_id])
-      @posts = @category.posts.where(group_id: nil).page(params[:page]).per(15)
+      @posts = @category.posts
+                        .where(group_id: nil)
+                        .includes(user: { profile_image_attachment: :blob })               
+                        .page(params[:page]).per(15)
     else
-      @posts = Post.where(group_id: nil).order(created_at: :desc).page(params[:page]).per(12)
+      @posts = Post.where(group_id: nil)
+                   .includes(user: { profile_image_attachment: :blob })
+                   .order(created_at: :desc)
+                   .page(params[:page]).per(12)
     end
       @user = current_user
   end
