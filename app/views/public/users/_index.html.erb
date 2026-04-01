@@ -6,15 +6,16 @@
                         <p class="h6 mt-3">該当するユーザーはいませんでした。</p>
                     <% else %>
                         <% users.each do |user| %>
-                        <div class="col-md-4">
+                        <div class="col-md-3 my-2">
                             <div class="rounded border h-100 d-flex flex-column" style="background-color: #fcfaf2;">
-                                <div class="d-flex align-items-center justify-content-between px-5 py-3">
-                                    <div>
-                                        <%= image_tag user.get_profile_image(60,60), size: "60x60", class: "rounded-circle border" %>
-                                        <%= link_to user.nickname, user_path(user), class: "font-weight-bold text-decoration-none text-dark ml-2" %>
+                                <div class="d-flex align-items-center justify-content-center py-3 px-4">
+                                    
+                                    <%= image_tag user.get_profile_image(60,60), size: "60x60", class: "rounded-circle border" %>
+                                    <div class="d-flex flex-column ml-3"> 
+                                    <%= link_to user.nickname, user_path(user), class: "font-weight-bold text-decoration-none text-dark ml-2" %>
+                                    <span class="small text-secondary">投稿件数：<%= user.posts.count %>件</span>
                                     </div>
-                                <div>
-                                <span class="small text-secondary">投稿件数：<%= user.posts.count %>件</span>
+                                </div>
                             </div>
                         </div>
                         <% end %>

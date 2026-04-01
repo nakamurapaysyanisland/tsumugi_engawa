@@ -30,8 +30,8 @@
               </div>
             </div>
           </div>
-          <%= link_to 'ユーザー一覧に戻る', admin_dashboards_path %> |
-          <%= link_to '退会', withdraw_admin_user_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" }, class: "text-danger" %>
+          <%= link_to 'ユーザー一覧に戻る', admin_dashboards_path, class: "btn btn-sm btn-outline-dark" %> |
+          <%= link_to '退会', withdraw_admin_user_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" }, class: "btn btn-sm btn-outline-danger text-danger" %>
       </div>
     </div>
   </div>

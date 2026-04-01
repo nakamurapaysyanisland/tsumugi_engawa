@@ -30,7 +30,7 @@
                             <p class="small text-muted mb-0">「<%= truncate(notification.comment.content, length: 30) %>」</p>
                           <% end %>
                         <% end %>
-                      <% when 'group_approved' %>
+                      <% when 'group_accepted' %>
                         <%= link_to group_path(notification.group_id), class: "text-decoration-none text-dark" do %>
                           「<%= notification.group.name %>」への参加が承認されました！
                         <% end %>
