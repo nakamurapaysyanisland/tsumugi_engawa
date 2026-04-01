@@ -6,6 +6,7 @@
 
 
 <%= form_with model: @user, url: user_registration_path, class: "w-100" do |f| %>
+  <%= f.hidden_field :registering_as_member, value: true %>
   <div class="d-flex flex-column mt-3">
    <div class="d-flex flex-row">
     <div class="field my-1">
@@ -90,7 +91,7 @@
     <%= f.label :ニックネーム, style: "color: #4a463f;" %><br />
     <%= f.text_field :nickname, placeholder: "たろう", class: "form-control" %>
   </div>
-  <%= f.submit "ゲスト登録", class: "w-100 mt-3", style: "color: #4a463f;" %>
+  <%= f.submit "ゲスト登録", class: "w-100 my-3", style: "color: #4a463f;" %>
 <% end %>
 </div>
 </div>

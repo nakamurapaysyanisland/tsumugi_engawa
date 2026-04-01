@@ -13,15 +13,24 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
+  attr_accessor :registering_as_member
 
   validates :nickname, presence: true, uniqueness: true
-
-  with_options unless: :guest_user? do
+ 
+  with_options if: :registering_as_member do
     validates :last_name, presence: true
     validates :first_name, presence: true
     validates :email, presence: true
     validates :password, presence: true, length: { minimum: 6 }, on: :create
     validates :password_confirmation, presence: true, on: :create
+  end
+
+  def password_required?
+    registering_as_member || (super && !guest?)
+  end
+
+  def email_required?
+    registering_as_member || !guest?
   end
 
   enum status: { active: 0, withdrawn: 1 }
@@ -37,16 +46,6 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-
-  def password_required?
-    return false if guest? 
-    !persisted? || !password.nil? || !password_confirmation.nil?
-  end
-
-  def email_required?
-    !guest?
-  end
-
   
   def inactive_message
     active? ? super : :withdrawn_account 
@@ -75,6 +74,15 @@ class User < ApplicationRecord
 
   def self.search_for(content, method)
       User.where('nickname LIKE ?', '%'+content+'%')
+  end
+
+  def finalize_role
+    if registering_as_member || (last_name.present? && first_name.present?)
+      self.role = :member
+    else
+      self.role ||= :guest
+    end
+    self.status ||= :active
   end
 end
 
