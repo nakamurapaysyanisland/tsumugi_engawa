@@ -1,7 +1,10 @@
 <div class="container my-5">
   <div class="row"> 
     <div class="col-md-4">
-      <%= render 'public/groups/sidebar', group: @group %>
+        <div class="d-flex justify-content-left my-3">
+          <%= link_to "グループ一覧に戻る", groups_path(@group), class: 'btn btn-outline-dark font-weight-bold' %></p>
+        </div>
+        <%= render 'public/groups/sidebar', group: @group %>
     </div>
 
     <div class="col-md-8 col-lg-8">
