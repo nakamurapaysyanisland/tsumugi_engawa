@@ -27,7 +27,10 @@ class Public::GroupUsersController < ApplicationController
 
     def index
         @group = Group.find(params[:group_id])
-        @group_users = @group.group_users.pending.page(params[:page])
+        @group_users = @group.group_users
+                        .includes(user: {profile_image_attachment: :blob })
+                        .pending
+                        .page(params[:page])
     end
 
    def update

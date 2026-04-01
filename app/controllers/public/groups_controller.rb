@@ -3,7 +3,9 @@ class Public::GroupsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @groups = Group.all.order(created_at: :desc).page(params[:page]).per(12)
+    @groups = Group.all.includes(group_image_attachment: :blob)
+                       .order(created_at: :desc)
+                       .page(params[:page]).per(12)
   end
 
   def new
@@ -26,7 +28,9 @@ class Public::GroupsController < ApplicationController
       redirect_to groups_path, alert: "グループが見つかりませんでした。"
     end
     @post = Post.new
-    @posts = @group.posts.order(created_at: :desc).page(params[:page]).per(10)
+    @posts = @group.posts.includes(user: { profile_image_attachment: :blob })
+                         .order(created_at: :desc)
+                         .page(params[:page]).per(10)
     @post_comment = PostComment.new
   end
 
