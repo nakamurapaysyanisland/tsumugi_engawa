@@ -1,3 +1,6 @@
+<div class="mt-4">
+  <p class="text-center"><%= link_to "グループ一覧に戻る", groups_path(@group), class: 'btn btn-outline-dark font-weight-bold' %></p>
+</div>
 <div class="card shadow-sm border-0 mb-4" style="background-color: #fcfaf2;">
   <div class="card-body text-center p-4">
     <div class="mb-3">
@@ -57,9 +60,9 @@
   <h6 class="fw-bold text-center mb-3" style="color: #4a463f;">参加メンバー (<%= group.group_users.count %>人)</h6>
     
     
-    <div class="member-list">
+    <div class="member-list row">
       <% group.users.each do |user| %>
-        <div class="d-flex align-items-center mb-3">
+        <div class="d-flex align-items-center mb-3 col-md-6">
           <%= link_to admin_user_path(user), class: "text-decoration-none d-flex align-items-center" do %>
             <%= image_tag user.get_profile_image(35,35), size: "35x35", class: "rounded-circle border mr-2" %>
             <span class="small font-weight-bold text-dark">
@@ -75,6 +78,4 @@
     </div>
   </div>
 </div>
-  <div class="mt-4">
-      <p class="text-center"><%= link_to "グループ一覧に戻る", groups_path(@group), class: 'btn btn-outline-dark font-weight-bold' %></p>
-  </div>
+  
