@@ -15,7 +15,9 @@
                     <div class="container">
                         <a class="navbar-brand p-3">つむぎ縁側-管理者</a>
                     <div>
-                    <ul class="navbar-nav ml-auto">
+                    
+                    <ul class="navbar-nav ml-auto"> 
+                      <% if admin_signed_in? %>
                         <li class="nav-item">
                             <%= link_to admin_dashboards_path, class: "mr-4" do %>
                                 ダッシュボード(ユーザー一覧)
@@ -28,7 +30,7 @@
                         </li>
                         <li class="nav-item">
                             <%= link_to admin_groups_path, class: "mr-4" do %>
-                                グループ一覧
+                                コミュニティ一覧
                             <% end %>
                         </li>
                         <li class="nav-item">
@@ -36,7 +38,10 @@
                                 ログアウト(管理者)
                             <% end %>
                         </li>
+                        <% else %>
+                      <% end %>
                     </ul>
+                    
                 </nav>
             </header>
 
