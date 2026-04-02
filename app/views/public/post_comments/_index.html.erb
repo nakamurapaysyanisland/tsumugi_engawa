@@ -1,6 +1,6 @@
 <% post.post_comments.order(created_at: :desc).each do |post_comment| %>
 
-  <div class="border-bottom py-3" style="color: #4a463f;">
+  <div id="comment_<%= post_comment.id %>" class="border-bottom py-3" style="color: #4a463f;">
     
     <div class="d-flex align-items-center justify-content-between mb-2">
       <div class="d-flex align-items-center">   
@@ -18,8 +18,8 @@
         <button class="btn btn-sm text-secondary p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="box-shadow: none;">
           <i class="fas fa-ellipsis-h"></i>
         </button>
-        <div class="dropdown-menu dropdown-menu-right shadow-sm" aria-labelledby="dropdownMenuButton">
-          <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item small text-danger" %>
+        <div class="dropdown-menu dropdown-menu-right shadow-sm" aria-labelledby="dropdownMenuButton" style="min-width: 80px;">
+          <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, remote: true, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item small text-danger" %>
         </div>
         </div>
       <% end %>

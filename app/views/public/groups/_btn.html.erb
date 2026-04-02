@@ -3,7 +3,7 @@
     <% if group.owner_id == current_user.id %>
       <span>あなたは管理者です</span>
       <% elsif group_user&.accepted? %>
-        <%= link_to 'グループ退出', group_group_user_path(group, group_user), method: :delete, remote: true, class: "btn btn-sm btn-outline-secondary", style: "background-color: #f2dede;", data: {confirm: "本当にグループを退出しますか？"} %>
+        <%= link_to 'コミュニティ退出', group_group_user_path(group, group_user), method: :delete, remote: true, class: "btn btn-sm btn-outline-secondary", style: "background-color: #f2dede;", data: {confirm: "本当にグループを退出しますか？"} %>
       <% elsif group_user&.pending? %>
         <%= link_to '申請取消', group_group_user_path(group, group_user), method: :delete, remote: true, class: "btn btn-sm btn-outline-secondary", style: "background-color: #e0e0e0;" %>
       <% else %>

@@ -9,7 +9,7 @@
   </div>
 
   <%= form_with model: [post, post_comment], local: false, class: "d-flex align-items-center flex-grow-1" do |f| %>
-    <%= f.text_area :content, rows: 1, placeholder: "コメントを入力...", class: "form-control mr-2" %>
+    <%= f.text_area :content, rows: 1, placeholder: "コメントを入力...", class: "comment-textarea form-control mr-2" %>
     <%= f.submit "投稿" %>
   <% end %>
 </div>
