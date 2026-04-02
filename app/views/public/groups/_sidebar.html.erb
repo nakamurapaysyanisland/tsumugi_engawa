@@ -38,11 +38,23 @@
       <div class="form-group mb-2">
         <%= f.label :title, "タイトル", class: "x-small fw-bold text-secondary" %>
         <%= f.text_field :title, class: "form-control form-control-sm" %>
+        <% if @post.errors.include?(:title) %>
+          <div class="text-danger small mt-1 fw-bold">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <%= @post.errors.full_messages_for(:title).first %>
+          </div>
+        <% end %>      
       </div>
 
       <div class="form-group mb-3">
         <%= f.label :body, "本文", class: "x-small fw-bold text-secondary" %>
         <%= f.text_area :body, class: "form-control form-control-sm", rows: 3 %>
+        <% if @post.errors.include?(:body) %> 
+            <div class="text-danger small mt-1 fw-bold">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <%= @post.errors.full_messages_for(:body).first %>
+          </div>
+        <% end %>
       </div>
 
       <div class="text-center">
