@@ -39,7 +39,16 @@ class Public::PostsController < ApplicationController
       redirect_to post_path(@post), notice: "投稿に成功しました。"
       end
     else
-      render :new
+      if @post.group_id.present?
+        @group = Group.find(@post.group_id) 
+        @posts = @group.posts.includes(user: { profile_image_attachment: :blob })
+                           .order(created_at: :desc)
+                           .page(params[:page]).per(10)
+        @post_comment = PostComment.new
+        render "public/groups/show"
+      else
+        render :new
+      end
     end
   end
 
