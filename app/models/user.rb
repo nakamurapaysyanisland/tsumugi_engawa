@@ -55,6 +55,10 @@ class User < ApplicationRecord
     self.guest? 
   end
 
+  def active_for_authentication?
+    super && (new_record? || !withdrawn?)
+  end
+
   private
   
   def set_default_status
@@ -66,6 +70,7 @@ class User < ApplicationRecord
     posts.destroy_all
   end
 
+  
   def check_role
     if last_name.present? && first_name.present? && email.present?
       self.role = 'member' if self.role == 'guest'

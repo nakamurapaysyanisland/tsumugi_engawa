@@ -92,7 +92,11 @@ ja:
     failure:
       not_found_in_database: "メールアドレスまたはパスワードが違います。"
       invalid: "メールアドレスまたはパスワードが違います。"
-
+    failure:
+      user:
+        withdrawn_account: "このアカウントは退会済みです。新規登録をお願いします。"
+        unauthenticated: "ログインが必要です。"
+      
   datetime:
     distance_in_words:
       half_a_minute: 半分
@@ -126,3 +130,5 @@ ja:
       over_x_years:
         one: 1年以上前
         other: "%{count}年以上前"
+
+  
