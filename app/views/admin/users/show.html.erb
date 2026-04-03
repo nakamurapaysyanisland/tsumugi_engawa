@@ -44,7 +44,7 @@
 
   <div class="row mt-2">
     <% @posts.each do |post| %>
-      <div class="col-md-4 mb-2">
+      <div id="post_<%= post.id %>" class="col-md-4 mb-2">
         <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
           <%= render 'admin/posts/post_card', post: post %>
         </div>

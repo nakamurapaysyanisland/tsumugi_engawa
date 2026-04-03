@@ -1,0 +1,12 @@
+var currentPath = window.location.pathname;
+
+if (currentPath.match(/\/admin\/posts\/\d+$/)) {
+  
+  window.location.href = "<%= admin_user_path(@post.user) %>";
+
+} else {
+
+  $('#post_<%= @post.id %>').fadeOut(400, function(){
+    $(this).remove();
+  });
+}

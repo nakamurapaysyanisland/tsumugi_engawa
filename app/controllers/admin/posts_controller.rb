@@ -7,10 +7,16 @@ class Admin::PostsController < Admin::BaseController
   end
   end
   def destroy
-    
-    @post = Post.find_by(id: params[:id])
-    nickname = @post.user.nickname
+   @post = Post.find_by(id: params[:id])
+  
+  if @post
+    @nickname = @post.user&.nickname || "ユーザー"
     @post.destroy
-    redirect_to admin_post_comments_path(@post), method: :destroy, notice: "#{nickname}さんのコメントを削除しました。"
   end
+
+  respond_to do |format|
+    format.html { redirect_to admin_user_path, notice: "#{@nickname}さんの投稿を削除しました。" }
+    format.js
+  end
+end
 end

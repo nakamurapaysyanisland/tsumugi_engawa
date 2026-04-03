@@ -6,7 +6,7 @@ class Admin::GroupsController < Admin::BaseController
 
   def show
     @group = Group.find(params[:id])
-    @posts = @group.posts.page(params[:page]).per(10)
+    @posts = @group.posts.page(params[:page]).per(5)
   end
 
   def destroy

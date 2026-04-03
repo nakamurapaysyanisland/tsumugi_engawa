@@ -5,14 +5,20 @@ class Admin::PostCommentsController < Admin::BaseController
   end
 
   def destroy
-    @post_comment = PostComment.find_by(id: params[:id])
-    
-    if @post_comment
-      nickname = @post_comment.user.nickname
-      @post_comment.destroy
-      redirect_to admin_post_comments_path, notice: "#{nickname}さんのコメントを削除しました。"
-    else
-      redirect_to admin_post_comments_path, alert: "そのコメントは既に削除されています。"
-    end
+  @post_comment = PostComment.find_by(id: params[:id])
+  @post = @post_comment.post 
+
+  if @post_comment.blank?
+    return render js: "alert('そのコメントは既に削除されています');"
   end
+  
+  if @post_comment
+    @post_comment.destroy
+  end
+
+  respond_to do |format|
+    format.html { redirect_to admin_post_path(@post), notice: "削除しました" }
+    format.js
+  end
+end
 end
