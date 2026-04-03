@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_04_01_055514) do
+ActiveRecord::Schema.define(version: 2026_04_03_042703) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 2026_04_01_055514) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "post_id"
+    t.integer "user_id"
+    t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -83,11 +83,11 @@ ActiveRecord::Schema.define(version: 2026_04_01_055514) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.bigint "visitor_id", null: false
-    t.bigint "visited_id", null: false
-    t.bigint "post_id"
-    t.bigint "comment_id"
-    t.bigint "group_id"
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.integer "group_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(version: 2026_04_01_055514) do
 
   create_table "post_comments", force: :cascade do |t|
     t.text "content"
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -139,8 +139,17 @@ ActiveRecord::Schema.define(version: 2026_04_01_055514) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "posts"
+  add_foreign_key "favorites", "users"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
+  add_foreign_key "notifications", "groups"
+  add_foreign_key "notifications", "post_comments", column: "comment_id"
+  add_foreign_key "notifications", "posts"
+  add_foreign_key "notifications", "users", column: "visited_id"
+  add_foreign_key "notifications", "users", column: "visitor_id"
+  add_foreign_key "post_comments", "posts"
+  add_foreign_key "post_comments", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "groups"
   add_foreign_key "posts", "users"
