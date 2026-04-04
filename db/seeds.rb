@@ -1,5 +1,4 @@
 
-ActiveRecord::Base.connection.execute("PRAGMA busy_timeout = 5000")
 
 
 Admin.find_or_create_by!(email: "admin@example.com") do |a|
@@ -92,7 +91,6 @@ puts "コミュニティを作成中"
       created_at: rand(1..30).days.ago
     )
   end
-  sleep 0.1
 end
 
 puts "コメントを作成中"
