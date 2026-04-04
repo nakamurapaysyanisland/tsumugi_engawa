@@ -30,7 +30,7 @@ class Public::GroupsController < ApplicationController
     @post = Post.new
     @posts = @group.posts.includes(user: { profile_image_attachment: :blob })
                          .order(created_at: :desc)
-                         .page(params[:page]).per(10)
+                         .page(params[:page]).per(5)
     @post_comment = PostComment.new
   end
 

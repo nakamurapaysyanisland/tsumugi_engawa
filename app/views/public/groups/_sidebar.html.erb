@@ -72,7 +72,7 @@
     <div class="member-list row">
       <% group.users.each do |user| %>
         <div class="d-flex align-items-center mb-3 col-md-6">
-          <%= link_to admin_user_path(user), class: "text-decoration-none d-flex align-items-center" do %>
+          <%= link_to user_path(user), class: "text-decoration-none d-flex align-items-center" do %>
             <%= image_tag user.get_profile_image(35,35), size: "35x35", class: "rounded-circle border mr-2" %>
             <span class="small font-weight-bold text-dark">
               <%= user.nickname %>

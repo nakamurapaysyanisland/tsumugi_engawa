@@ -55,33 +55,27 @@ categories.values.each do |cat|
   Post.insert_all(posts_data)
 end
 
-group_data = [
+group_templates = [
   { name: "夜勤・交代制の広場", introduction: "夜勤の過ごし方や、交代制勤務の悩み相談" },
   { name: "食事・調理レクリエーション", introduction: "献立作成や、調理レクのアイデア共有" },
   { name: "新人・実習生指導の部屋", introduction: "教育担当の悩みや、マニュアル作成のコツ" },
   { name: "認知症ケアの知恵袋", introduction: "具体的な対応方法や、心のケアについて語り合う" },
   { name: "福祉用具", introduction: "最新の車椅子や、記録アプリの使い心地をシェア" },
-  { name: "自宅介護のサポーター", introduction: "在宅介護を支える家族やヘルパーの交流場所" },
-  { name: "資格試験・勉強部", introduction: "介護福祉士やケアマネ試験の合格を目指す仲間" },
-  { name: "メンタル・リフレッシュ", introduction: "仕事の疲れを癒やす方法や、趣味の話題で息抜き" },
-  { name: "キャリア・働き方相談室", introduction: "転職、昇進、副業など、将来のキャリアプラン" },
-  { name: "記録アプリ活用術", introduction: "記録ソフトの使い心地をシェアしましょう。" },
-  { name: "看取りと心のグリーフケア", introduction: "最期に寄り添う日々の想いや、心の整え方を分かち合う" },
-  { name: "行事・レクの工作スタジオ", introduction: "季節の飾り付けや手作りプレゼントのアイデア帖" },
-  { name: "多職種連携の架け橋", introduction: "看護師、リハ職、ケアマネ…他職種とのスムーズな連携のコツ" }
 ]
 
 puts "コミュニティを作成中"
-group_data.each_with_index do |data, i|
-  group = Group.find_or_create_by!(name: data[:name]) do |c|
-    c.introduction = data[:introduction]
+21.times do |i|
+  template = group_templates[i % group_templates. length]
+  group_name = "#{template[:name]} No.#{i + 1}"
+
+  group = Group.find_or_create_by!(name: group_name) do |c|
+    c.introduction = template[:introduction]
     c.owner_id = user_ids.sample
   end
-
+  image_num = (i % 5) + 1
   image_path = Rails.root.join("db/fixtures/sample-group#{(i % 5) + 1}.jpg")
   if File.exist?(image_path) && !group.group_image.attached?
     group.group_image.attach(io: File.open(image_path), filename: "group.jpg")
-    sleep(0.1) 
   end
 
   members = user_ids.sample(5)
@@ -90,7 +84,7 @@ group_data.each_with_index do |data, i|
   end
   GroupUser.insert_all(gu_data) if gu_data.any?
 
-  3.times do |n|
+  6.times do |n|
     group.posts.create!(
       user_id: members.sample,
       title: "#{group.name}のトピック No.#{n+1}",
@@ -98,6 +92,7 @@ group_data.each_with_index do |data, i|
       created_at: rand(1..30).days.ago
     )
   end
+  sleep 0.1
 end
 
 puts "コメントを作成中"
