@@ -12,14 +12,26 @@
         <h2 class="fw-bold mb-4" style="color: #314a33; border-bottom: 2px solid #314a33; display: inline-block; padding-bottom: 10px;">
           つむぎ緑側について
         </h2>
-        <p class="" style="max-width: 800px; margin: 0 auto;">
+        <p class="mb-2" style="max-width: 800px; margin: 0 auto;">
           つむぎ緑側は介護職の方や、自宅でご家族を介護する方など、介護に関わる方のコミュニティサイトです。</br>
           介護の心を紡ぎ、繋げるサイトを目指しています。
           介護者同士で意見交換や悩み共有ができるため、困ったことや分からないことがあった時はぜひつむぎ緑側をご利用ください。
         </p>
+        <h5 class="fw-bold mb-4 mt-5" style="color: #314a33; border-bottom: 1px solid #314a33; display: inline-block; padding-bottom: 10px;">
+        つむぎ縁側でできること
+        </h5>
+        <p>
+          ~ コミュニティ参加 ~</br>
+          「在宅介護」「施設勤務」「食事ケア」など、自分の状況に近いグループで仲間を見つけることができます。
+        </p>
+        <p>
+        ~ 悩み相談・意見交換 ~</br>
+        日々のふとした疑問や、誰かに聞いてほしい悩みを投稿し、同じ経験を持つ方からアドバイスをもらえます。</br>
+        嬉しかったことや、介護の中での小さな発見を共有し、温かい繋がりを作ることができます。
+        </p>
       </div>
 
-      <div class="container py-5 mb-5">
+      <div class="container py-5 mb-3">
         <h3 class="fw-bold text-center mb-5 japanese-font" style="color: #4a463f;">
           最近の和み（新着投稿）
         </h3>
@@ -33,6 +45,14 @@
           <% end %>
         </div>
       </div>
+
+      <% unless user_signed_in? %>
+        <div class="text-center">
+          <%= link_to new_user_registration_path, class: "btn btn-outline-dark" do %>
+            新規登録はこちらから
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
