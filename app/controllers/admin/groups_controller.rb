@@ -1,12 +1,12 @@
 class Admin::GroupsController < Admin::BaseController
   
   def index
-    @groups = Group.all.page(params[:page]).per(17)
+    @groups = Group.all.order(created_at: :desc).page(params[:page]).per(17)
   end
 
   def show
     @group = Group.find(params[:id])
-    @posts = @group.posts.page(params[:page]).per(5)
+    @posts = @group.posts.order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def destroy

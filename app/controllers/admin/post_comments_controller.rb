@@ -1,7 +1,7 @@
 class Admin::PostCommentsController < Admin::BaseController
 
   def index
-    @post_comment = PostComment.all.page(params[:page]).per(20)
+    @post_comment = PostComment.all.order(created_at: :desc).page(params[:page]).per(20)
   end
 
   def destroy

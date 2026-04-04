@@ -4,7 +4,7 @@ class Admin::UsersController < Admin::BaseController
     before_action :set_user, only: [:show, :withdraw]
 
      def show
-        @posts = @user.posts.page(params[:page]).per(12)
+        @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(12)
     end
     
     def withdraw
