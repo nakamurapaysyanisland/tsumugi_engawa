@@ -26,7 +26,17 @@
 * 誰かに話を聞いてほしい時
 ​
 ## 設計書
-後ほど作成予定です
+* テープル定義書
+https://docs.google.com/spreadsheets/d/1GCHh8r9ogQHGCty2I6h-8yAbTvjPrvDSt6qAlgUSAH0/edit?usp=sharing
+
+* アプリケーション詳細設計図
+https://docs.google.com/spreadsheets/d/10w6tLDbEke5sdKKfd5Wy1trura_pO2porGAuisOWtPo/edit?usp=sharing
+
+* UI flows
+https://drive.google.com/file/d/1zMbyAwNduwQBLWgHiSbBeRG7Idr_sXb_/view?usp=sharing
+
+*ER図
+https://drive.google.com/file/d/1E85rlZtKA_7I_9YrqsPT0cpdiead1oi6/view?usp=sharing
 ​
 ## 開発環境
 - OS：Mac
@@ -36,6 +46,6 @@
 - IDE：Visual Studio Code（VSCode）
 ​
 ## 使用素材
-Adobe stock　
-ファイル番号:809068755
+* Adobe stock　
+* ファイル番号:809068755
 https://stock.adobe.com/jp/images/%E5%A4%8F%E3%83%BB%E6%9A%91%E4%B8%AD%E8%A6%8B%E8%88%9E%E3%81%84%E3%80%80%E5%92%8C%E6%9F%84%E3%80%80%E6%B0%B4%E8%89%B2%E3%83%BB%E9%9D%92%E3%83%BB%E9%87%91%E3%83%BB%E9%AB%98%E7%B4%9A%E6%84%9F%E3%83%BB%E9%9B%B2%E3%80%80%E5%92%8C%E7%B4%99%E3%80%80%E8%83%8C%E6%99%AF/809068755?prev_url=detail
