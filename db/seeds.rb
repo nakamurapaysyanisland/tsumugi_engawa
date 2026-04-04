@@ -42,7 +42,7 @@ end
 
 puts "全てのカテゴリーにテスト投稿を作成中"
 categories.values.each do |cat|
-  posts_data = 5.times.map do |n| 
+  posts_data = 15.times.map do |n| 
     {
       category_id: cat.id,
       user_id: user_ids.sample,
