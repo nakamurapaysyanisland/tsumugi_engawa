@@ -22,8 +22,10 @@
   <main class="mb-auto mt-3">
     <% flash.each do |message_type, message| %>
      <div class="flash-message <%= message_type %> text-center js-flash w-50 mx-auto rounded"><i class="fa-solid fa-circle-exclamation"></i><%= message %></div>
-   <% end %>
-   
+    <% end %>
+    <div class="container mt-3">
+      <%= breadcrumbs separator: " &rsaquo; " %>
+    </div>
     <%= yield %>
   </main>
     <%= render 'layouts/footer' %>

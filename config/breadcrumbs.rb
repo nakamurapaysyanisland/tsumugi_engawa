@@ -11,6 +11,27 @@ crumb :category_post_show do |post|
   link post.title, post_path(post)
   parent :posts 
 end
+
+crumb :groups do
+  link "グループ一覧", groups_path
+  parent :root
+end
+
+crumb :group do |group|
+  link group.name, group_path(group)
+  parent :groups
+end
+
+crumb :group_post_show do |post|
+  link post.title, group_post_path(post.group, post)
+  parent :group, post.group
+end
+
+crumb :group_user do |group|
+  link "承認待ち一覧", group_memberships_path(group)
+  parent :group, group
+end
+
 # crumb :projects do
 #   link "Projects", projects_path
 # end
