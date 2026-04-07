@@ -13,7 +13,7 @@ crumb :category_post_show do |post|
 end
 
 crumb :groups do
-  link "グループ一覧", groups_path
+  link "コミュニティ一覧", groups_path
   parent :root
 end
 

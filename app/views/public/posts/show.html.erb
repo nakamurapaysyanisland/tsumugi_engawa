@@ -1,3 +1,8 @@
+<% if @group.present? %>
+  <% breadcrumb :group_post_show, @post %>
+<% else %>
+  <% breadcrumb :category_post_show, @post %>
+<% end %>
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
