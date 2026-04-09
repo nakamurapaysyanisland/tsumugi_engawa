@@ -1,4 +1,9 @@
-<% breadcrumb :posts %>
+<% if @category %>
+  <% breadcrumb :category_posts, @category %>
+<% else %>
+  <% breadcrumb :posts %>
+<% end %>
+
 <div class="container my-5">
   <div class="text-center mb-5">
     <h3 class="fw-bold">

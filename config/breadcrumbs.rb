@@ -8,8 +8,13 @@ crumb :posts do
 end
 
 crumb :category_post_show do |post|
-  link post.title, post_path(post)
+  link post.title.truncate(15), post_path(post)
   parent :posts 
+end
+
+crumb :category_posts do |category|
+  link "カテゴリー: #{category.name}", category_path(category)
+  parent :posts
 end
 
 crumb :groups do
@@ -18,17 +23,17 @@ crumb :groups do
 end
 
 crumb :group do |group|
-  link group.name, group_path(group)
+  link group.name.truncate(15), group_path(group)
   parent :groups
 end
 
 crumb :group_post_show do |post|
-  link post.title, group_post_path(post.group, post)
+  link post.title.truncate(15), post_path(post)
   parent :group, post.group
 end
 
 crumb :group_user do |group|
-  link "承認待ち一覧", group_memberships_path(group)
+  link "承認待ち一覧", group_group_users_path(group)
   parent :group, group
 end
 
