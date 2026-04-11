@@ -7,7 +7,7 @@
 <div class="container my-5">
   <div class="text-center mb-5">
     <h3 class="fw-bold">
-      <%= @category ? "-「#{@category.name}」の投稿一覧 -" : "- すべての投稿 -" %>
+      <%= @category ? "-「#{@category.name}」の投稿一覧 - (#{@category.posts.count}件)" : "- すべての投稿 -" %>
     </h3>
   </div>
   
