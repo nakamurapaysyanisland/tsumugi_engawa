@@ -7,7 +7,7 @@
                     <% else %>
                         <% users.each do |user| %>
                         <div class="col-md-3 my-2">
-                            <div class="rounded border h-100 d-flex flex-column" style="background-color: #fcfaf2;">
+                            <div class="rounded border h-100 d-flex flex-column shadow" style="background-color: #fcfaf2;">
                                 <div class="d-flex align-items-center justify-content-center py-3 px-4">
                                     
                                     <%= image_tag user.get_profile_image(60,60), size: "60x60", class: "rounded-circle border" %>

@@ -6,7 +6,7 @@
         <% else %>
           <% groups.order(created_at: :desc).each do |group| %>
             <div class="col-md-4 mb-2">
-              <div class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+              <div class="rounded border h-100 p-4 d-flex flex-column shadow" style="background-color: #fcfaf2;">
                 <%= render 'public/groups/group_card', group: group %>
               </div>
             </div>

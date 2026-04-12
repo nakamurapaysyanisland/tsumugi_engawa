@@ -6,8 +6,8 @@
             <p class="h6 mt-3">該当する投稿はありませんでした。</p>
           <% else %>
             <% posts.each do |post| %>
-              <div class="col-md-4 mb-2">
-                <div id="post_<%= post.id %>" class="rounded border h-100 p-4 d-flex flex-column" style="background-color: #fcfaf2;">
+              <div class="col-md-4 mb-4">
+                <div id="post_<%= post.id %>" class="rounded border h-100 p-4 d-flex flex-column shadow" style="background-color: #fcfaf2;">
                   <%= render 'public/posts/post_card', post: post %>
                 </div>
               </div>

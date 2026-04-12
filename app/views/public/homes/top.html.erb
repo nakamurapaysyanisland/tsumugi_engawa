@@ -38,7 +38,7 @@
         <div class="row justify-content-center">
           <% @posts.each do |post| %>
             <div id="post_<%= post.id %>" class="col-md-4 col-sm-6 mb-4">
-              <div class="card h-100 shadow-sm border-0 p-3" style="background-color: #fcfaf2;">
+              <div class="card h-100 shadow border-0 p-3" style="background-color: #fcfaf2;">
                 <%= render 'public/posts/post_card', post: post %>
               </div>
             </div>
@@ -48,8 +48,8 @@
 
       <% unless user_signed_in? %>
         <div class="text-center">
-          <%= link_to new_user_registration_path, class: "btn btn-outline-dark" do %>
-            新規登録はこちらから
+          <%= link_to new_user_registration_path, class: "btn btn-lg btn-outline-success" do %>
+            ＞新規登録はこちらから
           <% end %>
         </div>
       <% end %>
