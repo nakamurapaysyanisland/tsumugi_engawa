@@ -37,6 +37,10 @@ crumb :group_user do |group|
   parent :group, group
 end
 
+crumb :group_group_users do |group|
+  link "承認一覧", group_group_users_path(group)
+  parent :group, group 
+end
 # crumb :projects do
 #   link "Projects", projects_path
 # end
