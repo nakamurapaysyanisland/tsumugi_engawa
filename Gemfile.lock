@@ -321,6 +321,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   kaminari (~> 1.2.1)
   listen (~> 3.3)
+  logger
   mysql2
   net-imap
   net-pop

@@ -68,3 +68,4 @@ gem "net-imap"
 gem 'kaminari','~> 1.2.1'
 gem 'gretel'
 gem 'aws-sdk-s3'
+gem 'logger'
