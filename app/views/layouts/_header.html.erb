@@ -6,8 +6,8 @@
           aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-          <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavDropdown">
-            <ul class="navbar-nav ">
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav align-items-center ml-auto">
               <% if user_signed_in? %>
                 <li class="nav-item">
                   <%= link_to root_path, class: "mr-4" do %>
