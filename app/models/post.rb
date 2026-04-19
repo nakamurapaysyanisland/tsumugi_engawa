@@ -35,18 +35,16 @@ class Post < ApplicationRecord
         notification.save if notification.valid?
     end
   
-    def create_notification_like!(current_user)
+    def create_notification_favorite!(current_user)
       return if user_id == current_user.id
-      temp = Notification.where(["visitor_id = ? AND visited_id = ? AND post_id = ? AND action = ? ", current_user.id, user_id, id, 'like'])
   
-      if temp.blank?
-        notification = current_user.active_notifications.new(
+        notification = current_user.active_notifications.find_or_create_by(
         post_id: id,
         visited_id: user_id,
-        action: 'like'
+        action: 'favorite'
       )
 
-        notification.save if notification.valid?
+        notification.save if notification.new_record? && notification.valid?
       end
     end
   
