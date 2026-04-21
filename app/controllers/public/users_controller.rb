@@ -13,13 +13,15 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    logger.debug
-    @user.assign_attributes(user_params)
-    logger.debug @user.errors.full_messages unless @user.valid?
-    if @user.update(user_params)
-      bypass_sign_in(@user) 
+    update_params = user_params.to_h
+    if update_params[:password].blank?
+      update_params.delete(:password)
+      update_params.delete(:password_confirmation)
+    end
+    if @user.update(update_params)
       redirect_to mypage_path, notice: "ユーザー情報を更新しました。"
     else
+      logger.debug @user.errors.full_messages
       render :edit
     end
   end
