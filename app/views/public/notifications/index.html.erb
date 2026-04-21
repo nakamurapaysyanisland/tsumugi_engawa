@@ -19,7 +19,7 @@
                 <tr class="<%= 'text-muted' if notification.checked %>" style="<%= 'background-color: #fbfbf8;' if notification.checked %>">
                     <td>
                       <% case notification.action %>
-                      <% when 'like' %>
+                      <% when 'favorite' %>
                         <%= link_to post_path(notification.post_id), class: "text-decoration-none" do %>
                           <strong><%= notification.visitor.nickname %></strong>さんがあなたの投稿にいいねしました。
                         <% end %>
