@@ -1,4 +1,4 @@
----
+
 ja:
   
 
@@ -18,7 +18,6 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
 
-
   errors:
     format: "%{attribute}%{message}"
     messages:
@@ -28,6 +27,13 @@ ja:
       taken: "はすでに存在します"
       required: "を入力してください"
 
+    models:
+        post:
+          attributes:
+            category:
+              blank: "を選択してください"
+            category_id:
+              blank: "を選択してください"
 
   activerecord:
     models:
@@ -48,22 +54,14 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
         last_name: "姓"
+      group:
         first_name: "名"
+        name: "コミュニティ名"
+        introduction: "コミュニティの概要・ルール"
       admin:
         email: "メールアドレス"
         password: "パスワード"
         remember_me: "ログイン状態を保持する"
-
-    
-    errors:
-      models:
-        post:
-          attributes:
-            category:
-              blank: "を選択してください"
-            category_id:
-              blank: "を選択してください"
-
 
   enums:
     user:
@@ -88,6 +86,7 @@ ja:
       previous: "‹"
       next: "›"
       truncate: "..."
+
   devise:
     failure:
       not_found_in_database: "メールアドレスまたはパスワードが違います。"
