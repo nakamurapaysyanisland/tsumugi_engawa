@@ -45,7 +45,7 @@ class Post < ApplicationRecord
       )
 
         notification.save if notification.new_record? && notification.valid?
-      end
     end
+    
   
 end
