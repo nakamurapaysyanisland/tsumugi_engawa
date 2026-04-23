@@ -7,7 +7,7 @@
           <%= f.hidden_field :registering_as_member, value: true %>
           <div class="d-flex flex-column mt-3">
             <div class="d-flex flex-row">
-              <div class="field my-1">
+              <div class="field my-1 flex-grow-1">
                 <%= f.label :姓, style: "color: #4a463f;" %><br />
                 <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "form-control" %>
                 <% if @user.errors.include?(:last_name) %>
@@ -18,7 +18,7 @@
                 <% end %>
               </div>
    
-              <div class="field my-1">
+              <div class="field my-1 flex-grow-1">
                 <%= f.label :名, style: "color: #4a463f;" %><br />
                 <%= f.text_field :first_name, autocomplete: "first_name", class: "form-control" %>
                 <% if @user.errors.include?(:first_name) %>
