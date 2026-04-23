@@ -71,3 +71,9 @@ main a:hover,
   color: #f32828;
 
 }
+
+.@media (max-width: 1024px) {
+  .custom-category {
+    font-size: 3px;
+  }
+}
