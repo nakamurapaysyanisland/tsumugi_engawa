@@ -41,6 +41,11 @@ crumb :group_group_users do |group|
   link "承認一覧", group_group_users_path(group)
   parent :group, group 
 end
+
+crumb :mypage do |user|
+  link "マイページ", mypage_path(user)
+  parent :root
+end
 # crumb :projects do
 #   link "Projects", projects_path
 # end
